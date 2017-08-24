@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using Geode.Attributes;
 using Geode.Geometries;
+using Geode.Exceptions;
 
 namespace Geode.Json
 {
@@ -32,6 +33,8 @@ namespace Geode.Json
         public static Feature<IGeoType> CreateFeature(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
+            var geometryPropertyFound = false;
+            var isCollectionType = false;
 
             IGeoType geometry = null;
             var objProperties = new Dictionary<string, object>();
@@ -43,7 +46,11 @@ namespace Geode.Json
                 var propVal = prop.GetValue(obj, null);
                 if (geoAttribute != null)
                 {
-
+                    if(geometryPropertyFound && !isCollectionType)
+                    {
+                        throw new MultipleGeometriesException();
+                    }
+                    geometryPropertyFound = true;
                     if (geoAttribute.Type == GeoType.Point)
                     {
                         geometry = GetPointGeometry(geoAttribute, obj, propVal);

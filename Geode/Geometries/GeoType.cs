@@ -8,6 +8,7 @@ namespace Geode.Geometries
     {
         Point,
         Polyline,
-        Polygon
+        Polygon,
+        GeometryCollection
     }
 }
