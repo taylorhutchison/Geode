@@ -11,30 +11,42 @@ namespace Geode.Json
 {
     public static class GeoJson
     {
-        private static IGeoType GetPointGeometry(GeometryAttribute attribute, Object obj, Object value)
+        private static IGeoType GetPointGeometry(GeometryAttribute attribute, Object point)
         {
             var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
             var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
-            object x = value.GetType().GetProperty(xMap).GetValue(value, null);
-            object y = value.GetType().GetProperty(yMap).GetValue(value, null);
+            object x = point.GetType().GetProperty(xMap).GetValue(point, null);
+            object y = point.GetType().GetProperty(yMap).GetValue(point, null);
             return new Point((double)x, (double)y);
         }
 
-        private static IGeoType GetPolylineGeometry(GeometryAttribute attribute, Object obj, Object value)
+        private static IGeoType GetPolylineGeometry(GeometryAttribute attribute, Object polyline)
         {
-            object x;
-            object y;
-            x = value.GetType().GetProperty("X").GetValue(value, null);
-            y = value.GetType().GetProperty("Y").GetValue(value, null);
-            return new Point((double)x, (double)y);
+            if (IsEnumerable(polyline))
+            {
+                var enumerable = polyline as System.Collections.IEnumerable;
+                var line = new List<IEnumerable<double>>();
+                foreach (var point in enumerable)
+                {
+                    object x = point.GetType().GetProperty("X").GetValue(point, null);
+                    object y = point.GetType().GetProperty("Y").GetValue(point, null);
+                    var xy = new double[] { (double)x, (double)y };
+                    line.Add(xy);
+                }
+                return new Polyline(line);
+            }
+            return null;
+        }
+
+        private static bool IsEnumerable(Object obj)
+        {
+            return obj != null && (obj as System.Collections.IEnumerable) != null;
         }
 
 
         public static Feature<IGeoType> CreateFeature(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
-            var geometryPropertyFound = false;
-            var isCollectionType = false;
 
             IGeoType geometry = null;
             var objProperties = new Dictionary<string, object>();
@@ -46,18 +58,13 @@ namespace Geode.Json
                 var propVal = prop.GetValue(obj, null);
                 if (geoAttribute != null)
                 {
-                    if(geometryPropertyFound && !isCollectionType)
-                    {
-                        throw new MultipleGeometriesException();
-                    }
-                    geometryPropertyFound = true;
                     if (geoAttribute.Type == GeoType.Point)
                     {
-                        geometry = GetPointGeometry(geoAttribute, obj, propVal);
+                        geometry = GetPointGeometry(geoAttribute, propVal);
                     }
                     else if (geoAttribute.Type == GeoType.Polyline)
                     {
-                        geometry = GetPolylineGeometry(geoAttribute, obj, propVal);
+                        geometry = GetPolylineGeometry(geoAttribute, propVal);
                     }
                 }
                 else

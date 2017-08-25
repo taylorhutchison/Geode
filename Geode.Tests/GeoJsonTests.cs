@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using Xunit;
 using Geode.Json;
 using Geode.Tests.Models;
@@ -41,6 +43,28 @@ namespace Geode.Tests
             var geometry = feature.Geometry as Geometries.Point;
             Assert.Equal(90, geometry.Coordinates[0]);
             Assert.Equal(180, geometry.Coordinates[1]);
+        }
+
+        [Fact]
+        public void CreateFeature_TypeOfPolylineGeometry_CreatesFeature()
+        {
+            var testIncident = new Incident
+            {
+                Description = "Test Description",
+                Route = new List<Point>
+                {
+                    new Point { X = 1, Y = 1},
+                    new Point { X = 2, Y = 2}
+                }
+            };
+            var feature = GeoJson.CreateFeature(testIncident);
+            var geometry = feature.Geometry as Geometries.Polyline;
+            var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
+            Assert.Equal(1, coordinatePairs[0][0]);
+            Assert.Equal(1, coordinatePairs[0][1]);
+            Assert.Equal(2, coordinatePairs[1][0]);
+            Assert.Equal(2, coordinatePairs[1][0]);
+
         }
     }
 }
