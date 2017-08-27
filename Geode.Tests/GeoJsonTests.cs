@@ -53,18 +53,60 @@ namespace Geode.Tests
                 Description = "Test Description",
                 Route = new List<Point>
                 {
-                    new Point { X = 1, Y = 1},
-                    new Point { X = 2, Y = 2}
+                    new Point { X = 1, Y = 4},
+                    new Point { X = 9, Y = 7}
                 }
             };
             var feature = GeoJson.CreateFeature(testIncident);
             var geometry = feature.Geometry as Geometries.Polyline;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(1, coordinatePairs[0][0]);
+            Assert.Equal(4, coordinatePairs[0][1]);
+            Assert.Equal(9, coordinatePairs[1][0]);
+            Assert.Equal(7, coordinatePairs[1][0]);
+        }
+
+        [Fact]
+        public void CreateFeature_TypeOfPolylineGeometryWithMappedXYProperties_CreatesFeature()
+        {
+            var testRiver = new River
+            {
+                Name = "Test Name",
+                Description = "Test Description",
+                Location = new List<LatLng>
+                {
+                    new LatLng { Lat = 1, Lng = 1},
+                    new LatLng { Lat = 2, Lng = 2}
+                }
+            };
+            var feature = GeoJson.CreateFeature(testRiver);
+            var geometry = feature.Geometry as Geometries.Polyline;
+            var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
+            Assert.Equal(1, coordinatePairs[0][0]);
             Assert.Equal(1, coordinatePairs[0][1]);
             Assert.Equal(2, coordinatePairs[1][0]);
             Assert.Equal(2, coordinatePairs[1][0]);
+        }
 
+        [Fact]
+        public void CreateFeature_TypeOfPolylineGeometryasArrayOfArrays_CreatesFeature()
+        {
+            var testRiver = new Pipe
+            {
+                Id = 1,
+                Location = new List<double[]>
+                {
+                    new double[] {24, 35},
+                    new double[] {56, 22}
+                }
+            };
+            var feature = GeoJson.CreateFeature(testRiver);
+            var geometry = feature.Geometry as Geometries.Polyline;
+            var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
+            Assert.Equal(24, coordinatePairs[0][0]);
+            Assert.Equal(35, coordinatePairs[0][1]);
+            Assert.Equal(56, coordinatePairs[1][0]);
+            Assert.Equal(22, coordinatePairs[1][0]);
         }
     }
 }

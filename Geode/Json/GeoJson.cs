@@ -24,12 +24,14 @@ namespace Geode.Json
         {
             if (IsEnumerable(polyline))
             {
+                var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
+                var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
                 var enumerable = polyline as System.Collections.IEnumerable;
                 var line = new List<IEnumerable<double>>();
                 foreach (var point in enumerable)
                 {
-                    object x = point.GetType().GetProperty("X").GetValue(point, null);
-                    object y = point.GetType().GetProperty("Y").GetValue(point, null);
+                    object x = point.GetType().GetProperty(xMap).GetValue(point, null);
+                    object y = point.GetType().GetProperty(yMap).GetValue(point, null);
                     var xy = new double[] { (double)x, (double)y };
                     line.Add(xy);
                 }
