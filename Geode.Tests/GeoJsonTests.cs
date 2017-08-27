@@ -63,7 +63,7 @@ namespace Geode.Tests
             Assert.Equal(1, coordinatePairs[0][0]);
             Assert.Equal(4, coordinatePairs[0][1]);
             Assert.Equal(9, coordinatePairs[1][0]);
-            Assert.Equal(7, coordinatePairs[1][0]);
+            Assert.Equal(7, coordinatePairs[1][1]);
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace Geode.Tests
         [Fact]
         public void CreateFeature_TypeOfPolylineGeometryasArrayOfArrays_CreatesFeature()
         {
-            var testRiver = new Pipe
+            var testPipe= new Pipe
             {
                 Id = 1,
                 Location = new List<double[]>
@@ -100,7 +100,7 @@ namespace Geode.Tests
                     new double[] {56, 22}
                 }
             };
-            var feature = GeoJson.CreateFeature(testRiver);
+            var feature = GeoJson.CreateFeature(testPipe);
             var geometry = feature.Geometry as Geometries.Polyline;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(24, coordinatePairs[0][0]);
