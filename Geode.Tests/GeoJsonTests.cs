@@ -106,7 +106,7 @@ namespace Geode.Tests
             Assert.Equal(24, coordinatePairs[0][0]);
             Assert.Equal(35, coordinatePairs[0][1]);
             Assert.Equal(56, coordinatePairs[1][0]);
-            Assert.Equal(22, coordinatePairs[1][0]);
+            Assert.Equal(22, coordinatePairs[1][1]);
         }
     }
 }

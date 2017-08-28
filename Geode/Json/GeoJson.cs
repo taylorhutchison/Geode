@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -26,14 +27,21 @@ namespace Geode.Json
             {
                 var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
                 var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
-                var enumerable = polyline as System.Collections.IEnumerable;
+                var enumerable = polyline as IEnumerable;
                 var line = new List<IEnumerable<double>>();
                 foreach (var point in enumerable)
                 {
-                    object x = point.GetType().GetProperty(xMap).GetValue(point, null);
-                    object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-                    var xy = new double[] { (double)x, (double)y };
-                    line.Add(xy);
+                    if (IsEnumerable(point))
+                    {
+                        line.Add(point as double[]);
+                    }
+                    else
+                    {
+                        object x = point.GetType().GetProperty(xMap).GetValue(point, null);
+                        object y = point.GetType().GetProperty(yMap).GetValue(point, null);
+                        var xy = new double[] { (double)x, (double)y };
+                        line.Add(xy);
+                    }
                 }
                 return new Polyline(line);
             }
@@ -42,7 +50,7 @@ namespace Geode.Json
 
         private static bool IsEnumerable(Object obj)
         {
-            return obj != null && (obj as System.Collections.IEnumerable) != null;
+            return obj != null && (obj as IEnumerable) != null;
         }
 
 
