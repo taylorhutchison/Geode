@@ -12,38 +12,38 @@ namespace Geode.Json
 {
     public static class GeoJson
     {
-        private static IGeoType GetPointGeometry(GeometryAttribute attribute, Object point)
+        private static IGeoType GetPointGeometry<T>(GeometryAttribute attribute, Object point)
         {
             var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
             var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
             object x = point.GetType().GetProperty(xMap).GetValue(point, null);
             object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-            return new Point((double)x, (double)y);
+            return new Point<T>((T)x, (T)y);
         }
 
-        private static IGeoType GetPolylineGeometry(GeometryAttribute attribute, Object polyline)
+        private static IGeoType GetPolylineGeometry<T>(GeometryAttribute attribute, Object polyline)
         {
             if (IsEnumerable(polyline))
             {
                 var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
                 var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
                 var enumerable = polyline as IEnumerable;
-                var line = new List<IEnumerable<double>>();
+                var line = new List<IEnumerable<T>>();
                 foreach (var point in enumerable)
                 {
                     if (IsEnumerable(point))
                     {
-                        line.Add(point as double[]);
+                        line.Add(point as T[]);
                     }
                     else
                     {
                         object x = point.GetType().GetProperty(xMap).GetValue(point, null);
                         object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-                        var xy = new double[] { (double)x, (double)y };
+                        var xy = new T[] { (T)x, (T)y };
                         line.Add(xy);
                     }
                 }
-                return new Polyline(line);
+                return new Polyline<T>(line);
             }
             return null;
         }
@@ -53,8 +53,7 @@ namespace Geode.Json
             return obj != null && (obj as IEnumerable) != null;
         }
 
-
-        public static Feature<IGeoType> CreateFeature(Object obj)
+        public static Feature<IGeoType> CreateFeature<T>(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
 
@@ -70,11 +69,11 @@ namespace Geode.Json
                 {
                     if (geoAttribute.Type == GeoType.Point)
                     {
-                        geometry = GetPointGeometry(geoAttribute, propVal);
+                        geometry = GetPointGeometry<T>(geoAttribute, propVal);
                     }
                     else if (geoAttribute.Type == GeoType.Polyline)
                     {
-                        geometry = GetPolylineGeometry(geoAttribute, propVal);
+                        geometry = GetPolylineGeometry<T>(geoAttribute, propVal);
                     }
                 }
                 else
@@ -90,6 +89,12 @@ namespace Geode.Json
             };
 
             return feature;
+        }
+
+
+        public static Feature<IGeoType> CreateFeature(Object obj)
+        {
+            return CreateFeature<double>(obj);
         }
     }
 }

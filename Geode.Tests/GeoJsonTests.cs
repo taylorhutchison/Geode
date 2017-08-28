@@ -20,7 +20,7 @@ namespace Geode.Tests
             };
             var feature = GeoJson.CreateFeature(testEvent);
             Assert.Equal("Feature", feature.Type);
-            var geometry = feature.Geometry as Geometries.Point;
+            var geometry = feature.Geometry as Geometries.Point<double>;
             Assert.Equal(123.005, geometry.Coordinates[0]);
             Assert.Equal(456.004, geometry.Coordinates[1]);
         }
@@ -40,7 +40,7 @@ namespace Geode.Tests
             };
 
             var feature = GeoJson.CreateFeature(testPlace);
-            var geometry = feature.Geometry as Geometries.Point;
+            var geometry = feature.Geometry as Geometries.Point<double>;
             Assert.Equal(90, geometry.Coordinates[0]);
             Assert.Equal(180, geometry.Coordinates[1]);
         }
@@ -58,7 +58,7 @@ namespace Geode.Tests
                 }
             };
             var feature = GeoJson.CreateFeature(testIncident);
-            var geometry = feature.Geometry as Geometries.Polyline;
+            var geometry = feature.Geometry as Geometries.Polyline<double>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(1, coordinatePairs[0][0]);
             Assert.Equal(4, coordinatePairs[0][1]);
@@ -80,7 +80,7 @@ namespace Geode.Tests
                 }
             };
             var feature = GeoJson.CreateFeature(testRiver);
-            var geometry = feature.Geometry as Geometries.Polyline;
+            var geometry = feature.Geometry as Geometries.Polyline<double>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(1, coordinatePairs[0][0]);
             Assert.Equal(1, coordinatePairs[0][1]);
@@ -89,7 +89,7 @@ namespace Geode.Tests
         }
 
         [Fact]
-        public void CreateFeature_TypeOfPolylineGeometryasArrayOfArrays_CreatesFeature()
+        public void CreateFeature_TypeOfPolylineGeometryAsArrayOfArrays_CreatesFeature()
         {
             var testPipe= new Pipe
             {
@@ -101,12 +101,34 @@ namespace Geode.Tests
                 }
             };
             var feature = GeoJson.CreateFeature(testPipe);
-            var geometry = feature.Geometry as Geometries.Polyline;
+            var geometry = feature.Geometry as Geometries.Polyline<double>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(24, coordinatePairs[0][0]);
             Assert.Equal(35, coordinatePairs[0][1]);
             Assert.Equal(56, coordinatePairs[1][0]);
             Assert.Equal(22, coordinatePairs[1][1]);
+        }
+
+        [Fact]
+        public void CreateFeature_TypeOfPolylineGeometryAsArrayOfInts_CreatesFeature()
+        {
+            var testFlight = new Flight
+            {
+                Id = 1,
+                Name = "Test Name",
+                FlightPath = new List<int[]>
+                {
+                    new int[] {10, 20},
+                    new int[] {30, 40}
+                }
+            };
+            var feature = GeoJson.CreateFeature<int>(testFlight);
+            var geometry = feature.Geometry as Geometries.Polyline<int>;
+            var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
+            Assert.Equal(10, coordinatePairs[0][0]);
+            Assert.Equal(20, coordinatePairs[0][1]);
+            Assert.Equal(30, coordinatePairs[1][0]);
+            Assert.Equal(40, coordinatePairs[1][1]);
         }
     }
 }
