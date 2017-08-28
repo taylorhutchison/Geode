@@ -130,5 +130,32 @@ namespace Geode.Tests
             Assert.Equal(30, coordinatePairs[1][0]);
             Assert.Equal(40, coordinatePairs[1][1]);
         }
+
+        [Fact]
+        public void CreateFeature_TypeOfPolygonGeometry_CreatesFeature()
+        {
+            var testCountry = new Country
+            {
+                Name = "Test Name",
+                Boundary = new List<int[]>
+                {
+                    new int[] {0, 0},
+                    new int[] {10, 10},
+                    new int[] {-10, 10},
+                    new int[] {0, 0}
+                }
+            };
+            var feature = GeoJson.CreateFeature<int>(testCountry);
+            var geometry = feature.Geometry as Geometries.Polygon<int>;
+            var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
+            Assert.Equal(0, coordinatePairs[0][0]);
+            Assert.Equal(0, coordinatePairs[0][1]);
+            Assert.Equal(10, coordinatePairs[1][0]);
+            Assert.Equal(10, coordinatePairs[1][1]);
+            Assert.Equal(-10, coordinatePairs[2][0]);
+            Assert.Equal(10, coordinatePairs[2][1]);
+            Assert.Equal(0, coordinatePairs[3][0]);
+            Assert.Equal(0, coordinatePairs[3][1]);
+        }
     }
 }

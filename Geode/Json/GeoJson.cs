@@ -21,13 +21,13 @@ namespace Geode.Json
             return new Point<T>((T)x, (T)y);
         }
 
-        private static IGeoType GetPolylineGeometry<T>(GeometryAttribute attribute, Object polyline)
+        private static IEnumerable<IEnumerable<T>> CreatePoly<T>(GeometryAttribute attribute, Object poly)
         {
-            if (IsEnumerable(polyline))
+            if (IsEnumerable(poly))
             {
                 var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
                 var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
-                var enumerable = polyline as IEnumerable;
+                var enumerable = poly as IEnumerable;
                 var line = new List<IEnumerable<T>>();
                 foreach (var point in enumerable)
                 {
@@ -43,14 +43,47 @@ namespace Geode.Json
                         line.Add(xy);
                     }
                 }
-                return new Polyline<T>(line);
+                return line;
             }
             return null;
+        }
+
+        private static IGeoType GetPolylineGeometry<T>(GeometryAttribute attribute, Object polyline)
+        {
+            var line = CreatePoly<T>(attribute, polyline);
+            return line != null ? new Polyline<T>(line) : null;
+        }
+
+        private static IGeoType GetPolygonGeometry<T>(GeometryAttribute attribute, Object polyline)
+        {
+            var line = CreatePoly<T>(attribute, polyline);
+            return line != null ? new Polygon<T>(line) : null;
         }
 
         private static bool IsEnumerable(Object obj)
         {
             return obj != null && (obj as IEnumerable) != null;
+        }
+
+        private static IGeoType GetGeometry<T>(GeometryAttribute attribute, Object obj)
+        {
+            switch (attribute.Type)
+            {
+                case GeoType.Point:
+                    return GetPointGeometry<T>(attribute, obj);
+                case GeoType.Polyline:
+                    return GetPolylineGeometry<T>(attribute, obj);
+                case GeoType.Polygon:
+                    return GetPolygonGeometry<T>(attribute, obj);
+                default:
+                    throw new ArgumentException($"GeoType {attribute.Type} not handled.");
+            }
+        }
+
+        private static GeometryAttribute GetGeometryAttribute(PropertyInfo prop)
+        {
+            var propAttributes = prop.GetCustomAttributes();
+            return propAttributes.FirstOrDefault(at => at.GetType() == typeof(GeometryAttribute)) as GeometryAttribute;
         }
 
         public static Feature<IGeoType> CreateFeature<T>(Object obj)
@@ -61,20 +94,11 @@ namespace Geode.Json
             var objProperties = new Dictionary<string, object>();
             foreach (var prop in properties)
             {
-                var propAttributes = prop.GetCustomAttributes();
-                var geoAttribute =
-                    propAttributes.FirstOrDefault(at => at.GetType() == typeof(GeometryAttribute)) as GeometryAttribute;
+                var geoAttribute = GetGeometryAttribute(prop);
                 var propVal = prop.GetValue(obj, null);
                 if (geoAttribute != null)
                 {
-                    if (geoAttribute.Type == GeoType.Point)
-                    {
-                        geometry = GetPointGeometry<T>(geoAttribute, propVal);
-                    }
-                    else if (geoAttribute.Type == GeoType.Polyline)
-                    {
-                        geometry = GetPolylineGeometry<T>(geoAttribute, propVal);
-                    }
+                    geometry = GetGeometry<T>(geoAttribute, propVal);
                 }
                 else
                 {
