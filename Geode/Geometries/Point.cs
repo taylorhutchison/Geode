@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Geode.Geometries
 {
-    public class Point : IGeoType
+    public class Point<T> : IGeoType
     {
         public string Type => "Point";
-        public double[] Coordinates { get; set; }
-        public Point(double x, double y)
+        public T[] Coordinates { get; set; }
+        public Point(T x, T y)
         {
-            Coordinates = new double[] { x, y };
+            Coordinates = new T[] { x, y };
         }
     }
 }
