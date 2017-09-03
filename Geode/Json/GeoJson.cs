@@ -120,5 +120,14 @@ namespace Geode.Json
         {
             return CreateFeature<double>(obj);
         }
+
+        public static FeatureCollection<Feature<IGeoType>> CreateFeatures(IEnumerable<Object> objList)
+        {
+            var features = objList.Select(obj => CreateFeature(obj));
+            return new FeatureCollection<Feature<IGeoType>>
+            {
+                Features = features
+            };
+        }
     }
 }

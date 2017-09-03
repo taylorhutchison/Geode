@@ -5,11 +5,10 @@ using Geode.Geometries;
 
 namespace Geode
 {
-    public class Feature<T> where T : IGeoType
+    public class Feature<T>: IFeature<T> where T : IGeoType
     {
         public string Type => "Feature";
         public T Geometry { get; set; }
         public IDictionary<string, object> Properties { get; set; }
-
     }
 }
