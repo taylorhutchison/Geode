@@ -7,9 +7,11 @@ using Geode.Tests.Models;
 
 namespace Geode.Tests
 {
-    public class GeoJsonTests
+    public class CreateFeatureFromAttributesTests
     {
         [Fact]
+        [Trait("Category","Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeWithXYProperties_CreatesFeature()
         {
             var testEvent = new Event
@@ -26,6 +28,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeWithMappedXYProperties_CreatesFeature()
         {
             var testPlace = new Place
@@ -46,6 +50,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometry_CreatesFeature()
         {
             var testIncident = new Incident
@@ -67,6 +73,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometryWithMappedXYProperties_CreatesFeature()
         {
             var testRiver = new River
@@ -89,6 +97,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometryAsArrayOfArrays_CreatesFeature()
         {
             var testPipe= new Pipe
@@ -110,6 +120,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometryAsArrayOfInts_CreatesFeature()
         {
             var testFlight = new Flight
@@ -132,6 +144,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolygonGeometry_CreatesFeature()
         {
             var testCountry = new Country
