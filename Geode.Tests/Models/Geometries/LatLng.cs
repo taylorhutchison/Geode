@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Geode.Attributes;
-using Geode.Geometries;
+using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Geometries
+namespace Geode
 {
     public enum GeoType
     {

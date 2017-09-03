@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Geometries
+namespace Geode.Geometry
 {
-    public interface IGeoType
+    public interface IFeatureCollection
     {
-        string Type { get; }
     }
 }

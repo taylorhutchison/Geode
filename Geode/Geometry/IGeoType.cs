@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode
+namespace Geode.Geometry
 {
-    public class FeatureAttribute : Attribute
+    public interface IGeoType
     {
-
+        string Type { get; }
     }
 }

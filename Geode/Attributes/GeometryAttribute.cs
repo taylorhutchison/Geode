@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Geode.Geometries;
+using Geode.Geometry;
 
-namespace Geode.Attributes
+namespace Geode
 {
     public class GeometryAttribute : Attribute
     {

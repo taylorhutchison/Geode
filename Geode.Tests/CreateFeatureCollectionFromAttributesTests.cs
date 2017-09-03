@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Xunit;
-using Geode.Json;
 using Geode.Tests.Models;
+using Geode;
 
 namespace Geode.Tests
 {

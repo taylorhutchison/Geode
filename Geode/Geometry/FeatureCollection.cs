@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Geode.Geometries;
+using Geode.Geometry;
 using Geode.Services;
 
 namespace Geode

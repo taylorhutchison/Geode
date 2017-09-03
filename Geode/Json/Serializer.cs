@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using Geode;
-using Geode.Geometries;
 
 namespace Geode.Json
 {

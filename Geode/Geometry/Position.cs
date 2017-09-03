@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode
+namespace Geode.Geometry
 {
     internal class Position
     {
