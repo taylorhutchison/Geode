@@ -7,9 +7,11 @@ using Geode.Tests.Models;
 
 namespace Geode.Tests
 {
-    public class GeoJsonTests
+    public class CreateFeatureFromAttributesTests
     {
         [Fact]
+        [Trait("Category","Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeWithXYProperties_CreatesFeature()
         {
             var testEvent = new Event
@@ -26,6 +28,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeWithMappedXYProperties_CreatesFeature()
         {
             var testPlace = new Place
@@ -46,6 +50,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometry_CreatesFeature()
         {
             var testIncident = new Incident
@@ -67,6 +73,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometryWithMappedXYProperties_CreatesFeature()
         {
             var testRiver = new River
@@ -89,6 +97,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometryAsArrayOfArrays_CreatesFeature()
         {
             var testPipe= new Pipe
@@ -110,6 +120,8 @@ namespace Geode.Tests
         }
 
         [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
         public void CreateFeature_TypeOfPolylineGeometryAsArrayOfInts_CreatesFeature()
         {
             var testFlight = new Flight
@@ -129,6 +141,35 @@ namespace Geode.Tests
             Assert.Equal(20, coordinatePairs[0][1]);
             Assert.Equal(30, coordinatePairs[1][0]);
             Assert.Equal(40, coordinatePairs[1][1]);
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        [Trait("Category", "FeatureCreation")]
+        public void CreateFeature_TypeOfPolygonGeometry_CreatesFeature()
+        {
+            var testCountry = new Country
+            {
+                Name = "Test Name",
+                Boundary = new List<int[]>
+                {
+                    new int[] {0, 0},
+                    new int[] {10, 10},
+                    new int[] {-10, 10},
+                    new int[] {0, 0}
+                }
+            };
+            var feature = GeoJson.CreateFeature<int>(testCountry);
+            var geometry = feature.Geometry as Geometries.Polygon<int>;
+            var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
+            Assert.Equal(0, coordinatePairs[0][0]);
+            Assert.Equal(0, coordinatePairs[0][1]);
+            Assert.Equal(10, coordinatePairs[1][0]);
+            Assert.Equal(10, coordinatePairs[1][1]);
+            Assert.Equal(-10, coordinatePairs[2][0]);
+            Assert.Equal(10, coordinatePairs[2][1]);
+            Assert.Equal(0, coordinatePairs[3][0]);
+            Assert.Equal(0, coordinatePairs[3][1]);
         }
     }
 }
