@@ -28,7 +28,7 @@ namespace Geode.Tests
                     Coordinates = new Point { X = 777.123, Y = 999.789 }
                 }
             };
-            var featureCollection = GeoJson.CreateFeatures(eventList);
+            var featureCollection = FeatureCollection.CreateFeatures(eventList);
             Assert.Equal("FeatureCollection", featureCollection.Type);
             Assert.Equal(2, featureCollection.Features.Count());
         }
