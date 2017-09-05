@@ -15,8 +15,13 @@ namespace Geode
 
     public static class Feature
     {
-        public static Feature<IGeoType> CreateFeature(Object obj) => FeatureService.CreateFeature(obj);
+        public static IFeature<IGeoType> CreateFeature(Object obj) => FeatureService.CreateFeature(obj);
 
-        public static Feature<IGeoType> CreateFeature<U>(Object obj) => FeatureService.CreateFeature<U>(obj);
+        public static IFeature<IGeoType> CreateFeature<U>(Object obj) => FeatureService.CreateFeature<U>(obj);
+
+        public static IFeature<IGeoType> CreateFeature(IFeatureConvertible feature)
+        {
+            return feature.ConvertToFeature();
+        }
     }
 }

@@ -26,5 +26,7 @@ namespace Geode
     public static class FeatureCollection
     {
         public static FeatureCollection<IFeature<IGeoType>> CreateFeatures(IEnumerable<Object> objList) => FeatureService.CreateFeatures(objList);
+
+        public static IFeatureCollection<IFeature<IGeoType>> CreateFeatures(IFeatureCollectionConvertible featureCollection) => featureCollection.ConvertToFeatureCollection();
     }
 }
