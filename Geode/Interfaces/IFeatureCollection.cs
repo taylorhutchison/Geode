@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IFeature<T>
+    public interface IFeatureCollection<T> where T: IFeature<IGeoType>
     {
         string Type { get; }
-        T Geometry { get; set; }
-        IDictionary<string, object> Properties { get; set; }
+        IEnumerable<T> Features { get; set; }
     }
 }
