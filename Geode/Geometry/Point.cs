@@ -13,4 +13,14 @@ namespace Geode.Geometry
             Coordinates = new T[] { x, y };
         }
     }
+
+    public class Point : IGeoType
+    {
+        public string Type => "Point";
+        public double[] Coordinates { get; set; }
+        public Point(double x, double y)
+        {
+            Coordinates = new double[] { x, y };
+        }
+    }
 }

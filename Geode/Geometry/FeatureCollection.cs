@@ -7,7 +7,7 @@ using Geode.Services;
 
 namespace Geode
 {
-    public class FeatureCollection<T>: IEnumerable<T> where T : IFeature<IGeoType>
+    public class FeatureCollection<T>: IEnumerable<T> where T : IFeature
     {
         public string Type => "FeatureCollection";
         public IEnumerable<T> Features { get; set; }
@@ -25,8 +25,8 @@ namespace Geode
 
     public static class FeatureCollection
     {
-        public static FeatureCollection<IFeature<IGeoType>> CreateFeatures(IEnumerable<Object> objList) => FeatureService.CreateFeatures(objList);
+        public static FeatureCollection<IFeature> CreateFeatures(IEnumerable<Object> objList) => FeatureService.CreateFeatures(objList);
 
-        public static IFeatureCollection<IFeature<IGeoType>> CreateFeatures(IFeatureCollectionConvertible featureCollection) => featureCollection.ConvertToFeatureCollection();
+        public static IFeatureCollection CreateFeatures(IFeatureCollectionConvertible featureCollection) => featureCollection.ConvertToFeatureCollection();
     }
 }

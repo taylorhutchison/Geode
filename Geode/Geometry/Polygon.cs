@@ -12,6 +12,7 @@ namespace Geode.Geometry
         {
             Coordinates = coordinates;
         }
+        public Polygon() { }
     }
 
     public class Polygon<T> : IGeoType
@@ -22,5 +23,6 @@ namespace Geode.Geometry
         {
             Coordinates = coordinates;
         }
+        public Polygon() { }
     }
 }

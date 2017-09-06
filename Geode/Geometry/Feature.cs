@@ -6,22 +6,33 @@ using Geode.Services;
 
 namespace Geode
 {
-    public class Feature<T>: IFeature<T> where T : IGeoType
+    public abstract class BaseFeature : IFeature
     {
         public string Type => "Feature";
-        public T Geometry { get; set; }
         public IDictionary<string, object> Properties { get; set; }
     }
 
-    public static class Feature
+    public sealed class Feature: BaseFeature, IFeature
     {
-        public static IFeature<IGeoType> CreateFeature(Object obj) => FeatureService.CreateFeature(obj);
-
-        public static IFeature<IGeoType> CreateFeature<U>(Object obj) => FeatureService.CreateFeature<U>(obj);
-
-        public static IFeature<IGeoType> CreateFeature(IFeatureConvertible feature)
+        public IGeoType Geometry { get; set; }
+        public static IFeature CreateFeature(Object obj)
+        {
+            return FeatureService.CreateFeature(obj);
+        }
+        public static IFeature CreateFeature<U>(Object obj)
+        {
+            return FeatureService.CreateFeature<U>(obj);
+        }
+        public static IFeature CreateFeature(IFeatureConvertible feature)
         {
             return feature.ConvertToFeature();
         }
     }
+
+    public sealed class GeoCollectionFeature : BaseFeature, IFeature
+    {
+        public IEnumerable<IGeoType> Geometries { get; set; }
+    }
+
+
 }
