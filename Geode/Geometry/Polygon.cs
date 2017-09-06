@@ -6,7 +6,7 @@ namespace Geode.Geometry
 {
     public class Polygon: IGeoType
     {
-        public string Type => "Polygon";
+        public GeoType Type => GeoType.Polygon;
         public IEnumerable<IEnumerable<double>> Coordinates { get; set; }
         public Polygon(IEnumerable<IEnumerable<double>> coordinates)
         {
@@ -17,7 +17,7 @@ namespace Geode.Geometry
 
     public class Polygon<T> : IGeoType
     {
-        public string Type => "Polygon";
+        public GeoType Type => GeoType.Polygon;
         public IEnumerable<IEnumerable<T>> Coordinates { get; set; }
         public Polygon(IEnumerable<IEnumerable<T>> coordinates)
         {

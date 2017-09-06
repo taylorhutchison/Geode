@@ -11,7 +11,7 @@ namespace Geode.Tests.Models
         [Geometry(GeoType.Point)]
         public LatLng MidPoint { get; set; }
 
-        [Geometry(GeoType.Polyline)]
+        [Geometry(GeoType.LineString)]
         public IEnumerable<LatLng> Line { get; set; }
 
         [Geometry(GeoType.Polygon)]

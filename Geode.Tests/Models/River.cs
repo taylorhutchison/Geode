@@ -9,7 +9,7 @@ namespace Geode.Tests.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        [Geometry(GeoType.Polyline,"Lng","Lat")]
+        [Geometry(GeoType.LineString,"Lng","Lat")]
         public IEnumerable<LatLng> Location { get; set; }
     }
 }

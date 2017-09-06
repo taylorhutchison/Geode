@@ -6,7 +6,7 @@ namespace Geode.Geometry
 {
     public class Point<T> : IGeoType
     {
-        public string Type => "Point";
+        public GeoType Type => GeoType.Point;
         public T[] Coordinates { get; set; }
         public Point(T x, T y)
         {
@@ -16,7 +16,7 @@ namespace Geode.Geometry
 
     public class Point : IGeoType
     {
-        public string Type => "Point";
+        public GeoType Type => GeoType.Point;
         public double[] Coordinates { get; set; }
         public Point(double x, double y)
         {

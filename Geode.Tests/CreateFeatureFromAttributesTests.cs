@@ -22,9 +22,9 @@ namespace Geode.Tests
             };
             var feature = (Feature)Feature.CreateFeature(testEvent);
             Assert.Equal("Feature", feature.Type);
-            var geometry = feature.Geometry as Point<double>;
-            Assert.Equal(123.005, geometry.Coordinates[0]);
-            Assert.Equal(456.004, geometry.Coordinates[1]);
+            var geometry = feature.Geometry as Geode.Tests.Models.Point;
+            Assert.Equal(123.005, geometry.X);
+            Assert.Equal(456.004, geometry.Y);
         }
 
         [Fact]

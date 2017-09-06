@@ -8,7 +8,7 @@ namespace Geode.Tests.Models
     public class Incident
     {
         public string Description { get; set; }
-        [Geometry(GeoType.Polyline)]
+        [Geometry(GeoType.LineString)]
         public IEnumerable<Point> Route { get; set; }
     }
 }

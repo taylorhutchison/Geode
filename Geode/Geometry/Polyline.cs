@@ -6,7 +6,7 @@ namespace Geode.Geometry
 {
     public class Polyline<T> : IGeoType
     {
-        public string Type => "LineString";
+        public GeoType Type => GeoType.Polygon;
         public IEnumerable<IEnumerable<T>> Coordinates { get; set; }
         public Polyline(IEnumerable<IEnumerable<T>> coordinates)
         {

@@ -69,7 +69,7 @@ namespace Geode.Services
             {
                 case GeoType.Point:
                     return GetPointGeometry<T>(attribute, obj);
-                case GeoType.Polyline:
+                case GeoType.LineString:
                     return GetPolylineGeometry<T>(attribute, obj);
                 case GeoType.Polygon:
                     return GetPolygonGeometry<T>(attribute, obj);

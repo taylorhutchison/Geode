@@ -4,6 +4,7 @@
 - [Installation](#installation)
 - [About](#about)
 - [Examples](#examples)
+	- [Feature Creation](#feature-creation)
 
 ### Installation:
 ```bash
@@ -15,9 +16,9 @@ dotnet add package Geode
 Geode is a library that contains a set of Geometric primatives including: 
 - Point
 - MultiPoint
-- Polyline
+- LineString
 - Polygon
-- MultiPolyline
+- MultiLineString
 - MultiPolygon
 
 #### Top Features
@@ -27,7 +28,7 @@ Geode is a library that contains a set of Geometric primatives including:
 
 ### Examples
 
-#### Convert an about to a Feature:
+#### Convert an object to a Feature:
 ```c#
 public class Archipelago: IFeatureConvertible
 {
