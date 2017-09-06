@@ -11,7 +11,7 @@ namespace Geode.Tests
     public class CreateFeatureAsIFeatureConvertibleTests
     {
         [Fact]
-        [Trait("Category","Unit")]
+        [Trait("Category", "Unit")]
         public void CreateFeatureWithGeometryAttributesFavorsInterfaceMethod()
         {
             var city = new City
@@ -26,6 +26,60 @@ namespace Geode.Tests
             {
                 Feature.CreateFeature(city);
             });
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void CreateFeature_GeoCollectionFeature_CreatesFeature()
+        {
+            var archipeligo = new Archipelago
+            {
+                Islands = new List<Polygon>()
+                {
+                    new Polygon()
+                    {
+                        Coordinates = new List<IEnumerable<double>> {
+                         new double[]{0 ,0 },
+                         new double[]{1 ,1 },
+                         new double[]{2 ,2 }
+                        }
+                    },
+                    new Polygon()
+                    {
+                        Coordinates = new List<IEnumerable<double>> {
+                         new double[]{0 ,0 },
+                         new double[]{1 ,1 },
+                         new double[]{2 ,2 }
+                        }
+                    }
+                },
+                Name = "Test Name"
+            };
+            var feature = (GeoCollectionFeature)Feature.CreateFeature(archipeligo);
+            Assert.Equal(2, feature.Geometries.Count());
+        }
+
+        [Fact]
+        [Trait("Category", "Unit")]
+        public void CreateFeature_GeoCollectionFeatureWithMultipleTypes_CreatesFeature()
+        {
+            var earthquake = new Earthquake
+            {
+                ImpactArea = new Polygon
+                {
+                    Coordinates = new List<IEnumerable<double>>
+                    {
+                        new double[]{0 ,0 },
+                        new double[]{1 ,1 },
+                        new double[]{2 ,2 }
+                    }
+                },
+                Epicenter = new Geode.Geometry.Point(0, 0),
+                Magnitude = 9.0
+            };
+            var feature = earthquake.ConvertToFeature();
+            var json = Geode.Json.Serializer.Write(feature);
+            var x = 1;
         }
     }
 }

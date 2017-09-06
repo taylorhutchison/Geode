@@ -13,7 +13,7 @@ namespace Geode.Tests.Models
         [Geometry(GeoType.Polygon)]
         public IEnumerable<IEnumerable<int>> Boundary { get; set; }
 
-        public IFeature<IGeoType> ConvertToFeature()
+        public IFeature ConvertToFeature()
         {
             throw new NotImplementedException();
         }

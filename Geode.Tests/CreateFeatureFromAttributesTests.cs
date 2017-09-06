@@ -18,9 +18,9 @@ namespace Geode.Tests
             {
                 Name = "Test Name",
                 Description = "Test Description",
-                Coordinates = new Point { X = 123.005, Y = 456.004 }
+                Coordinates = new Geode.Tests.Models.Point { X = 123.005, Y = 456.004 }
             };
-            var feature = Feature.CreateFeature(testEvent);
+            var feature = (Feature)Feature.CreateFeature(testEvent);
             Assert.Equal("Feature", feature.Type);
             var geometry = feature.Geometry as Point<double>;
             Assert.Equal(123.005, geometry.Coordinates[0]);
@@ -43,7 +43,7 @@ namespace Geode.Tests
                 }
             };
 
-            var feature = Feature.CreateFeature(testPlace);
+            var feature = (Feature)Feature.CreateFeature(testPlace);
             var geometry = feature.Geometry as Point<double>;
             Assert.Equal(90, geometry.Coordinates[0]);
             Assert.Equal(180, geometry.Coordinates[1]);
@@ -57,13 +57,13 @@ namespace Geode.Tests
             var testIncident = new Incident
             {
                 Description = "Test Description",
-                Route = new List<Point>
+                Route = new List<Geode.Tests.Models.Point>
                 {
-                    new Point { X = 1, Y = 4},
-                    new Point { X = 9, Y = 7}
+                    new Geode.Tests.Models.Point { X = 1, Y = 4},
+                    new Geode.Tests.Models.Point { X = 9, Y = 7}
                 }
             };
-            var feature = Feature.CreateFeature(testIncident);
+            var feature = (Feature)Feature.CreateFeature(testIncident);
             var geometry = feature.Geometry as Polyline<double>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(1, coordinatePairs[0][0]);
@@ -87,7 +87,7 @@ namespace Geode.Tests
                     new LatLng { Lat = 2, Lng = 2}
                 }
             };
-            var feature = Feature.CreateFeature(testRiver);
+            var feature = (Feature)Feature.CreateFeature(testRiver);
             var geometry = feature.Geometry as Polyline<double>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(1, coordinatePairs[0][0]);
@@ -110,7 +110,7 @@ namespace Geode.Tests
                     new double[] {56, 22}
                 }
             };
-            var feature = Feature.CreateFeature(testPipe);
+            var feature = (Feature)Feature.CreateFeature(testPipe);
             var geometry = feature.Geometry as Polyline<double>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(24, coordinatePairs[0][0]);
@@ -134,7 +134,7 @@ namespace Geode.Tests
                     new int[] {30, 40}
                 }
             };
-            var feature = Feature.CreateFeature<int>(testFlight);
+            var feature = (Feature)Feature.CreateFeature<int>(testFlight);
             var geometry = feature.Geometry as Polyline<int>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(10, coordinatePairs[0][0]);
@@ -159,7 +159,7 @@ namespace Geode.Tests
                     new int[] {0, 0}
                 }
             };
-            var feature = Feature.CreateFeature<int>(testCountry);
+            var feature = (Feature)Feature.CreateFeature<int>(testCountry);
             var geometry = feature.Geometry as Polygon<int>;
             var coordinatePairs = geometry.Coordinates.Select(c => c.ToArray()).ToArray();
             Assert.Equal(0, coordinatePairs[0][0]);
