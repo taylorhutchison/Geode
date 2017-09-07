@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IFeature
+    public interface IFeature<T> where T: IGeoType
     {
         string Type { get; }
         IDictionary<string, object> Properties { get; set; }

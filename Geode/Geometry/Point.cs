@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 namespace Geode.Geometry
@@ -12,6 +13,7 @@ namespace Geode.Geometry
         {
             Coordinates = new T[] { x, y };
         }
+        public IEnumerable Geometry => Coordinates;
     }
 
     public class Point : IGeoType
@@ -22,5 +24,6 @@ namespace Geode.Geometry
         {
             Coordinates = new double[] { x, y };
         }
+        public IEnumerable Geometry => Coordinates;
     }
 }

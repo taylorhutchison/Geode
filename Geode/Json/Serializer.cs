@@ -14,7 +14,7 @@ namespace Geode.Json
             return JsonConvert.SerializeObject(geoObj, Formatting.Indented);
         }
 
-        public static string Write(IFeature feature)
+        public static string Write(IFeature<IGeoType> feature)
         {
             return JsonConvert.SerializeObject(feature, Formatting.Indented);
         }
