@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 namespace Geode.Geometry
@@ -13,6 +14,7 @@ namespace Geode.Geometry
             Coordinates = coordinates;
         }
         public Polygon() { }
+        public IEnumerable Geometry => Coordinates;
     }
 
     public class Polygon<T> : IGeoType
@@ -24,5 +26,6 @@ namespace Geode.Geometry
             Coordinates = coordinates;
         }
         public Polygon() { }
+        public IEnumerable Geometry => Coordinates;
     }
 }

@@ -5,14 +5,14 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Earthquake : IFeatureConvertible
+    public class Earthquake : IGeoCollectionFeatureConvertible
     {
-        public Geode.Geometry.Polygon ImpactArea { get; set; }
+        public Geode.Geometry.Polygon<double> ImpactArea { get; set; }
         public Geode.Geometry.Point Epicenter { get; set; }
         public double Magnitude { get; set; }
-        public IFeature ConvertToFeature()
+        public GeoCollectionFeature<IGeoType> ConvertToFeature()
         {
-            var feature = new GeoCollectionFeature
+            var feature = new GeoCollectionFeature<IGeoType>
             {
                 Geometries = new List<IGeoType>
                 {

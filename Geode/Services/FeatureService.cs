@@ -8,7 +8,7 @@ using Geode.Geometry;
 
 namespace Geode.Services
 {
-    internal class FeatureService
+    internal static class FeatureService
     {
         private static IGeoType GetPointGeometry<T>(GeometryAttribute attribute, Object point)
         {
@@ -16,7 +16,7 @@ namespace Geode.Services
             var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
             object x = point.GetType().GetProperty(xMap).GetValue(point, null);
             object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-            return new Point<T>((T)x, (T)y);
+            return new Point((double)x, (double)y);
         }
 
         private static IEnumerable<IEnumerable<T>> CreatePoly<T>(GeometryAttribute attribute, Object poly)
@@ -84,7 +84,7 @@ namespace Geode.Services
             return propAttributes.FirstOrDefault(at => at.GetType() == typeof(GeometryAttribute)) as GeometryAttribute;
         }
 
-        public static IFeature CreateFeature<T>(Object obj)
+        public static Feature CreateFeature<T>(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
 
@@ -113,18 +113,15 @@ namespace Geode.Services
             return feature;
         }
 
-        public static IFeature CreateFeature(Object obj)
+        public static FeatureCollection<IFeature<IGeoType>> CreateFeatures<T>(IEnumerable<Object> objList)
         {
-            return CreateFeature<double>(obj);
-        }
-
-        public static FeatureCollection<IFeature> CreateFeatures(IEnumerable<Object> objList)
-        {
-            var features = objList.Select(obj => CreateFeature(obj));
-            return new FeatureCollection<IFeature>
             {
-                Features = features
-            };
+                var features = objList.Select(obj => CreateFeature<T>(obj));
+                return new FeatureCollection<IFeature<IGeoType>>
+                {
+                    Features = features
+                };
+            }
         }
 
     }

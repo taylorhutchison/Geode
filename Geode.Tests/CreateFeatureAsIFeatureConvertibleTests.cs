@@ -24,7 +24,7 @@ namespace Geode.Tests
             };
             Assert.Throws<NotImplementedException>(() =>
             {
-                Feature.CreateFeature(city);
+                Feature<Polygon>.CreateFeature(city);
             });
         }
 
@@ -55,7 +55,7 @@ namespace Geode.Tests
                 },
                 Name = "Test Name"
             };
-            var feature = (GeoCollectionFeature)Feature.CreateFeature(archipeligo);
+            var feature = GeoCollectionFeature<Polygon>.CreateFeature(archipeligo);
             Assert.Equal(2, feature.Geometries.Count());
         }
 
@@ -65,21 +65,22 @@ namespace Geode.Tests
         {
             var earthquake = new Earthquake
             {
-                ImpactArea = new Polygon
+                ImpactArea = new Polygon<double>
                 {
                     Coordinates = new List<IEnumerable<double>>
                     {
-                        new double[]{0 ,0 },
+                        new double[]{0, 0 },
                         new double[]{1 ,1 },
                         new double[]{2 ,2 }
                     }
                 },
-                Epicenter = new Geode.Geometry.Point(0, 0),
+                Epicenter = new Geode.Geometry.Point
+                {
+                    Coordinates = new double[] { 0, 0 }
+                },
                 Magnitude = 9.0
             };
             var feature = earthquake.ConvertToFeature();
-            var json = Geode.Json.Serializer.Write(feature);
-            var x = 1;
         }
     }
 }

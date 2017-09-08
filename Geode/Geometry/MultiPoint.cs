@@ -13,6 +13,7 @@ namespace Geode.Geometry
         {
             Coordinates = coordinates;
         }
+        public IEnumerable Geometry => Coordinates;
     }
 
     public class MultiPoint : IGeoType
@@ -23,5 +24,6 @@ namespace Geode.Geometry
         {
             Coordinates = coordinates;
         }
+        public IEnumerable Geometry => Coordinates;
     }
 }

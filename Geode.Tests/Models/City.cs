@@ -6,13 +6,13 @@ using Geode.Geometry;
 namespace Geode.Tests.Models
 {
     [Feature]
-    public class City : IFeatureConvertible
+    public class City : IFeatureConvertible<Polygon>
     {
         public string Name { get; set; }
         [Geometry(GeoType.Polygon)]
         public IEnumerable<IEnumerable<double>> Boundary { get; set; }
 
-        public IFeature ConvertToFeature()
+        public Feature<Polygon> ConvertToFeature()
         {
             throw new NotImplementedException();
         }

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Point: IGeoType
+    public class Point : IGeoType
     {
         public GeoType Type => GeoType.Point;
         public Point() { }
@@ -16,5 +17,6 @@ namespace Geode.Tests.Models
         }
         public double X { get; set; }
         public double Y { get; set; }
+        public IEnumerable Geometry => new double[] { X, Y };
     }
 }
