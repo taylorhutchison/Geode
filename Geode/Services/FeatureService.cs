@@ -8,7 +8,7 @@ using Geode.Geometry;
 
 namespace Geode.Services
 {
-    internal class FeatureService
+    internal static class FeatureService
     {
         private static IGeoType GetPointGeometry<T>(GeometryAttribute attribute, Object point)
         {
@@ -16,7 +16,7 @@ namespace Geode.Services
             var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
             object x = point.GetType().GetProperty(xMap).GetValue(point, null);
             object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-            return new Point<T>((T)x, (T)y);
+            return new Point((double)x, (double)y);
         }
 
         private static IEnumerable<IEnumerable<T>> CreatePoly<T>(GeometryAttribute attribute, Object poly)

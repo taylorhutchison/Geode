@@ -65,16 +65,19 @@ namespace Geode.Tests
         {
             var earthquake = new Earthquake
             {
-                ImpactArea = new Polygon
+                ImpactArea = new Polygon<double>
                 {
                     Coordinates = new List<IEnumerable<double>>
                     {
-                        new double[]{0 ,0 },
+                        new double[]{0, 0 },
                         new double[]{1 ,1 },
                         new double[]{2 ,2 }
                     }
                 },
-                Epicenter = new Geode.Geometry.Point(0, 0),
+                Epicenter = new Geode.Geometry.Point
+                {
+                    Coordinates = new double[] { 0, 0 }
+                },
                 Magnitude = 9.0
             };
             var feature = earthquake.ConvertToFeature();

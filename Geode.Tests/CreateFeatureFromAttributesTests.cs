@@ -22,7 +22,7 @@ namespace Geode.Tests
             };
             var feature = Feature.CreateFeature(testEvent);
             Assert.Equal("Feature", feature.Type);
-            var geometry = feature.Geometry as Geometry.Point<double>;
+            var geometry = feature.Geometry as Geometry.Point;
             Assert.Equal(123.005, geometry.Coordinates[0]);
             Assert.Equal(456.004, geometry.Coordinates[1]);
         }
@@ -44,7 +44,7 @@ namespace Geode.Tests
             };
 
             var feature = Feature.CreateFeature(testPlace);
-            var geometry = feature.Geometry as Geometry.Point<double>;
+            var geometry = feature.Geometry as Geometry.Point;
             Assert.Equal(90, geometry.Coordinates[0]);
             Assert.Equal(180, geometry.Coordinates[1]);
         }
