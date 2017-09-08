@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 
 namespace Geode.Geometry
 {
     public interface IGeoType
     {
-        string Type { get; }
+        GeoType Type { get; }
     }
 }

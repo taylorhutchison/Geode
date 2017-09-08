@@ -6,6 +6,6 @@ namespace Geode.Geometry
 {
     public class GeometryCollection
     {
-        IGeoType[] Geometries;
+        IGeoType[] Geometries { get; set; }
     }
 }

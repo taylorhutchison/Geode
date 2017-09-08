@@ -7,13 +7,13 @@ using Geode.Geometry;
 namespace Geode.Tests.Models
 {
     [Feature]
-    public class Country: IFeatureConvertible
+    public class Country: IFeatureConvertible<IGeoType>
     {
         public string Name { get; set; }
         [Geometry(GeoType.Polygon)]
-        public IEnumerable<IEnumerable<int>> Boundary { get; set; }
+        public IEnumerable<IEnumerable<double>> Boundary { get; set; }
 
-        public IFeature ConvertToFeature()
+        public Feature<IGeoType> ConvertToFeature()
         {
             throw new NotImplementedException();
         }

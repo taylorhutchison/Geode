@@ -5,8 +5,18 @@ using Geode.Geometry;
 
 namespace Geode
 {
-    public interface IFeatureConvertible
+    public interface IFeatureConvertible<T> where T: IGeoType
     {
-        IFeature ConvertToFeature();
+        Feature<T> ConvertToFeature();
+    }
+
+    public interface IGeoCollectionFeatureConvertible<T> where T: IGeoType
+    {
+        GeoCollectionFeature<T> ConvertToFeature();
+    }
+
+    public interface IGeoCollectionFeatureConvertible
+    {
+        GeoCollectionFeature<IGeoType> ConvertToFeature();
     }
 }

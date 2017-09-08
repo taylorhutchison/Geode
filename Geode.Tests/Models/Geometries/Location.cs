@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Location
+    public class Location<IGeoType>
     {
-        public double Lat { get; set; }
-        public double Lng { get; set; }
+        IGeoType Geometry { get; set; }
     }
 }

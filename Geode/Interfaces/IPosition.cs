@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IGeometryFeature : IFeature<IGeoType>
+    public interface IPosition
     {
-        IGeoType Geometry { get; set; }
+        IReadOnlyList<double> Position { get; }
     }
+
 }

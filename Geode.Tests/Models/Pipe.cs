@@ -8,7 +8,7 @@ namespace Geode.Tests.Models
     public class Pipe
     {
         public int Id { get; set; }
-        [Geometry(GeoType.Polyline)]
+        [Geometry(GeoType.LineString)]
         public IEnumerable<double[]> Location { get; set; }
     }
 }
