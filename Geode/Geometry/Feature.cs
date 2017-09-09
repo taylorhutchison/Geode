@@ -6,20 +6,15 @@ using Geode.Services;
 
 namespace Geode
 {
-    public abstract class BaseFeature : IFeature<IGeoType>
-    {
-        public string Type => "Feature";
-        public IDictionary<string, object> Properties { get; set; }
-    }
 
-    public sealed class Feature : BaseFeature, IFeature<IGeoType>
+    public static class Feature
     {
-        public IGeoType Geometry { get; set; }
-        public static Feature CreateFeature(Object obj)
+        public static Feature<IGeoType> CreateFeature(Object obj)
         {
-            return CreateFeature<double>(obj);
+            return FeatureService.CreateFeature<IGeoType>(obj);
         }
-        public static Feature CreateFeature<T>(Object obj)
+
+        public static Feature<IGeoType> CreateFeature<T>(Object obj)
         {
             return FeatureService.CreateFeature<T>(obj);
         }
@@ -31,23 +26,17 @@ namespace Geode
         public IDictionary<string, object> Properties { get; set; }
     }
 
-    public sealed class Feature<T>: BaseFeature<T>, IFeature<T> where T: IGeoType
+    public sealed class Feature<T>: BaseFeature<T>, IGeometryFeature where T: IGeoType
     {
-        public T Geometry { get; set; }
-        public static Feature<T> CreateFeature(IFeatureConvertible<T> feature)
-        {
-            return feature.ConvertToFeature();
-        }
+        public IGeoType Geometry { get; set; }
     }
 
-    public sealed class GeoCollectionFeature<T> : BaseFeature<T>, IFeature<T> where T: IGeoType
+    public sealed class GeoCollectionFeature<T> : BaseFeature<T>, IGeometryCollectionFeature where T: IGeoType
     {
         public IEnumerable<IGeoType> Geometries { get; set; }
-        public static GeoCollectionFeature<IGeoType> CreateFeature(IGeoCollectionFeatureConvertible feature)
-        {
-            return feature.ConvertToFeature();
-        }
+
     }
+
 
 
 }
