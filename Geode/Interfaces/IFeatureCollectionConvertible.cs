@@ -7,6 +7,6 @@ namespace Geode
 {
     public interface IFeatureCollectionConvertible
     {
-        IFeatureCollection ConvertToFeatureCollection();
+        IFeatureCollection<IFeature<IGeoType>> ConvertToFeatureCollection();
     }
 }
