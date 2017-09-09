@@ -7,10 +7,10 @@ namespace Geode.Tests.Models
 {
     public class Earthquake : IGeoCollectionFeatureConvertible
     {
-        public Geode.Geometry.Polygon<double> ImpactArea { get; set; }
+        public Geode.Geometry.Polygon ImpactArea { get; set; }
         public Geode.Geometry.Point Epicenter { get; set; }
         public double Magnitude { get; set; }
-        public GeoCollectionFeature<IGeoType> ConvertToFeature()
+        public GeoCollectionFeature<IGeoType> ToFeature()
         {
             var feature = new GeoCollectionFeature<IGeoType>
             {

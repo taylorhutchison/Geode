@@ -11,7 +11,7 @@ namespace Geode.Tests.Models
 
         public string Name { get; set; }
 
-        public GeoCollectionFeature<IGeoType> ConvertToFeature()
+        public GeoCollectionFeature<IGeoType> ToFeature()
         {
             return new GeoCollectionFeature<IGeoType>
             {

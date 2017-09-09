@@ -12,7 +12,7 @@ namespace Geode.Tests.Models
         public string Description { get; set; }
         [Geometry(GeoType.Point)]
         public IGeoType Coordinates { get; set; }
-        public Feature<IGeoType> ConvertToFeature()
+        public Feature<IGeoType> ToFeature()
         {
             return new Feature<IGeoType>
             {
