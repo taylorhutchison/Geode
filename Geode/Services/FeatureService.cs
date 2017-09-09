@@ -10,7 +10,7 @@ namespace Geode.Services
 {
     internal static class FeatureService
     {
-        private static IGeoType GetPointGeometry<T>(GeometryAttribute attribute, Object point)
+        private static IGeoType GetPointGeometry(GeometryAttribute attribute, Object point)
         {
             var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
             var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
@@ -19,25 +19,25 @@ namespace Geode.Services
             return new Point((double)x, (double)y);
         }
 
-        private static IEnumerable<IEnumerable<T>> CreatePoly<T>(GeometryAttribute attribute, Object poly)
+        private static IEnumerable<IEnumerable<double>> CreatePoly(GeometryAttribute attribute, Object poly)
         {
             if (IsEnumerable(poly))
             {
                 var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
                 var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
                 var enumerable = poly as IEnumerable;
-                var line = new List<IEnumerable<T>>();
+                var line = new List<IEnumerable<double>>();
                 foreach (var point in enumerable)
                 {
                     if (IsEnumerable(point))
                     {
-                        line.Add(point as T[]);
+                        line.Add(point as double[]);
                     }
                     else
                     {
                         object x = point.GetType().GetProperty(xMap).GetValue(point, null);
                         object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-                        var xy = new T[] { (T)x, (T)y };
+                        var xy = new double[] { (double)x, (double)y };
                         line.Add(xy);
                     }
                 }
@@ -46,16 +46,16 @@ namespace Geode.Services
             return null;
         }
 
-        private static IGeoType GetPolylineGeometry<T>(GeometryAttribute attribute, Object polyline)
+        private static IGeoType GetPolylineGeometry(GeometryAttribute attribute, Object polyline)
         {
-            var line = CreatePoly<T>(attribute, polyline);
-            return line != null ? new Polyline<T>(line) : null;
+            var line = CreatePoly(attribute, polyline);
+            return line != null ? new Polyline(line) : null;
         }
 
-        private static IGeoType GetPolygonGeometry<T>(GeometryAttribute attribute, Object polyline)
+        private static IGeoType GetPolygonGeometry(GeometryAttribute attribute, Object polyline)
         {
-            var line = CreatePoly<T>(attribute, polyline);
-            return line != null ? new Polygon<T>(line) : null;
+            var line = CreatePoly(attribute, polyline);
+            return line != null ? new Polygon(line) : null;
         }
 
         private static bool IsEnumerable(Object obj)
@@ -63,16 +63,16 @@ namespace Geode.Services
             return obj != null && (obj as IEnumerable) != null;
         }
 
-        private static IGeoType GetGeometry<T>(GeometryAttribute attribute, Object obj)
+        private static IGeoType GetGeometry(GeometryAttribute attribute, Object obj)
         {
             switch (attribute.Type)
             {
                 case GeoType.Point:
-                    return GetPointGeometry<T>(attribute, obj);
+                    return GetPointGeometry(attribute, obj);
                 case GeoType.LineString:
-                    return GetPolylineGeometry<T>(attribute, obj);
+                    return GetPolylineGeometry(attribute, obj);
                 case GeoType.Polygon:
-                    return GetPolygonGeometry<T>(attribute, obj);
+                    return GetPolygonGeometry(attribute, obj);
                 default:
                     throw new ArgumentException($"GeoType {attribute.Type} not handled.");
             }
@@ -84,7 +84,7 @@ namespace Geode.Services
             return propAttributes.FirstOrDefault(at => at.GetType() == typeof(GeometryAttribute)) as GeometryAttribute;
         }
 
-        public static Feature CreateFeature<T>(Object obj)
+        public static Feature<IGeoType> CreateFeature<T>(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
 
@@ -96,7 +96,7 @@ namespace Geode.Services
                 var propVal = prop.GetValue(obj, null);
                 if (geoAttribute != null)
                 {
-                    geometry = GetGeometry<T>(geoAttribute, propVal);
+                    geometry = GetGeometry(geoAttribute, propVal);
                 }
                 else
                 {
@@ -104,7 +104,7 @@ namespace Geode.Services
                 }
             }
 
-            var feature = new Feature
+            var feature = new Feature<IGeoType>
             {
                 Geometry = geometry,
                 Properties = objProperties
