@@ -31,6 +31,11 @@ namespace Geode.Geometry
         {
             return Position.GetEnumerator();
         }
+
+        public bool Equals(IGeoType other)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

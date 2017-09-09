@@ -5,17 +5,6 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class Polyline<T> : IGeoType
-    {
-        public GeoType Type => GeoType.LineString;
-        public IEnumerable<IEnumerable<T>> Coordinates { get; set; }
-        public Polyline(IEnumerable<IEnumerable<T>> coordinates)
-        {
-            Coordinates = coordinates;
-        }
-        public IEnumerable Geometry => Coordinates;
-    }
-
     public class Polyline : IGeoType
     {
         public GeoType Type => GeoType.LineString;
@@ -25,5 +14,10 @@ namespace Geode.Geometry
             Coordinates = coordinates;
         }
         public IEnumerable Geometry => Coordinates;
+
+        public bool Equals(IGeoType other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

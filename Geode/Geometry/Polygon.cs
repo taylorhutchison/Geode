@@ -15,17 +15,9 @@ namespace Geode.Geometry
         }
         public Polygon() { }
         public IEnumerable Geometry => Coordinates;
-    }
-
-    public class Polygon<T> : IGeoType
-    {
-        public GeoType Type => GeoType.Polygon;
-        public IEnumerable<IEnumerable<T>> Coordinates { get; set; }
-        public Polygon(IEnumerable<IEnumerable<T>> coordinates)
+        public bool Equals(IGeoType other)
         {
-            Coordinates = coordinates;
+            throw new NotImplementedException();
         }
-        public Polygon() { }
-        public IEnumerable Geometry => Coordinates;
     }
 }
