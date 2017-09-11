@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Geode.Geometry;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("Geode.Tests")]
 
 namespace Geode
 {
-    public class GeometryAttribute : Attribute
+    internal class GeometryAttribute : Attribute
     {
         public GeoType Type { get; set; }
         public GeoTypeMap Map { get; set; }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("Geode.Tests")]
 
 namespace Geode
 {
-    public class GeoDataAttribute : Attribute
+    internal class GeoDataAttribute : Attribute
     {
 
     }
