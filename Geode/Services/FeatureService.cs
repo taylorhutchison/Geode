@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Geode.Geometry;
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("Geode.Tests")]
 
 namespace Geode.Services
 {
@@ -12,6 +14,10 @@ namespace Geode.Services
     {
         private static IGeoType GetPointGeometry(GeometryAttribute attribute, Object point)
         {
+            if (point is IPosition)
+            {
+                return new Point(((IPosition)point));
+            }
             var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
             var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
             object x = point.GetType().GetProperty(xMap).GetValue(point, null);
@@ -29,7 +35,11 @@ namespace Geode.Services
                 var line = new List<IEnumerable<double>>();
                 foreach (var point in enumerable)
                 {
-                    if (IsEnumerable(point))
+                    if (point is IPosition)
+                    {
+                        line.Add(((IPosition)point).Coordinates);
+                    }
+                    else if (IsEnumerable(point))
                     {
                         line.Add(point as double[]);
                     }
@@ -49,7 +59,7 @@ namespace Geode.Services
         private static IGeoType GetPolylineGeometry(GeometryAttribute attribute, Object polyline)
         {
             var line = CreatePoly(attribute, polyline);
-            return line != null ? new Polyline(line) : null;
+            return line != null ? new LineString(line) : null;
         }
 
         private static IGeoType GetPolygonGeometry(GeometryAttribute attribute, Object polyline)
@@ -84,10 +94,9 @@ namespace Geode.Services
             return propAttributes.FirstOrDefault(at => at.GetType() == typeof(GeometryAttribute)) as GeometryAttribute;
         }
 
-        public static Feature<IGeoType> CreateFeature<T>(Object obj)
+        public static IFeature<IGeoType> CreateFeature<T>(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
-
             IGeoType geometry = null;
             var objProperties = new Dictionary<string, object>();
             foreach (var prop in properties)
@@ -103,26 +112,21 @@ namespace Geode.Services
                     objProperties.Add(prop.Name, propVal);
                 }
             }
-
             var feature = new Feature<IGeoType>
             {
                 Geometry = geometry,
                 Properties = objProperties
             };
-
             return feature;
         }
 
         public static FeatureCollection<IFeature<IGeoType>> CreateFeatures<T>(IEnumerable<Object> objList)
         {
+            var features = objList.Select(obj => CreateFeature<T>(obj));
+            return new FeatureCollection<IFeature<IGeoType>>
             {
-                var features = objList.Select(obj => CreateFeature<T>(obj));
-                return new FeatureCollection<IFeature<IGeoType>>
-                {
-                    Features = features
-                };
-            }
+                Features = features
+            };
         }
-
     }
 }
