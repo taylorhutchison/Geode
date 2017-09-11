@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class Polyline : IGeoType
+    public class LineString : IGeoType
     {
         public GeoType Type => GeoType.LineString;
         public IEnumerable<IEnumerable<double>> Coordinates { get; set; }
-        public Polyline(IEnumerable<IEnumerable<double>> coordinates)
+        public LineString(IEnumerable<IEnumerable<double>> coordinates)
         {
             Coordinates = coordinates;
         }
