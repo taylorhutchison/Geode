@@ -17,7 +17,7 @@ namespace Geode.Tests
             {
                 Name = "Test Event",
                 Description = "TestDescription",
-                Coordinates = new Geode.Geometry.Point(10, 10),
+                Coordinates = new Point(10, 10),
             };
             var feature = testEvent.ToFeature().ToGeoJson(indented: true);
         }
@@ -30,13 +30,13 @@ namespace Geode.Tests
                 {
                     Name = "Test Event",
                     Description = "TestDescription",
-                    Coordinates = new Geode.Geometry.Point(10, 10),
+                    Coordinates = new Point(10, 10),
                 },
                 new Event()
                 {
                     Name = "Test Event",
                     Description = "TestDescription",
-                    Coordinates = new Geode.Geometry.Point(10, 10),
+                    Coordinates = new Point(10, 10),
                 }
             };
             var feature = eventList.ToFeatureCollection().ToGeoJson(indented: true);
