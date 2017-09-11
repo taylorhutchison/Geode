@@ -15,7 +15,7 @@ namespace Geode.Services
     {
         public static IPosition Centroid(this IEnumerable<IPosition> pointList)
         {
-            var coords = pointList.Select(p => p.Position);
+            var coords = pointList.Select(p => p.Coordinates);
             var dimensions = coords.FirstOrDefault().Count();
             var coordinates = new double[dimensions];
             for (var i = 0; i < dimensions; i++)
