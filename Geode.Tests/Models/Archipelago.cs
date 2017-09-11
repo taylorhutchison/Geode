@@ -5,21 +5,23 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Archipelago: IGeoCollectionFeatureConvertible
+    public class Archipelago: IFeatureConvertible<GeometryCollection>
     {
         public IEnumerable<Polygon> Islands { get; set; }
 
         public string Name { get; set; }
 
-        public GeoCollectionFeature<IGeoType> ToFeature()
+        public IFeature<IGeoType> ToFeature()
         {
-            return new GeoCollectionFeature<IGeoType>
+            return new Feature<IGeoType>
             {
                 Properties = new Dictionary<string, object>
                 {
                     { nameof(Name), Name }
                 },
-                Geometries = Islands                
+                Geometry = new GeometryCollection() {
+                   Geometries = Islands
+                }            
             };
         }
     }

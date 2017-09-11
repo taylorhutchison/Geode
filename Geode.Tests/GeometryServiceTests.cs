@@ -18,9 +18,9 @@ namespace Geode.Tests
                 new Point(1,1,10)
             };
             var centroid = points.Centroid();
-            Assert.Equal(0.5, centroid.Position[0]);
-            Assert.Equal(0.5, centroid.Position[1]);
-            Assert.Equal(5, centroid.Position[2]);
+            Assert.Equal(0.5, centroid.Coordinates[0]);
+            Assert.Equal(0.5, centroid.Coordinates[1]);
+            Assert.Equal(5, centroid.Coordinates[2]);
         }
     }
 }

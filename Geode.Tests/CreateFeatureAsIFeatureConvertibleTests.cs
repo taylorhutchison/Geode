@@ -56,7 +56,8 @@ namespace Geode.Tests
                 Name = "Test Name"
             };
             var feature = archipeligo.ToFeature();
-            Assert.Equal(2, feature.Geometries.Count());
+            var geometry = feature.Geometry as GeometryCollection;
+            Assert.Equal(2, geometry.Count());
         }
 
         [Fact]

@@ -13,7 +13,7 @@ namespace Geode.Tests.Models
         [Geometry(GeoType.Polygon)]
         public IEnumerable<IEnumerable<double>> Boundary { get; set; }
 
-        public Feature<IGeoType> ToFeature()
+        public IFeature<IGeoType> ToFeature()
         {
             throw new NotImplementedException();
         }
