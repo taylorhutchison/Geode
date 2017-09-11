@@ -8,5 +8,6 @@ namespace Geode.Geometry
     {
         string Type { get; }
         IDictionary<string, object> Properties { get; set; }
+        T Geometry { get; set; }
     }
 }

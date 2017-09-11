@@ -7,11 +7,7 @@ namespace Geode
 {
     public interface IFeatureConvertible<T> where T: IGeoType
     {
-        Feature<T> ToFeature();
+        IFeature<IGeoType> ToFeature();
     }
 
-    public interface IGeoCollectionFeatureConvertible
-    {
-        GeoCollectionFeature<IGeoType> ToFeature();
-    }
 }
