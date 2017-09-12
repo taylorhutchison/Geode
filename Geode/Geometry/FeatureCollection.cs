@@ -8,11 +8,11 @@ using Geode.Services;
 
 namespace Geode
 {
-    public class FeatureCollection<T> : IEnumerable<T>, IFeatureCollection<T> where T : IFeature<IGeoType>
+    public class FeatureCollection : IEnumerable<IFeature>, IFeatureCollection
     {
         public string Type => "FeatureCollection";
-        public IEnumerable<T> Features { get; set; }
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerable<IFeature> Features { get; set; }
+        public IEnumerator<IFeature> GetEnumerator()
         {
             return Features.GetEnumerator();
         }
@@ -22,21 +22,22 @@ namespace Geode
         }
     }
 
-    public static class FeatureCollection
+    public static class FeatureCollectionExtensions
     {
-        public static IFeatureCollection<IFeature<IGeoType>> ToFeatureCollection(this IEnumerable<IFeatureConvertible<IGeoType>> features)
+        public static IFeatureCollection ToFeatureCollection(this IEnumerable<IFeatureConvertible> features)
         {
-            return new FeatureCollection<IFeature<IGeoType>>()
+            return new FeatureCollection()
             {
                 Features = features.Select(f => f.ToFeature())
             };
         }
-        public static IFeatureCollection<IFeature<IGeoType>> ToFeatureCollection<T>(this IEnumerable<T> features, Func<T, IFeature<IGeoType>> converter)
+        public static IFeatureCollection ToFeatureCollection<T>(this IEnumerable<T> features, Func<T, IFeature> converter)
         {
-            return new FeatureCollection<IFeature<IGeoType>>()
+            return new FeatureCollection()
             {
                 Features = features.Select(f => converter(f))
             };
         }
     }
+
 }

@@ -5,15 +5,15 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Archipelago: IFeatureConvertible<GeometryCollection>
+    public class Archipelago: IFeatureConvertible
     {
-        public IEnumerable<Polygon> Islands { get; set; }
+        public IEnumerable<IGeoType> Islands { get; set; }
 
         public string Name { get; set; }
 
-        public IFeature<IGeoType> ToFeature()
+        public IFeature ToFeature()
         {
-            return new Feature<IGeoType>
+            return new Feature
             {
                 Properties = new Dictionary<string, object>
                 {

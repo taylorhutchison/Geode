@@ -94,7 +94,7 @@ namespace Geode.Services
             return propAttributes.FirstOrDefault(at => at.GetType() == typeof(GeometryAttribute)) as GeometryAttribute;
         }
 
-        public static IFeature<IGeoType> CreateFeature<T>(Object obj)
+        public static IFeature CreateFeature<T>(Object obj)
         {
             var properties = obj.GetType().GetRuntimeProperties();
             IGeoType geometry = null;
@@ -112,7 +112,7 @@ namespace Geode.Services
                     objProperties.Add(prop.Name, propVal);
                 }
             }
-            var feature = new Feature<IGeoType>
+            var feature = new Feature
             {
                 Geometry = geometry,
                 Properties = objProperties
@@ -120,10 +120,10 @@ namespace Geode.Services
             return feature;
         }
 
-        public static FeatureCollection<IFeature<IGeoType>> CreateFeatures<T>(IEnumerable<Object> objList)
+        public static FeatureCollection CreateFeatures<T>(IEnumerable<Object> objList)
         {
             var features = objList.Select(obj => CreateFeature<T>(obj));
-            return new FeatureCollection<IFeature<IGeoType>>
+            return new FeatureCollection
             {
                 Features = features
             };

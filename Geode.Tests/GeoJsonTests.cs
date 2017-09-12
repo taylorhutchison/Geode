@@ -47,7 +47,31 @@ namespace Geode.Tests
         {
             var archipelago = new Archipelago
             {
-
+                Islands = new List<IGeoType>
+                {
+                    new Polygon
+                    {
+                        Coordinates = new List<IEnumerable<double>>
+                        {
+                            new double[]{0,0},
+                            new double[]{1,1},
+                            new double[]{2,2},
+                            new double[]{3,3}
+                        }
+                    },
+                    new Polygon
+                    {
+                        Coordinates = new List<IEnumerable<double>>
+                        {
+                            new double[]{4,4},
+                            new double[]{5,5},
+                            new double[]{6,6},
+                            new double[]{7,7}
+                        }
+                    },
+                    new Point(1,2,3)
+                },
+                Name = "Test Archipelago"
             };
             var feature = archipelago.ToFeature().ToGeoJson(indented: true);
         }

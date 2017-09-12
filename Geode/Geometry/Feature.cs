@@ -9,25 +9,21 @@ using System.Runtime.CompilerServices;
 namespace Geode
 {
 
-    public static class Feature
+    public sealed class Feature : IFeature
     {
-        internal static IFeature<IGeoType> CreateFeature(Object obj)
+        public string Type => "Feature";
+        public IDictionary<string, object> Properties { get; set; }
+        public IGeoType Geometry { get; set; }
+
+        internal static IFeature CreateFeature(Object obj)
         {
             return FeatureService.CreateFeature<IGeoType>(obj);
         }
 
-        internal static IFeature<IGeoType> CreateFeature<T>(Object obj)
+        internal static IFeature CreateFeature<T>(Object obj)
         {
             return FeatureService.CreateFeature<T>(obj);
         }
-    }
-
-    public sealed class Feature<T>: IFeature<IGeoType>
-    {
-        public string Test => "Hello!";
-        public string Type => "Feature";
-        public IDictionary<string, object> Properties { get; set; }
-        public IGeoType Geometry { get; set; }
 
     }
 

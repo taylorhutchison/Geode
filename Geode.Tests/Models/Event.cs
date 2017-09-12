@@ -6,15 +6,15 @@ using Geode.Geometry;
 namespace Geode.Tests.Models
 {
     [Feature]
-    public class Event: IFeatureConvertible<IGeoType>
+    public class Event: IFeatureConvertible
     {
         public string Name { get; set; }
         public string Description { get; set; }
         [Geometry(GeoType.Point)]
         public IGeoType Coordinates { get; set; }
-        public IFeature<IGeoType> ToFeature()
+        public IFeature ToFeature()
         {
-            return new Feature<IGeoType>
+            return new Feature
             {
                 Properties = new Dictionary<string, object>()
                 {
