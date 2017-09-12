@@ -13,7 +13,7 @@ namespace Geode.Serializers
     {
         private IEnumerable<Type> _typeList {
             get {
-                yield return typeof(IFeature<IGeoType>);
+                yield return typeof(IFeature);
             }
         }
         protected override IList<JsonProperty> CreateProperties(
@@ -33,26 +33,28 @@ namespace Geode.Serializers
 
     public static class GeoJsonSerializer
     {
-        public static string ToGeoJson(this IFeature<IGeoType> feature, bool indented = false)
+        public static string ToGeoJson(this IFeature feature, bool indented = false)
         {
+            var geoJsonFeature = new GeoJsonFeature(feature);
             var formatting = indented ? Formatting.Indented : Formatting.None;
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new FeatureContractResolver(),
+                //ContractResolver = new FeatureContractResolver(),
                 Formatting = formatting
             };
-            return JsonConvert.SerializeObject(feature, settings);
+            return JsonConvert.SerializeObject(geoJsonFeature, settings);
         }
 
-        public static string ToGeoJson(this IFeatureCollection<IFeature<IGeoType>> featureCollection, bool indented = false)
+        public static string ToGeoJson(this IFeatureCollection featureCollection, bool indented = false)
         {
+            var geoJsonFeatures = new GeoJsonFeatureCollection(featureCollection);
             var formatting = indented ? Formatting.Indented : Formatting.None;
             var settings = new JsonSerializerSettings
             {
                 ContractResolver = new FeatureContractResolver(),
                 Formatting = formatting
             };
-            return JsonConvert.SerializeObject(featureCollection, settings);
+            return JsonConvert.SerializeObject(geoJsonFeatures, settings);
         }
     }
 }

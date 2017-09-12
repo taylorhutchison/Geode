@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class GeometryCollection: IGeoType, IEnumerable<IGeoType>
+    public class GeometryCollection: IGeoType, IEnumerable<IGeoType>, IGeometryCollection
     {
         public GeoType Type => GeoType.GeometryCollection;
 
         public IEnumerable<IGeoType> Geometries { get; set; }
-
+        public IEnumerable Geometry => Geometries;
         public bool Equals(IGeoType other)
         {
             throw new NotImplementedException();

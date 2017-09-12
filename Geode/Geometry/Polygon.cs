@@ -9,12 +9,12 @@ namespace Geode.Geometry
     {
         public GeoType Type => GeoType.Polygon;
         public IEnumerable<IEnumerable<double>> Coordinates { get; set; }
+        public IEnumerable Geometry => Coordinates;
         public Polygon(IEnumerable<IEnumerable<double>> coordinates)
         {
             Coordinates = coordinates;
         }
         public Polygon() { }
-        public IEnumerable Geometry => Coordinates;
         public bool Equals(IGeoType other)
         {
             throw new NotImplementedException();
