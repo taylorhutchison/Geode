@@ -32,26 +32,22 @@ namespace Geode.Tests
         [Trait("Category", "Unit")]
         public void CreateFeature_GeoCollectionFeature_CreatesFeature()
         {
+            var p1 = new List<IReadOnlyList<double>> {
+                         new double[]{0 ,0 },
+                         new double[]{1 ,1 },
+                         new double[]{2 ,2 }
+                        };
+            var p2 = new List<IReadOnlyList<double>> {
+                         new double[]{0 ,0 },
+                         new double[]{1 ,1 },
+                         new double[]{2 ,2 }
+                        };
             var archipeligo = new Archipelago
             {
                 Islands = new List<Polygon>()
                 {
-                    new Polygon()
-                    {
-                        Coordinates = new List<IEnumerable<double>> {
-                         new double[]{0 ,0 },
-                         new double[]{1 ,1 },
-                         new double[]{2 ,2 }
-                        }
-                    },
-                    new Polygon()
-                    {
-                        Coordinates = new List<IEnumerable<double>> {
-                         new double[]{0 ,0 },
-                         new double[]{1 ,1 },
-                         new double[]{2 ,2 }
-                        }
-                    }
+                    new Polygon(p1),
+                    new Polygon(p2)
                 },
                 Name = "Test Name"
             };
@@ -64,21 +60,16 @@ namespace Geode.Tests
         [Trait("Category", "Unit")]
         public void CreateFeature_GeoCollectionFeatureWithMultipleTypes_CreatesFeature()
         {
-            var earthquake = new Earthquake
-            {
-                ImpactArea = new Polygon
-                {
-                    Coordinates = new List<IEnumerable<double>>
+            var p1 = new List<IReadOnlyList<double>>
                     {
                         new double[]{0, 0 },
                         new double[]{1 ,1 },
                         new double[]{2 ,2 }
-                    }
-                },
-                Epicenter = new Geode.Geometry.Point
-                {
-                    Coordinates = new double[] { 0, 0 }
-                },
+                    };
+            var earthquake = new Earthquake
+            {
+                ImpactArea = new Polygon(p1),
+                Epicenter = new Geode.Geometry.Point(new double[] { 0, 0 }),
                 Magnitude = 9.0
             };
             var feature = earthquake.ToFeature();

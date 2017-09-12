@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Geode.Geometry;
@@ -7,7 +8,7 @@ namespace Geode.Tests.Models
 {
     public class Archipelago: IFeatureConvertible
     {
-        public IEnumerable<IGeoType> Islands { get; set; }
+        public IEnumerable<IGeometry> Islands { get; set; }
 
         public string Name { get; set; }
 

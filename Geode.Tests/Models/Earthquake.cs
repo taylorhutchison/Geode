@@ -16,7 +16,7 @@ namespace Geode.Tests.Models
             {
                 Geometry = new GeometryCollection
                 {
-                    Geometries = new List<IGeoType> {
+                    Geometries = new List<IGeometry> {
                         ImpactArea,
                         Epicenter
                     }
