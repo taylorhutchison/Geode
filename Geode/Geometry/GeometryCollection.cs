@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class GeometryCollection: IGeoType, IEnumerable<IGeoType>, IGeometryCollection
+    public class GeometryCollection: IGeoType, IEnumerable<IGeoType>
     {
         public GeoType Type => GeoType.GeometryCollection;
 
