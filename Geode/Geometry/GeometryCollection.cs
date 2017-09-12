@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class GeometryCollection: IGeoType, IEnumerable<IGeoType>
+    public class GeometryCollection: IGeoType, IGeoCollection, IEnumerable<IGeoType>
     {
         public GeoType Type => GeoType.GeometryCollection;
-
-        public IEnumerable<IGeoType> Geometries { get; set; }
+        public IEnumerable<IGeometry> Geometries { get; set; }
         public IEnumerable Geometry => Geometries;
         public bool Equals(IGeoType other)
         {
@@ -22,7 +21,7 @@ namespace Geode.Geometry
             {
                 foreach(var geometry in Geometries)
                 {
-                    yield return geometry;
+                    yield return (IGeoType)geometry;
                 }
             }
             yield break;

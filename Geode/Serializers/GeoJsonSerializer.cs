@@ -9,51 +9,42 @@ using Newtonsoft.Json.Serialization;
 
 namespace Geode.Serializers
 {
-    internal class FeatureContractResolver : DefaultContractResolver
-    {
-        private IEnumerable<Type> _typeList {
-            get {
-                yield return typeof(IFeature);
-            }
-        }
-        protected override IList<JsonProperty> CreateProperties(
-            Type type,
-            MemberSerialization memberSerialization)
-        {
-            foreach (var t in _typeList)
-            {
-                if (t.IsAssignableFrom(type))
-                {
-                    return base.CreateProperties(t, memberSerialization);
-                }
-            }
-            return base.CreateProperties(type, memberSerialization);
-        }
-    }
-
     public static class GeoJsonSerializer
     {
-        public static string ToGeoJson(this IFeature feature, bool indented = false)
+        public static string ToGeoJson(this IFeature feature, bool indented = false, bool camelCase = true)
         {
-            var geoJsonFeature = new GeoJsonFeature(feature);
             var formatting = indented ? Formatting.Indented : Formatting.None;
+            var contractResolver = camelCase ? new CamelCasePropertyNamesContractResolver() : null;
             var settings = new JsonSerializerSettings
             {
-                //ContractResolver = new FeatureContractResolver(),
+                ContractResolver = contractResolver,
                 Formatting = formatting
             };
+            return feature.ToGeoJson(settings);
+        }
+
+        public static string ToGeoJson(this IFeature feature, JsonSerializerSettings settings)
+        {
+            var geoJsonFeature = new GeoJsonFeature(feature);
             return JsonConvert.SerializeObject(geoJsonFeature, settings);
         }
 
-        public static string ToGeoJson(this IFeatureCollection featureCollection, bool indented = false)
+        public static string ToGeoJson(this IFeatureCollection featureCollection, bool indented = false, bool camelCase = true)
         {
             var geoJsonFeatures = new GeoJsonFeatureCollection(featureCollection);
             var formatting = indented ? Formatting.Indented : Formatting.None;
+            var contractResolver = camelCase ? new CamelCasePropertyNamesContractResolver() : null;
             var settings = new JsonSerializerSettings
             {
-                ContractResolver = new FeatureContractResolver(),
+                ContractResolver = contractResolver,
                 Formatting = formatting
             };
+            return JsonConvert.SerializeObject(geoJsonFeatures, settings);
+        }
+
+        public static string ToGeoJson(this IFeatureCollection featureCollection, JsonSerializerSettings settings)
+        {
+            var geoJsonFeatures = new GeoJsonFeatureCollection(featureCollection);
             return JsonConvert.SerializeObject(geoJsonFeatures, settings);
         }
     }
