@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class MultiPoint : IGeoType
+    public class MultiPoint : IGeoType, IGeometry
     {
         public GeoType Type => GeoType.MultiPoint;
         public IEnumerable Coordinates { get; set; }

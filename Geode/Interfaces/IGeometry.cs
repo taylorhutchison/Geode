@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IGeometryFeature : IFeature<IGeoType>
+    public interface IGeometry: IGeoType
     {
-        IGeoType Geometry { get; set; }
+        IEnumerable Coordinates { get; }
     }
 }

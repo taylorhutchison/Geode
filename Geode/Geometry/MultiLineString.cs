@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class MultiLineString : IGeoType
+    public class MultiLineString : IGeoType, IGeometry
     {
         public GeoType Type => GeoType.MultiLineString;
-        public IEnumerable<IEnumerable<IEnumerable<double>>> Coordinates { get; set; }
+        public IEnumerable Coordinates { get; private set; }
         public MultiLineString(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates)
         {
             Coordinates = coordinates;

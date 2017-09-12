@@ -6,7 +6,7 @@ namespace Geode.Geometry
 {
     public interface IPosition
     {
-        IReadOnlyList<double> Coordinates { get; }
+        IReadOnlyList<double> Position { get; }
     }
 
 }

@@ -6,22 +6,28 @@ using System.Linq;
 
 namespace Geode.Geometry
 {
-    public sealed class Point : IGeoType, IPosition
+    public sealed class Point : IGeoType, IPosition, IGeometry, IEnumerable<double>
     {
+        private double[] _position;
         public GeoType Type => GeoType.Point;
-        public IReadOnlyList<double> Coordinates { get; set; }
+        public IReadOnlyList<double> Position => _position;
+        public IEnumerable Coordinates => _position;
         public IEnumerable Geometry => Coordinates;
         public Point(double x, double y)
         {
-            Coordinates = new double[] { x, y };
+            _position = new double[] { x, y };
         }
         public Point(double x, double y, double z)
         {
-            Coordinates = new double[] { x, y, z };
+            _position = new double[] { x, y, z };
         }
         public Point(IPosition position)
         {
-            Coordinates = position.Coordinates.ToArray();
+            _position = position.Position.ToArray();
+        }
+        public Point(double[] position)
+        {
+            _position = position;
         }
         public Point() { }
 
@@ -29,7 +35,16 @@ namespace Geode.Geometry
         {
             throw new NotImplementedException();
         }
-        
+
+        public IEnumerator<double> GetEnumerator()
+        {
+            return ((IEnumerable<double>)_position).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)_position).GetEnumerator();
+        }
     }
 
 }
