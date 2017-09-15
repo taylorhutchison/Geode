@@ -5,19 +5,19 @@ using Geode.Geometry;
 
 namespace Geode.Structures
 {
-    public class QuadTree
+    public class QuadTree<T> where T: IPosition
     {
-        public QuadTree(IEnumerable<IPosition> positions)
+        public QuadTree(IEnumerable<T> positions)
         {
 
         }
 
-        public QuadTree Add(IPosition position)
+        public QuadTree<T> Add(IPosition position)
         {
             return this;
         }
         
-        public QuadTree Add(IEnumerable<IPosition> position)
+        public QuadTree<T> Add(IEnumerable<IPosition> positions)
         {
             return this;
         }
