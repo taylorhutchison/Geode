@@ -21,7 +21,6 @@ namespace Geode.Tests
                 Coordinates = new Point(123.005,456.004)
             };
             var feature = Feature.CreateFeature<IGeoType>(testEvent);
-            Assert.Equal("Feature", feature.Type);
             var geometry = feature.Geometry as Point;
             var coordinates = geometry.ToArray();
             Assert.Equal(123.005, coordinates[0]);

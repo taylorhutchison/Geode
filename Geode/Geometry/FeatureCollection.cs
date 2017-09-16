@@ -8,9 +8,11 @@ using Geode.Services;
 
 namespace Geode
 {
+    /// <summary>
+    /// A FeatureCollection is a collection of Features.
+    /// </summary>
     public class FeatureCollection : IEnumerable<IFeature>, IFeatureCollection
     {
-        public string Type => "FeatureCollection";
         public IEnumerable<IFeature> Features { get; set; }
         public IEnumerator<IFeature> GetEnumerator()
         {

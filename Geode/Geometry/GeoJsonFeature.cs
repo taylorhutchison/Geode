@@ -10,7 +10,6 @@ namespace Geode.Geometry
     {
         public GeoJsonFeature(IFeature feature)
         {
-            Type = feature?.Type;
             Properties = feature?.Properties;
             Geometry = new Dictionary<string, object>(2)
             {
@@ -27,7 +26,7 @@ namespace Geode.Geometry
                 Geometry.Add("Coordinates", feature?.Geometry?.Geometry);
             }
         }
-        public string Type { get; private set; }
+        public string Type => "Feature";
         public IDictionary<string, object> Properties { get; private set; }
         public IDictionary<string, object> Geometry { get; private set; }
     }
@@ -36,10 +35,9 @@ namespace Geode.Geometry
     {
         public GeoJsonFeatureCollection(IFeatureCollection featureCollection)
         {
-            Type = featureCollection.Type;
             Features = featureCollection.Features.Select(f => new GeoJsonFeature(f));
         }
-        public string Type { get; private set; }
+        public string Type => "FeatureCollection";
         public IEnumerable<GeoJsonFeature> Features { get; private set; }
     }
 

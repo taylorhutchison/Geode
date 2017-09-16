@@ -6,7 +6,6 @@ namespace Geode.Geometry
 {
     public interface IFeature
     {
-        string Type { get; }
         IDictionary<string, object> Properties { get; set; }
         IGeoType Geometry { get; set; }
     }
