@@ -8,11 +8,12 @@ using System.Linq;
 
 namespace Geode.Readers
 {
-    public class ShapefileReader: FeatureReader
+    internal class ShapefileReader: FeatureReader
     {
         public override IFeatureCollection Read(string path)
         {
             return new FeatureCollection();
         }
     }
+
 }

@@ -6,7 +6,7 @@ using Geode.Geometry;
 
 namespace Geode.Readers
 {
-    public abstract class FeatureReader: Reader
+    internal abstract class FeatureReader: Reader
     {
         public abstract IFeatureCollection Read(string path);
     }

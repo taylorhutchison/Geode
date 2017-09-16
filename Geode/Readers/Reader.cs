@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Geode.Readers
 {
-    public abstract class Reader
+    internal abstract class Reader
     {
         internal string NullStreamExceptionMessage => "Stream is null and must be initialized before use.";
 
