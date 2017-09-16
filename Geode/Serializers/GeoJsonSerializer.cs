@@ -11,6 +11,13 @@ namespace Geode.Serializers
 {
     public static class GeoJsonSerializer
     {
+        /// <summary>
+        /// Returns the GeoJSON representation of a feature.
+        /// </summary>
+        /// <param name="feature">The feature of be represented as GeoJSON.</param>
+        /// <param name="indented">Boolean indicating if the GeoJSON should be formatted with carriage returns and indentation.</param>
+        /// <param name="camelCase">Boolean indicating if the GeoJSON property keys should be presented in camel casing.</param>
+        /// <returns></returns>
         public static string ToGeoJson(this IFeature feature, bool indented = false, bool camelCase = true)
         {
             var formatting = indented ? Formatting.Indented : Formatting.None;
