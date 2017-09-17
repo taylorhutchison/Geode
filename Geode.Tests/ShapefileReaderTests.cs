@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using Xunit;
 using Geode.Readers;
+using System.IO;
 
 namespace Geode.Tests
 {
@@ -11,8 +13,9 @@ namespace Geode.Tests
         [Fact]
         public void ReadShapefile()
         {
-            var reader = new ShapefileReader();
-            var header = reader.GetShpHeader(@"./Data/Shapefiles/places.shp");
+            var path = @"./Data/Shapefiles/places.shp";
+            var features = new ShapefileReader().Read(path);
+            Assert.Equal(243, features.Features.Count());
         }
     }
 }
