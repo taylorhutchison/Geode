@@ -29,7 +29,6 @@ namespace Geode.Geometry
         {
             _position = position;
         }
-        public Point() { }
 
         public bool Equals(Point other)
         {
