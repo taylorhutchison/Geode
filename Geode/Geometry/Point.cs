@@ -33,7 +33,35 @@ namespace Geode.Geometry
 
         public bool Equals(IGeoType other)
         {
-            throw new NotImplementedException();
+            if(Type != other.Type)
+            {
+                return false;
+            }
+            var coordList = new List<double>();
+            foreach(var coord in other.Geometry)
+            {
+                try
+                {
+                    coordList.Add(Convert.ToDouble(coord));
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            if(coordList.Count() != _position.Length)
+            {
+                return false;
+            }
+            var coordArray = coordList.ToArray();
+            for(int i = 0; i < _position.Length; i++)
+            {
+                if(_position[i] != coordArray[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public IEnumerator<double> GetEnumerator()
