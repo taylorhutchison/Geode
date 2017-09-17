@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Geode.Geometry
 {
-    public sealed class Point : IGeoType, IPosition, IGeometry, IEnumerable<double>
+    public sealed class Point : IGeoType, IPosition, IGeometry, IEnumerable<double>, IEquatable<Point>
     {
         private double[] _position;
         public GeoType Type => GeoType.Point;
@@ -30,6 +30,27 @@ namespace Geode.Geometry
             _position = position;
         }
         public Point() { }
+
+        public bool Equals(Point other)
+        {
+            return Equals((IPosition)other);
+        }
+
+        public bool Equals(IPosition other)
+        {
+            if(Position.Count != other.Position.Count)
+            {
+                return false;
+            }
+            for(int i = 0; i < Position.Count; i++)
+            {
+                if (Position[i] != other.Position[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         public bool Equals(IGeoType other)
         {

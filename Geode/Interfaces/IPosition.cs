@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IPosition
+    public interface IPosition: IEquatable<IPosition>
     {
         IReadOnlyList<double> Position { get; }
     }
