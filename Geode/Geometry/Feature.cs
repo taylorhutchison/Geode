@@ -8,10 +8,11 @@ using System.Runtime.CompilerServices;
 
 namespace Geode
 {
-
+    /// <summary>
+    /// A Feature represents a discrete geometry and it's associated attributes. 
+    /// </summary>
     public sealed class Feature : IFeature
     {
-        public string Type => "Feature";
         public IDictionary<string, object> Properties { get; set; }
         public IGeoType Geometry { get; set; }
 

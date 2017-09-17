@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Geode.Geometry
 {
+    /// <summary>
+    /// A LineString is a geometry type, sometimes refered to as a Polyline, that is represented by an array of positions.
+    /// </summary>
     public class LineString : IGeoType, IGeometry, IEnumerable<IEnumerable<double>>
     {
         private IEnumerable<IEnumerable<double>> _coordinates;
