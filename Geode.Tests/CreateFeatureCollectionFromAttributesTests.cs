@@ -30,7 +30,6 @@ namespace Geode.Tests
                 }
             };
             var featureCollection = eventList.ToFeatureCollection();
-            Assert.Equal("FeatureCollection", featureCollection.Type);
             Assert.Equal(2, featureCollection.Features.Count());
         }
     }
