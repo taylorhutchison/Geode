@@ -17,4 +17,23 @@
     <ProjectReference Include="..\Geode\Geode.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Shapefiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\Shapefiles\places.dbf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Shapefiles\places.prj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Shapefiles\places.shp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Shapefiles\places.shx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
