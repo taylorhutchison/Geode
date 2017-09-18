@@ -79,7 +79,7 @@ var testEvent = new Event()
 	Description = "TestDescription",
     Coordinates = new Point(10, 10),
 };          
-var geoJson= testEvent.ToFeature().ToGeoJson(indented: true);
+var geoJson = testEvent.ToFeature().ToGeoJson(indented: true);
 ```
 The value returned by the call to ToGeoJson(indented: true) is then:
 ```json
