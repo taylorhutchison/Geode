@@ -16,9 +16,14 @@ namespace Geode.Algorithms
             A = a;
             B = b;
         }
+        public LineSegment(double[] a, double[] b)
+        {
+            A = new Position(a);
+            B = new Position(b);
+        }
         public double SegmentLength => Math.Sqrt(Math.Pow(A.Position[0] - B.Position[0], 2) + Math.Pow(A.Position[1] - B.Position[1], 2));
 
-        public IPosition DistanceAlong(double distance)
+        public IPosition PositionAtDistance(double distance)
         {
             var cx = B.Position[0] - A.Position[0];
             var cy = B.Position[1] - A.Position[1];
@@ -32,40 +37,46 @@ namespace Geode.Algorithms
 
     public static class Midpoint
     {
-        private static IEnumerable<LineSegment> GetLineSegments(IEnumerable<IEnumerable<double>> lineString)
+        private static IEnumerable<LineSegment> GetLineSegments(ILineString lineString)
         {
+            var line = lineString.LineArray.ToArray();
             var segments = new List<LineSegment>();
-            lineString.Aggregate((a, b) =>
+            for (var i = 0; i < line.Length - 1; i++)
             {
-                var ax = a.ToArray()[0];
-                var ay = a.ToArray()[1];
-                var bx = b.ToArray()[0];
-                var by = b.ToArray()[1];
-                var pa = new Position(ax, ay);
-                var pb = new Position(bx, by);
-                var segment = new LineSegment(pa, pb);
+                var a = line[i];
+                var b = line[i + 1];
+                var segment = new LineSegment(a, b);
                 segments.Add(segment);
-                return a;
-            });
+            }
             return segments;
         }
-    public static Point GetMidPoint(this IEnumerable<IEnumerable<double>> lineString)
+        private static Point GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
         {
-            var segments = GetLineSegments(lineString).ToArray();
-            var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
-            var totalLength = segmentDistances.Sum(d => d);
-            var halfwayLength = totalLength / 2d;
             var cumulativeDistance = 0d;
-            IPosition midPoint = null;
             for (var i = 0; i < segmentDistances.Count(); i++)
             {
                 cumulativeDistance += segmentDistances[i];
                 if (cumulativeDistance >= halfwayLength)
                 {
-                    midPoint = segments[i].DistanceAlong(halfwayLength - (cumulativeDistance - segmentDistances[i]));
+                    var distance = halfwayLength - (cumulativeDistance - segmentDistances[i]);
+                    var midPoint = segments[i].PositionAtDistance(distance);
+                    return new Point(midPoint);
                 }
             }
-            return new Point(midPoint);
+            return default(Point);
+        }
+        public static Point GetMidPoint(this ILineString lineString)
+        {
+            if (lineString.LineArray.Count() > 1)
+            {
+                var segments = GetLineSegments(lineString).ToArray();
+                var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
+                var halfwayLength = segmentDistances.Sum(d => d) / 2d;
+
+                return GetMidPoint(segments, segmentDistances, halfwayLength);
+            }
+            var firstPosition = lineString.LineArray.First();
+            return new Point(firstPosition);
         }
     }
 }

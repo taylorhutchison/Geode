@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Interfaces
+namespace Geode.Geometry
 {
     public interface ILineString
     {
-
+        IEnumerable<double[]> LineArray { get; }
     }
 }

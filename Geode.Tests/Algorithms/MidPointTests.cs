@@ -11,16 +11,39 @@ namespace Geode.Tests.Algorithms
     public class MidPointTests
     {
         [Fact]
-        public void Test()
+        public void LineStringWithOnePosition()
         {
-            var line = new List<double[]>()
-            {
-                new double[]{0,0},
-                new double[]{1,1}
-            };
+            var line = new LineString(new double[][] {
+                new double[] { 2, 3 }
+            });
+            var midPoint = line.GetMidPoint();
+            Assert.Equal(2, midPoint.Position[0]);
+            Assert.Equal(3, midPoint.Position[1]);
+        }
+
+        [Fact]
+        public void LineStringWithTwoPositions()
+        {
+            var line = new LineString( new double[][] {
+                new double[] { 0, 0 },
+                new double[] { 1, 1 }
+            });
             var midPoint = line.GetMidPoint();
             Assert.Equal(0.5, midPoint.Position[0]);
             Assert.Equal(0.5, midPoint.Position[1]);
+        }
+
+        [Fact]
+        public void LineStringWithThreePositions()
+        {
+            var line = new LineString(new double[][] {
+                new double[] { 0, 0 },
+                new double[] { 1, 1 },
+                new double[] { 5, 5 }
+            });
+            var midPoint = line.GetMidPoint();
+            Assert.Equal(2.5, midPoint.Position[0]);
+            Assert.Equal(2.5, midPoint.Position[1]);
         }
     }
 }
