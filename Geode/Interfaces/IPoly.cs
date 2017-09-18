@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface ILineString
+    public interface IPoly
     {
-        IEnumerable<double[]> LineArray { get; }
+        IEnumerable<IPosition> Positions { get; }
     }
 }

@@ -46,26 +46,26 @@ namespace Geode.Tests
         [Fact]
         public void ConvertGeoCollectionFeatureToGeoJson()
         {
-            var p1 = new List<IEnumerable<double>>
+            var p1 = new List<double[]>
                         {
                             new double[]{0,0},
                             new double[]{1,1},
                             new double[]{2,2},
                             new double[]{3,3}
-                        };
-            var p2 = new List<IEnumerable<double>>
+                        }.ToPolygon();
+            var p2 = new List<double[]>
                         {
                             new double[]{4,4},
                             new double[]{5,5},
                             new double[]{6,6},
                             new double[]{7,7}
-                        };
+                        }.ToPolygon();
             var archipelago = new Archipelago
             {
                 Islands = new List<IGeometry>
                 {
-                    new Polygon(p1),
-                    new Polygon(p2),
+                    p1,
+                    p2,
                     new Point(1,2,3)
                 },
                 Name = "Test Archipelago"
@@ -76,26 +76,26 @@ namespace Geode.Tests
         [Fact]
         public void ConvertFeatureCollectionWithGeoCollectionFeatureToGeoJson()
         {
-            var p1 = new List<IEnumerable<double>>
+            var p1 = new List<double[]>
                         {
                             new double[]{0,0},
                             new double[]{1,1},
                             new double[]{2,2},
                             new double[]{3,3}
-                        };
-            var p2 = new List<IEnumerable<double>>
+                        }.ToPolygon();
+            var p2 = new List<double[]>
                         {
                             new double[]{4,4},
                             new double[]{5,5},
                             new double[]{6,6},
                             new double[]{7,7}
-                        };
+                        }.ToPolygon();
             var archipelago = new Archipelago
             {
                 Islands = new List<IGeometry>
                 {
-                    new Polygon(p1),
-                    new Polygon(p2),
+                    p1,
+                    p2,
                     new Point(1,2,3)
                 },
                 Name = "Test Archipelago"

@@ -25,29 +25,31 @@ namespace Geode.Services
             return new Point((double)x, (double)y);
         }
 
-        private static IReadOnlyList<IReadOnlyList<double>> CreatePoly(GeometryAttribute attribute, Object poly)
+        private static IEnumerable<IPosition> CreatePoly(GeometryAttribute attribute, Object poly)
         {
             if (IsEnumerable(poly))
             {
                 var xMap = attribute.Map != null ? attribute.Map.XMap : "X";
                 var yMap = attribute.Map != null ? attribute.Map.YMap : "Y";
                 var enumerable = poly as IEnumerable;
-                var line = new List<IReadOnlyList<double>>();
+                var line = new List<IPosition>();
                 foreach (var point in enumerable)
                 {
                     if (point is IPosition)
                     {
-                        line.Add(((IPosition)point).Position);
+                        line.Add(((IPosition)point));
                     }
                     else if (IsEnumerable(point))
                     {
-                        line.Add(point as double[]);
+                        var p = point as double[];
+                        var pos = new Position(p[0], p[1]);
+                        line.Add(pos);
                     }
                     else
                     {
                         object x = point.GetType().GetProperty(xMap).GetValue(point, null);
                         object y = point.GetType().GetProperty(yMap).GetValue(point, null);
-                        var xy = new double[] { (double)x, (double)y };
+                        var xy = new Position((double)x, (double)y);
                         line.Add(xy);
                     }
                 }

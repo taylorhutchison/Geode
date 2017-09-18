@@ -4,9 +4,12 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IPosition: IEquatable<IPosition>, IEnumerable<double>
+    public interface IPosition: IEquatable<IPosition>
     {
-        IReadOnlyList<double> Position { get; }
+        double[] Position { get; }
+        double X { get;  }
+        double Y { get;  }
+        double Z { get;  }
     }
 
 }

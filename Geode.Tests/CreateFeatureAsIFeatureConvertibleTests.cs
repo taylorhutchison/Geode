@@ -32,22 +32,22 @@ namespace Geode.Tests
         [Trait("Category", "Unit")]
         public void CreateFeature_GeoCollectionFeature_CreatesFeature()
         {
-            var p1 = new List<IReadOnlyList<double>> {
+            var p1 = new List<double[]> {
                          new double[]{0 ,0 },
                          new double[]{1 ,1 },
                          new double[]{2 ,2 }
-                        };
-            var p2 = new List<IReadOnlyList<double>> {
+                        }.ToPolygon();
+            var p2 = new List<double[]> {
                          new double[]{0 ,0 },
                          new double[]{1 ,1 },
                          new double[]{2 ,2 }
-                        };
+                        }.ToPolygon();
             var archipeligo = new Archipelago
             {
                 Islands = new List<Polygon>()
                 {
-                    new Polygon(p1),
-                    new Polygon(p2)
+                    p1,
+                    p2
                 },
                 Name = "Test Name"
             };
@@ -60,16 +60,16 @@ namespace Geode.Tests
         [Trait("Category", "Unit")]
         public void CreateFeature_GeoCollectionFeatureWithMultipleTypes_CreatesFeature()
         {
-            var p1 = new List<IReadOnlyList<double>>
+            var p1 = new List<double[]>
                     {
                         new double[]{0, 0 },
                         new double[]{1 ,1 },
                         new double[]{2 ,2 }
-                    };
+                    }.ToPolygon();
             var earthquake = new Earthquake
             {
-                ImpactArea = new Polygon(p1),
-                Epicenter = new Geode.Geometry.Point(new double[] { 0, 0 }),
+                ImpactArea = p1,
+                Epicenter = new Point(0,0),
                 Magnitude = 9.0
             };
             var feature = earthquake.ToFeature();

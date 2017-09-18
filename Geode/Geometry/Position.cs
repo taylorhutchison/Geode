@@ -11,34 +11,21 @@ namespace Geode.Geometry
         public double X => _position[0];
         public double Y => _position[1];
         public double Z => _position[2];
-        public Position(double[] position)
-        {
-            _position = position;
-        }
         public Position(double x, double y)
         {
-            _position = new double[] { x, y };
+            _position = new double[] { x, y, default(double) };
         }
+
         public Position(double x, double y, double z)
         {
             _position = new double[] { x, y, z };
         }
 
-        IReadOnlyList<double> IPosition.Position => _position;
+        double[] IPosition.Position => _position;
 
         public bool Equals(IPosition other)
         {
             throw new NotImplementedException();
-        }
-
-        public IEnumerator<double> GetEnumerator()
-        {
-            return (IEnumerator<double>)_position.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _position.GetEnumerator();
         }
     }
 }

@@ -8,49 +8,36 @@ namespace Geode.Geometry
 {
     public static class LineStringExtensions
     {
-        public static LineString ToLineString(this IEnumerable<IEnumerable<double>> lineString) {
-            return new LineString(lineString);
+        public static LineString ToLineString(this IEnumerable<double[]> positions)
+        {
+            var posArray = positions.Select((p, i) =>
+            {
+                var x = p.Length > 0 ? p[0] : default(double);
+                var y = p.Length > 1 ? p[1] : default(double);
+                var z = p.Length > 2 ? p[2] : default(double);
+                return new Position(x,y,z) as IPosition;
+            });
+            return new LineString(posArray);
         }
     }
     /// <summary>
     /// A LineString is a geometry type, sometimes refered to as a Polyline, that is represented by an array of positions.
     /// </summary>
-    public class LineString : IGeoType, IGeometry, ILineString, IEnumerable<double[]>
+    public class LineString : IGeoType, IGeometry, IPoly
     {
-        private IEnumerable<double[]> _coordinates;
+        private IEnumerable<IPosition> _coordinates;
         public GeoType Type => GeoType.LineString;
         public IEnumerable Coordinates => _coordinates;
-        public IEnumerable<double[]> LineArray => _coordinates;
-        public LineString(IEnumerable<IEnumerable<double>> coordinates)
-        {
-            _coordinates = coordinates.Select(c => c.ToArray());
-        }
-        public LineString(IEnumerable<double[]> coordinates)
+        public IEnumerable<IPosition> Positions => _coordinates;
+        public LineString(IEnumerable<IPosition> coordinates)
         {
             _coordinates = coordinates;
         }
-        public LineString(double[][] coordinates)
-        {
-            _coordinates = coordinates;
-        }
-        public LineString(IEnumerable<IPosition> positions)
-        {
-            _coordinates = positions.Select(p => p.Position.ToArray());
-        }
-
         public IEnumerable Geometry => _coordinates;
         
         public bool Equals(IGeoType other)
         {
             throw new NotImplementedException();
-        }
-        public IEnumerator<double[]> GetEnumerator()
-        {
-            return _coordinates.GetEnumerator();
-        }
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _coordinates.GetEnumerator();
         }
     }
 }

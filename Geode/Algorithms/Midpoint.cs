@@ -18,8 +18,8 @@ namespace Geode.Algorithms
         }
         public LineSegment(double[] a, double[] b)
         {
-            A = new Position(a);
-            B = new Position(b);
+            A = new Position(a[0],a[1]);
+            B = new Position(b[0],b[1]);
         }
         public double SegmentLength => Math.Sqrt(Math.Pow(A.Position[0] - B.Position[0], 2) + Math.Pow(A.Position[1] - B.Position[1], 2));
 
@@ -37,9 +37,9 @@ namespace Geode.Algorithms
 
     public static class Midpoint
     {
-        private static IEnumerable<LineSegment> GetLineSegments(ILineString lineString)
+        private static IEnumerable<LineSegment> GetLineSegments(IPoly lineString)
         {
-            var line = lineString.LineArray.ToArray();
+            var line = lineString.Positions.ToArray();
             var segments = new List<LineSegment>();
             for (var i = 0; i < line.Length - 1; i++)
             {
@@ -65,9 +65,9 @@ namespace Geode.Algorithms
             }
             return default(Point);
         }
-        public static Point GetMidPoint(this ILineString lineString)
+        public static Point GetMidPoint(this IPoly lineString)
         {
-            if (lineString.LineArray.Count() > 1)
+            if (lineString.Positions.Count() > 1)
             {
                 var segments = GetLineSegments(lineString).ToArray();
                 var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
@@ -75,7 +75,7 @@ namespace Geode.Algorithms
 
                 return GetMidPoint(segments, segmentDistances, halfwayLength);
             }
-            var firstPosition = lineString.LineArray.First();
+            var firstPosition = lineString.Positions.First();
             return new Point(firstPosition);
         }
     }
