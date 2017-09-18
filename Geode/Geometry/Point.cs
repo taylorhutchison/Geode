@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Linq;
+using Geode.Structures;
 
 namespace Geode.Geometry
 {
@@ -12,6 +13,7 @@ namespace Geode.Geometry
         public double X => _position[0];
         public double Y => _position[1];
         public double Z => _position[2];
+        public Bounds Bounds { get; set; }
         public GeoType Type => GeoType.Point;
         public double[] Position => _position;
         public IEnumerable Coordinates => _position;
@@ -54,7 +56,7 @@ namespace Geode.Geometry
             return true;
         }
 
-        public bool Equals(IGeoType other)
+        public bool Equals(IGeometry other)
         {
             if(Type != other.Type)
             {

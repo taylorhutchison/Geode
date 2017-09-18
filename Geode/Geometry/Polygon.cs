@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
+using Geode.Structures;
 
 namespace Geode.Geometry
 {
@@ -10,6 +11,7 @@ namespace Geode.Geometry
     {
         private IEnumerable<IPosition> _coordinates;
         public GeoType Type => GeoType.Polygon;
+        public Bounds Bounds { get; set; }
         public IEnumerable Coordinates => _coordinates;
         public IEnumerable Geometry => _coordinates;
         public IEnumerable<IPosition> Positions => _coordinates;
@@ -17,7 +19,7 @@ namespace Geode.Geometry
         {
             _coordinates = coordinates;
         }
-        public bool Equals(IGeoType other)
+        public bool Equals(IGeometry other)
         {
             throw new NotImplementedException();
         }

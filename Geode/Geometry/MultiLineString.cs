@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+using Geode.Structures;
 
 namespace Geode.Geometry
 {
@@ -9,15 +10,16 @@ namespace Geode.Geometry
     {
         public GeoType Type => GeoType.MultiLineString;
         public IEnumerable Coordinates { get; private set; }
-        public MultiLineString(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates)
+        public Bounds Bounds { get; set; }
+        public MultiLineString(IEnumerable<IEnumerable<IPosition>> coordinates)
         {
             Coordinates = coordinates;
         }
         public MultiLineString () { }
         public IEnumerable Geometry => Coordinates;
-        public bool Equals(IGeoType other)
+        public bool Equals(IGeometry other)
         {
-            throw new NotImplementedException();
+            return Type == other.Type;
         }
     }
 }

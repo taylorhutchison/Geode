@@ -10,10 +10,6 @@ namespace Geode.Geometry
         public GeoType Type => GeoType.GeometryCollection;
         public IEnumerable<IGeometry> Geometries { get; set; }
         public IEnumerable Geometry => Geometries;
-        public bool Equals(IGeoType other)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerator<IGeoType> GetEnumerator()
         {
