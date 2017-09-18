@@ -11,7 +11,7 @@
     <Version>0.0.7.1-alpha</Version>
     <RepositoryUrl>https://github.com/taylorhutchison/Geode</RepositoryUrl>
     <PackageTags>Geometry Geographic GeoJson Geo</PackageTags>
-    <PackageReleaseNotes>Improved GeoJson serialization.</PackageReleaseNotes>
+    <PackageReleaseNotes>Readers, structures, and algorithms (alpha).</PackageReleaseNotes>
     <Authors>Taylor Hutchison</Authors>
     <Company>Taylor Hutchison</Company>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
