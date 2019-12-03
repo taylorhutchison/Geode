@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Geode;
+<<<<<<< HEAD
 //using Geode.Geometry;
+=======
+using Geode.Geometry;
+>>>>>>> master
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
