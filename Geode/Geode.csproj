@@ -18,15 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Formatters\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Geode.Readers\Geode.Readers.csproj" />
+    <ProjectReference Include="..\Geode.Geometry\Geode.Geometry.csproj" />
   </ItemGroup>
+
 
 </Project>

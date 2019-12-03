@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Geode\Geode.csproj" />
     <ProjectReference Include="..\Geode.Readers\Geode.Readers.csproj" />
+    <ProjectReference Include="..\Geode.Geometry\Geode.Geometry.csproj" />
   </ItemGroup>
 
   <ItemGroup>

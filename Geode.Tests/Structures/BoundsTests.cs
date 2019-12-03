@@ -4,7 +4,6 @@ using System.Text;
 using Xunit;
 using Geode;
 using Geode.Geometry;
-using Geode.Structures;
 
 namespace Geode.Tests.Structures
 {

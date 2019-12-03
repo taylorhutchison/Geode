@@ -5,7 +5,7 @@ using System.Linq;
 using Geode;
 using Geode.Geometry;
 
-namespace Geode.Structures
+namespace Geode.Geometry
 {
     public class Bounds: IEquatable<Bounds>
     {

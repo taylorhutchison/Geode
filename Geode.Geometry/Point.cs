@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Text;
 using System.Linq;
-using Geode.Structures;
 
 namespace Geode.Geometry
 {

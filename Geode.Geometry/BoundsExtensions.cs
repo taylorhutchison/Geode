@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Geode.Geometry;
-using Geode.Structures;
 
-namespace Geode.Structures
+namespace Geode.Geometry
 {
     public static class BoundsExtensions
     {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Geode.Geometry;
-using Geode;
 
 namespace Geode.Tests.FeatureTests
 {
