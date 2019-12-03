@@ -25,4 +25,8 @@
     <Folder Include="Formatters\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Geode.Readers\Geode.Readers.csproj" />
+  </ItemGroup>
+
 </Project>
