@@ -15,6 +15,7 @@
     <Authors>Taylor Hutchison</Authors>
     <Company>Taylor Hutchison</Company>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <NoWarn>NU5125</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
