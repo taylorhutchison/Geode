@@ -5,7 +5,6 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    [Geometry(GeoType.Point, "Lng", "Lat")]
     public class LatLng
     {
         public LatLng() { }

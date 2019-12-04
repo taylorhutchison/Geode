@@ -5,7 +5,6 @@ using System.Linq;
 using Xunit;
 using Geode.Readers;
 using System.IO;
-using Geode.Readers;
 
 namespace Geode.Tests
 {

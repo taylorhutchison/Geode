@@ -8,7 +8,6 @@ namespace Geode.Tests.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [Geometry(GeoType.LineString)]
         public IEnumerable<IEnumerable<double>> FlightPath { get; set; }
     }
 }

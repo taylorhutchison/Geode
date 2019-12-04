@@ -9,7 +9,6 @@ namespace Geode.Tests.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [Geometry(GeoType.GeometryCollection)]
         public ICollection<RoadSegment> Segments { get; set; }
     }
 }
