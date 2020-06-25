@@ -16,7 +16,15 @@
     <Company>Taylor Hutchison</Company>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <NoWarn>NU5125</NoWarn>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <Folder Include="Formatters\" />
