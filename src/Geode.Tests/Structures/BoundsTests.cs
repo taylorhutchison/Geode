@@ -43,7 +43,7 @@ namespace Geode.Tests.Structures
                 c1, c2
             };
             var bounds = lines.GetBounds();
-            Assert.Equal(-3, bounds.XMin);
+            Assert.Equal(-33, bounds.XMin);
             Assert.Equal(8, bounds.XMax);
             Assert.Equal(-6, bounds.YMin);
             Assert.Equal(22, bounds.YMax);
