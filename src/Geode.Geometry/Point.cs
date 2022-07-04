@@ -6,17 +6,15 @@ using System.Linq;
 
 namespace Geode.Geometry
 {
-    public sealed class Point : IGeoType, IPosition, IGeometry, IEnumerable<double>, IEquatable<Point>
+    public class Point : IGeoType, IPosition, IEnumerable<double>, IEquatable<Point>
     {
         private double[] _position;
         public double X => _position[0];
         public double Y => _position[1];
         public double Z => _position[2];
-        public Bounds Bounds { get; set; }
         public GeoType Type => GeoType.Point;
         public double[] Position => _position;
-        public IEnumerable Coordinates => _position;
-        public IEnumerable Geometry => Coordinates;
+        public IEnumerable Geometry => _position;
         public Point(double x, double y)
         {
             _position = new double[] { x, y, 0 };

@@ -6,12 +6,12 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Country: IFeatureConvertible
+    public class Country: IFeatureConvertible<IGeoType>
     {
         public string Name { get; set; }
         public IEnumerable<IEnumerable<double>> Boundary { get; set; }
 
-        public IFeature ToFeature()
+        public IFeature<IGeoType> ToFeature()
         {
             throw new NotImplementedException();
         }

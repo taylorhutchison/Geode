@@ -5,18 +5,18 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Earthquake : IFeatureConvertible
+    public class Earthquake : IFeatureConvertible<IGeoType>
     {
         public Geode.Geometry.Polygon ImpactArea { get; set; }
         public Geode.Geometry.Point Epicenter { get; set; }
         public double Magnitude { get; set; }
-        public IFeature ToFeature()
+        public IFeature<IGeoType> ToFeature()
         {
-            var feature = new Feature
+            var feature = new Feature<IGeoType>
             {
                 Geometry = new GeometryCollection
                 {
-                    Geometries = new List<IGeometry> {
+                    Geometries = new List<IGeoType> {
                         ImpactArea,
                         Epicenter
                     }

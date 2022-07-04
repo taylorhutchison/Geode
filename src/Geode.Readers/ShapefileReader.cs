@@ -47,19 +47,14 @@ namespace Geode.Readers
                 MultiPatch = 31
             }
         }
-        internal class ShapefileRecordGeometry
+        internal class ShapefileRecordGeometry<T>
         {
-            public IGeometry Geometry { get; set; }
+            public T Geometry { get; set; }
             public int RecordNumber { get; set; }
-            public ShapefileRecordGeometry(int recordNumber, byte[] recordContents, GeoType geoType)
+            public ShapefileRecordGeometry(int recordNumber, T geometry)
             {
                 RecordNumber = recordNumber;
-                if (geoType == GeoType.Point)
-                {
-                    var x = BitConverter.ToDouble(recordContents, 4);
-                    var y = BitConverter.ToDouble(recordContents, 12);
-                    Geometry = new Point(x, y);
-                }
+                Geometry = geometry;
             }
         }
         internal class ShapefileRecord
@@ -268,7 +263,14 @@ namespace Geode.Readers
             return records;
         }
 
-        public override IFeatureCollection Read(string path)
+        private Point RecordContentsToPoint(byte[] recordContents)
+        {
+            var x = BitConverter.ToDouble(recordContents, 4);
+            var y = BitConverter.ToDouble(recordContents, 12);
+            return new Point(x, y);
+        }
+
+        public override IFeatureCollection<IGeoType> Read(string path)
         {
             if (path.EndsWith(".shp"))
             {
@@ -277,25 +279,29 @@ namespace Geode.Readers
                 {
                     var header = reader.GetShapefileHeader(stream);
                     var records = reader.GetAllMainRecords(stream);
-                    if(header.ShapeType == 1)
+                    if (header.ShapeType == 1)
                     {
-                        var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeoType.Point)).Select(gr =>
+                        var features = records.Select(r =>
                         {
-                            return new Feature
+                            var point = RecordContentsToPoint(r.RecordContents);
+                            return new ShapefileRecordGeometry<Point>(r.RecordNumber, point);
+                        }).Select(gr =>
+                        {
+                            return new Feature<IGeoType>
                             {
                                 Geometry = gr.Geometry
                             };
                         });
 
-                        return new FeatureCollection
+                        return new FeatureCollection<IGeoType>
                         {
-                            Features = features
+                            Features = (IEnumerable<IFeature<IGeoType>>)features
                         };
-                        
+
                     }
                 }
             }
-            return new FeatureCollection();
+            return new FeatureCollection<IGeoType>();
         }
 
     }

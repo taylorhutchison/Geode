@@ -5,14 +5,14 @@ using Geode.Geometry;
 
 namespace Geode.Tests.Models
 {
-    public class Event: IFeatureConvertible
+    public class Event: IFeatureConvertible<IGeoType>
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public IGeoType Coordinates { get; set; }
-        public IFeature ToFeature()
+        public IFeature<IGeoType> ToFeature()
         {
-            return new Feature
+            return new Feature<IGeoType>
             {
                 Properties = new Dictionary<string, object>()
                 {

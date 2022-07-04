@@ -5,9 +5,9 @@ using Geode.Geometry;
 
 namespace Geode
 {
-    public interface IFeatureConvertible
+    public interface IFeatureConvertible<T>
     {
-        IFeature ToFeature();
+        IFeature<T> ToFeature();
     }
 
 }

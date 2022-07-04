@@ -8,7 +8,7 @@ namespace Geode.Geometry
     public class GeometryCollection: IGeoType, IGeoCollection, IEnumerable<IGeoType>
     {
         public GeoType Type => GeoType.GeometryCollection;
-        public IEnumerable<IGeometry> Geometries { get; set; }
+        public IEnumerable<IGeoType> Geometries { get; set; }
         public IEnumerable Geometry => Geometries;
 
         public IEnumerator<IGeoType> GetEnumerator()

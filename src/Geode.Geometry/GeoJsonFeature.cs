@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Geode.Geometry
 {
-    public class GeoJsonFeature
+    public class GeoJsonFeature<T> where T: IGeoType
     {
-        public GeoJsonFeature(IFeature feature)
+        public GeoJsonFeature(IFeature<T> feature)
         {
             Properties = feature?.Properties;
             Geometry = new Dictionary<string, object>(2)
@@ -31,24 +31,24 @@ namespace Geode.Geometry
         public IDictionary<string, object> Geometry { get; private set; }
     }
 
-    public class GeoJsonFeatureCollection
+    public class GeoJsonFeatureCollection<T> where T: IGeoType
     {
-        public GeoJsonFeatureCollection(IFeatureCollection featureCollection)
+        public GeoJsonFeatureCollection(IFeatureCollection<T> featureCollection)
         {
-            Features = featureCollection.Features.Select(f => new GeoJsonFeature(f));
+            Features = featureCollection.Features.Select(f => new GeoJsonFeature<T>(f));
         }
         public string Type => "FeatureCollection";
-        public IEnumerable<GeoJsonFeature> Features { get; private set; }
+        public IEnumerable<GeoJsonFeature<T>> Features { get; private set; }
     }
 
     public class GeoJsonGeometry
     {
         public string Type { get; private set; }
         public IEnumerable Coordinates { get; private set; }
-        public GeoJsonGeometry(IGeometry geometry)
+        public GeoJsonGeometry(IGeoType geometry)
         {
             Type = geometry?.Type.ToString();
-            Coordinates = geometry?.Coordinates;
+            Coordinates = geometry?.Geometry;
         }
     }
 }

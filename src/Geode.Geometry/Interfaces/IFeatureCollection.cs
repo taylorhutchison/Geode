@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public interface IFeatureCollection 
+    public interface IFeatureCollection<T>
     {
-        IEnumerable<IFeature> Features { get; set; }
+        IEnumerable<IFeature<T>> Features { get; set; }
     }
 }

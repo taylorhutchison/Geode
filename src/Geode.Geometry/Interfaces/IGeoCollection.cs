@@ -7,6 +7,6 @@ namespace Geode.Geometry
 {
     public interface IGeoCollection
     {
-        IEnumerable<IGeometry> Geometries { get; }
+        IEnumerable<IGeoType> Geometries { get; }
     }
 }
