@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Geode.Tests")]
+[assembly: InternalsVisibleTo("Geode.Benchmarks")]
 
 namespace Geode.Readers
 {
