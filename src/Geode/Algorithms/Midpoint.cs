@@ -50,7 +50,7 @@ namespace Geode.Algorithms
             }
             return segments;
         }
-        private static Point GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
+        private static Point? GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
         {
             var cumulativeDistance = 0d;
             for (var i = 0; i < segmentDistances.Count(); i++)
@@ -65,7 +65,7 @@ namespace Geode.Algorithms
             }
             return default(Point);
         }
-        public static Point GetMidPoint(this IPoly lineString)
+        public static Point? GetMidPoint(this IPoly lineString)
         {
             if (lineString.Positions.Count() > 1)
             {
