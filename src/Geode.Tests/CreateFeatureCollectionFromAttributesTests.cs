@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Xunit;
 using Geode.Tests.Models;
-using Geode;
 using Geode.Geometry;
 
 namespace Geode.Tests
