@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <AssemblyVersion>0.0.7.2</AssemblyVersion>
-    <FileVersion>0.0.7.2</FileVersion>
+    <AssemblyVersion>0.0.8.0</AssemblyVersion>
+    <FileVersion>0.0.8.0</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/taylorhutchison/Geode/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/taylorhutchison/Geode</PackageProjectUrl>
     <Description>A .NET library for geometric and geographic processing.</Description>
-    <Version>0.0.7.2-alpha</Version>
+    <Version>0.0.8.0-alpha</Version>
     <RepositoryUrl>https://github.com/taylorhutchison/Geode</RepositoryUrl>
     <PackageTags>Geometry Geographic GeoJson Geo</PackageTags>
     <PackageReleaseNotes>Readers, structures, and algorithms (alpha).</PackageReleaseNotes>
