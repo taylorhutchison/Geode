@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Xunit;
 using Geode.Readers;
-using System.IO;
 
 namespace Geode.Tests
 {

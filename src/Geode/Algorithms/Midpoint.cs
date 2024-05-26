@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Geode;
 using Geode.Geometry;
 
 namespace Geode.Algorithms
@@ -29,8 +27,8 @@ namespace Geode.Algorithms
             var cy = B.Position[1] - A.Position[1];
             var c = new Point(cx, cy);
             var length = Math.Sqrt(Math.Pow(c.Position[0], 2) + Math.Pow(c.Position[1], 2));
-            var dx = (c.Position[0] / length) * distance;
-            var dy = (c.Position[0] / length) * distance;
+            var dx = c.Position[0] / length * distance;
+            var dy = c.Position[0] / length * distance;
             return new Point(dx + A.Position[0], dy + A.Position[1]);
         }
     }
