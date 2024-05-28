@@ -1,10 +1,8 @@
-using Geode.Algorithms;
-
 namespace Geode.Benchmarks;
-public class MidPointBenchmark
+public class MidpointBenchmarks
 {
     private readonly LineString _lineString;
-    public MidPointBenchmark()
+    public MidpointBenchmarks()
     {
         _lineString = new double[][]
         {
@@ -18,5 +16,5 @@ public class MidPointBenchmark
     }
 
     [Benchmark]
-    public Point GetMidPoint() => Midpoint.GetMidPoint(_lineString);
+    public Point GetMidpoint() => Midpoint.GetMidPoint(_lineString);
 }
