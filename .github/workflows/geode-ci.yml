@@ -19,8 +19,8 @@ jobs:
       working-directory: ./src
       run: dotnet restore
     - name: Build
-      working-directory: ./src/Geode
-      run: dotnet build --no-restore
+      working-directory: ./src
+      run: dotnet build ./Geode.sln --no-restore
     - name: Test
       working-directory: ./src/Geode.Tests
       run: dotnet test
