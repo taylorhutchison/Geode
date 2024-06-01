@@ -8,16 +8,16 @@ namespace Geode.Geometry
 {
 
     /// <summary>
-    /// A LineString is a geometry type, sometimes refered to as a Polyline, that is represented by an array of positions.
+    /// A Polyline is a geometry type, sometimes refered to as a Polyline, that is represented by an array of positions.
     /// </summary>
-    public class LineString : IGeoType, IGeometry, IPoly
+    public class Polyline : IGeoType, IGeometry, IPoly
     {
         private IEnumerable<IPosition> _coordinates;
-        public GeoType Type => GeoType.LineString;
+        public GeoType Type => GeoType.Polyline;
         public IEnumerable Coordinates => _coordinates;
         public Bounds Bounds { get; set; }
         public IEnumerable<IPosition> Positions => _coordinates;
-        public LineString(IEnumerable<IPosition> coordinates)
+        public Polyline(IEnumerable<IPosition> coordinates)
         {
             _coordinates = coordinates;
         }

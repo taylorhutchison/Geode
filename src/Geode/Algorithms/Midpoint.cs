@@ -35,9 +35,9 @@ namespace Geode.Algorithms
 
     public static class Midpoint
     {
-        private static IEnumerable<LineSegment> GetLineSegments(IPoly lineString)
+        private static IEnumerable<LineSegment> GetLineSegments(IPoly Polyline)
         {
-            var line = lineString.Positions.ToArray();
+            var line = Polyline.Positions.ToArray();
             var segments = new List<LineSegment>();
             for (var i = 0; i < line.Length - 1; i++)
             {
@@ -63,17 +63,17 @@ namespace Geode.Algorithms
             }
             return default(Point);
         }
-        public static Point GetMidPoint(this IPoly lineString)
+        public static Point GetMidPoint(this IPoly Polyline)
         {
-            if (lineString.Positions.Count() > 1)
+            if (Polyline.Positions.Count() > 1)
             {
-                var segments = GetLineSegments(lineString).ToArray();
+                var segments = GetLineSegments(Polyline).ToArray();
                 var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
                 var halfwayLength = segmentDistances.Sum(d => d) / 2d;
 
                 return GetMidPoint(segments, segmentDistances, halfwayLength);
             }
-            var firstPosition = lineString.Positions.First();
+            var firstPosition = Polyline.Positions.First();
             return new Point(firstPosition);
         }
     }

@@ -7,14 +7,14 @@ namespace Geode.Tests.Structures
     public class BoundsTests
     {
         [Fact]
-        public void BoundsOfLineString()
+        public void BoundsOfPolyline()
         {
-            var lineString = new List<double[]>
+            var Polyline = new List<double[]>
             {
                 new double[]{ -1, -5 },
                 new double[]{ 1, 22 }
-            }.ToLineString();
-            var bounds = lineString.GetBounds();
+            }.ToPolyline();
+            var bounds = Polyline.GetBounds();
             Assert.Equal(-1, bounds.XMin);
             Assert.Equal(1, bounds.XMax);
             Assert.Equal(-5, bounds.YMin);
@@ -24,19 +24,19 @@ namespace Geode.Tests.Structures
         }
 
         [Fact]
-        public void BoundsOfListofLineString()
+        public void BoundsOfListofPolyline()
         {
             var c1 = new List<double[]>
             {
                 new double[]{ -1, -6 },
                 new double[]{ 1, 22 }
-            }.ToLineString();
+            }.ToPolyline();
             var c2 = new List<double[]>
             {
                 new double[]{ -3, -5 },
                 new double[]{ 8, 7 }
-            }.ToLineString();
-            var lines = new List<LineString> {
+            }.ToPolyline();
+            var lines = new List<Polyline> {
                 c1, c2
             };
             var bounds = lines.GetBounds();

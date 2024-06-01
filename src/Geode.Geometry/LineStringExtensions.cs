@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace Geode.Geometry
 {
-    public static class LineStringExtensions
+    public static class PolylineExtensions
     {
-        public static LineString ToLineString(this IEnumerable<double[]> positions)
+        public static Polyline ToPolyline(this IEnumerable<double[]> positions)
         {
             var posArray = positions.Select((p, i) =>
             {
@@ -16,7 +16,7 @@ namespace Geode.Geometry
                 var z = p.Length > 2 ? p[2] : default(double);
                 return new Position(x, y, z) as IPosition;
             });
-            return new LineString(posArray);
+            return new Polyline(posArray);
         }
     }
 }

@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Geode.Geometry
 {
-    public class MultiLineString : IGeoType, IGeometry
+    public class MultiPolyline : IGeoType, IGeometry
     {
-        public GeoType Type => GeoType.MultiLineString;
+        public GeoType Type => GeoType.MultiPolyline;
         public IEnumerable Coordinates { get; private set; }
         public Bounds Bounds { get; set; }
-        public MultiLineString(IEnumerable<IEnumerable<IPosition>> coordinates)
+        public MultiPolyline(IEnumerable<IEnumerable<IPosition>> coordinates)
         {
             Coordinates = coordinates;
         }
-        public MultiLineString () { }
+        public MultiPolyline () { }
         public IEnumerable Geometry => Coordinates;
         public bool Equals(IGeometry other)
         {

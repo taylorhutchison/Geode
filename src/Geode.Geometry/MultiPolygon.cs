@@ -7,7 +7,7 @@ namespace Geode.Geometry
 {
     public class MultiPolygon : IGeoType, IGeometry
     {
-        public GeoType Type => GeoType.MultiLineString;
+        public GeoType Type => GeoType.MultiPolyline;
         public IEnumerable Coordinates { get; private set; }
         public MultiPolygon(IEnumerable<IEnumerable<IPosition>> coordinates)
         {

@@ -1,10 +1,10 @@
 namespace Geode.Benchmarks;
 public class MidpointBenchmarks
 {
-    private readonly LineString _lineString;
+    private readonly Polyline _polyline;
     public MidpointBenchmarks()
     {
-        _lineString = new double[][]
+        _polyline = new double[][]
         {
             new double[] { 0, 0 },
             new double[] { 10.1, 30.5 },
@@ -12,9 +12,9 @@ public class MidpointBenchmarks
             new double[] { 58.1, 43.562345 },
             new double[] { 67.67, 8 },
             new double[] { 70, 0.00 }
-        }.ToLineString();
+        }.ToPolyline();
     }
 
     [Benchmark]
-    public Point GetMidpoint() => Midpoint.GetMidPoint(_lineString);
+    public Point GetMidpoint() => Midpoint.GetMidPoint(_polyline);
 }
