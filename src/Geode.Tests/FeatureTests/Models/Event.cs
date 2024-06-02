@@ -5,10 +5,10 @@ public class Event : IFeatureConvertible
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public IGeometry Coordinates { get; set; }
+    public Point Coordinates { get; set; }
     public IFeature ToFeature()
     {
-        return new Feature
+        return new Feature<Point>
         {
             Properties = new Dictionary<string, object>()
                 {

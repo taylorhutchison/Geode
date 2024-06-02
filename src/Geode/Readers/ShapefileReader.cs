@@ -277,7 +277,7 @@ internal class ShapefileReader : FeatureReader
                 {
                     var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeometryType.Point)).Select(gr =>
                     {
-                        return new Feature
+                        return new Feature<Point>
                         {
                             Geometry = gr.Geometry
                         };

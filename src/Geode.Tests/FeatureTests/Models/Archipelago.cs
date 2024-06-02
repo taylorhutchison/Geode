@@ -3,13 +3,13 @@
 namespace Geode.Tests.FeatureTests.Models;
 public class Archipelago : IFeatureConvertible
 {
-    public IEnumerable<IGeometry> Islands { get; set; }
+    public IEnumerable<Polygon> Islands { get; set; }
 
     public string Name { get; set; }
 
     public IFeature ToFeature()
     {
-        return new Feature
+        return new Feature<Polygon>
         {
             Properties = new Dictionary<string, object>
                 {
