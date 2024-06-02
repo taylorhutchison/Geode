@@ -6,5 +6,4 @@ public interface IGeometry
 {
     GeometryType Type { get; }
     IEnumerable Coordinates { get; }
-    IEnumerable Geometry { get; }
 }

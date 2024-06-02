@@ -20,7 +20,7 @@ public class GeoJsonFeature
         }
         else
         {
-            Geometry.Add("Coordinates", feature?.Geometry?.Geometry);
+            Geometry.Add("Coordinates", feature?.Geometry?.Coordinates);
         }
     }
     public string Type => "Feature";

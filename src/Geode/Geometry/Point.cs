@@ -59,7 +59,7 @@ public sealed class Point : IGeometry, IPosition, IEnumerable<double>, IEquatabl
             return false;
         }
         var coordList = new List<double>();
-        foreach (var coord in other.Geometry)
+        foreach (var coord in other.Coordinates)
         {
             try
             {
