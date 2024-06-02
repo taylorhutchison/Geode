@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Geode;
-public class MultiPoint : IGeoType, IGeometry
+public class MultiPoint : IGeometry
 {
-    public GeoType Type => GeoType.MultiPoint;
+    public GeometryType Type => GeometryType.MultiPoint;
     public IEnumerable Coordinates { get; set; }
     public MultiPoint(IEnumerable<IPosition> coordinates)
     {

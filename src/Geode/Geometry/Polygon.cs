@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections;
 
 namespace Geode;
-public class Polygon : IGeoType, IGeometry, IPoly
+public class Polygon : IGeometry, IPoly
 {
     private IEnumerable<IPosition> _coordinates;
-    public GeoType Type => GeoType.Polygon;
+    public GeometryType Type => GeometryType.Polygon;
     public Bounds Bounds { get; set; }
     public IEnumerable Coordinates => _coordinates;
     public IEnumerable Geometry => _coordinates;

@@ -1,5 +1,5 @@
 ﻿namespace Geode.Tests.FeatureTests.Models.Geometries;
-public class Location<IGeoType>
+public class Location<IGeometry>
 {
-    IGeoType Geometry { get; set; }
+    IGeometry Geometry { get; set; }
 }

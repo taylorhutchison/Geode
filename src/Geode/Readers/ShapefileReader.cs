@@ -12,7 +12,7 @@ internal class ShapefileReader : FeatureReader
     #region internal-classes
     internal class ShapefileHeader
     {
-        public IGeoType GeoType { get; set; }
+        public IGeometry GeoType { get; set; }
         public int FileLength { get; set; }
         public int Version { get; set; }
         public int ShapeType { get; set; }
@@ -47,10 +47,10 @@ internal class ShapefileReader : FeatureReader
     {
         public IGeometry Geometry { get; set; }
         public int RecordNumber { get; set; }
-        public ShapefileRecordGeometry(int recordNumber, byte[] recordContents, GeoType geoType)
+        public ShapefileRecordGeometry(int recordNumber, byte[] recordContents, GeometryType geoType)
         {
             RecordNumber = recordNumber;
-            if (geoType == GeoType.Point)
+            if (geoType == GeometryType.Point)
             {
                 var x = BitConverter.ToDouble(recordContents, 4);
                 var y = BitConverter.ToDouble(recordContents, 12);
@@ -275,7 +275,7 @@ internal class ShapefileReader : FeatureReader
                 var records = reader.GetAllMainRecords(stream);
                 if (header.ShapeType == 1)
                 {
-                    var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeoType.Point)).Select(gr =>
+                    var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeometryType.Point)).Select(gr =>
                     {
                         return new Feature
                         {

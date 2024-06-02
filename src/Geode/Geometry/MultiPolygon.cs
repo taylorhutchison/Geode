@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Geode;
-public class MultiPolygon : IGeoType, IGeometry
+public class MultiPolygon : IGeometry
 {
-    public GeoType Type => GeoType.MultiPolyline;
+    public GeometryType Type => GeometryType.MultiPolyline;
     public IEnumerable Coordinates { get; private set; }
     public MultiPolygon(IEnumerable<IEnumerable<IPosition>> coordinates)
     {

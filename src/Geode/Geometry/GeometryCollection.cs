@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 
 namespace Geode;
-public class GeometryCollection : IGeoType, IGeoCollection, IEnumerable<IGeoType>
+public class GeometryCollection : IGeometry, IGeoCollection, IEnumerable<IGeometry>
 {
-    public GeoType Type => GeoType.GeometryCollection;
+    public GeometryType Type => GeometryType.GeometryCollection;
     public IEnumerable<IGeometry> Geometries { get; set; }
     public IEnumerable Geometry => Geometries;
+    public IEnumerable Coordinates => Geometries;
 
-    public IEnumerator<IGeoType> GetEnumerator()
+    public IEnumerator<IGeometry> GetEnumerator()
     {
         if (Geometries != null)
         {
             foreach (var geometry in Geometries)
             {
-                yield return (IGeoType)geometry;
+                yield return (IGeometry)geometry;
             }
         }
         yield break;

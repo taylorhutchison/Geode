@@ -4,14 +4,13 @@ using System.Collections;
 using System.Linq;
 
 namespace Geode;
-public sealed class Point : IGeoType, IPosition, IGeometry, IEnumerable<double>, IEquatable<Point>
+public sealed class Point : IGeometry, IPosition, IEnumerable<double>, IEquatable<Point>
 {
     private double[] _position;
     public double X => _position[0];
     public double Y => _position[1];
     public double Z => _position[2];
-    public Bounds Bounds { get; set; }
-    public GeoType Type => GeoType.Point;
+    public GeometryType Type => GeometryType.Point;
     public double[] Position => _position;
     public IEnumerable Coordinates => _position;
     public IEnumerable Geometry => Coordinates;

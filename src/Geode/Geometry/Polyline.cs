@@ -5,10 +5,10 @@ namespace Geode;
 /// <summary>
 /// A Polyline is a geometry type, sometimes refered to as a Polyline, that is represented by an array of positions.
 /// </summary>
-public class Polyline : IGeoType, IGeometry, IPoly
+public class Polyline : IGeometry, IPoly
 {
     private IEnumerable<IPosition> _coordinates;
-    public GeoType Type => GeoType.Polyline;
+    public GeometryType Type => GeometryType.Polyline;
     public IEnumerable Coordinates => _coordinates;
     public Bounds Bounds { get; set; }
     public IEnumerable<IPosition> Positions => _coordinates;

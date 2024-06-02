@@ -2,8 +2,9 @@
 using System.Collections;
 
 namespace Geode;
-public interface IGeometry : IGeoType, IEquatable<IGeometry>
+public interface IGeometry
 {
-    Bounds Bounds { get; }
+    GeometryType Type { get; }
     IEnumerable Coordinates { get; }
+    IEnumerable Geometry { get; }
 }

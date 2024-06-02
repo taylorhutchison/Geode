@@ -9,6 +9,6 @@ namespace Geode;
 public sealed class Feature : IFeature
 {
     public IDictionary<string, object> Properties { get; set; }
-    public IGeoType Geometry { get; set; }
+    public IGeometry Geometry { get; set; }
 
 }
