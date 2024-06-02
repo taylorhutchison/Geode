@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Geode.Geometry;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
     public class Earthquake : IFeatureConvertible
     {
-        public Geode.Geometry.Polygon ImpactArea { get; set; }
-        public Geode.Geometry.Point Epicenter { get; set; }
+        public Polygon ImpactArea { get; set; }
+        public Point Epicenter { get; set; }
         public double Magnitude { get; set; }
         public IFeature ToFeature()
         {

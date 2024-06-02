@@ -1,9 +1,9 @@
 ﻿using Xunit;
 using Geode.Geometry;
 
-namespace Geode.Tests.FeatureTests
+namespace Geode.Tests.GeometryTests
 {
-    public class PointFeatureTests
+    public class PointTests
     {
         [Fact]
         public void PointsAreEqual()

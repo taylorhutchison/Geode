@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Geode.Tests.Models;
 using Geode.Geometry;
+using Geode.Tests.FeatureTests.Models;
 
-namespace Geode.Tests
+namespace Geode.Tests.FeatureTests
 {
     public class CreateFeatureCollectionFromAttributesTests
     {

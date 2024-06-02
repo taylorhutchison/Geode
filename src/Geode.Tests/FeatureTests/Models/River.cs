@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Geode.Tests.FeatureTests.Models.Geometries;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
-    public class Place
+    public class River
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public LatLng Location { get; set; }
+        public IEnumerable<LatLng> Location { get; set; }
     }
 }

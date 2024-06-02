@@ -1,4 +1,7 @@
+using Geode.Algorithms;
+
 namespace Geode.Benchmarks;
+
 public class MidpointBenchmarks
 {
     private readonly Polyline _polyline;
@@ -16,5 +19,5 @@ public class MidpointBenchmarks
     }
 
     [Benchmark]
-    public Point GetMidpoint() => Midpoint.GetMidPoint(_polyline);
+    public Point GetMidpoint() => _polyline.GetMidPoint();
 }

@@ -1,17 +1,13 @@
-﻿using System;
+﻿using Geode.Geometry;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Geode.Geometry;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Geode.Services
+namespace Geode.Algorithms
 {
-    internal static class GeometryService
-    {
-        
-    }
-
-    public static class GeometryExtensions
+    public static class IPositionAlgorithms
     {
         public static IPosition Centroid(this IEnumerable<IPosition> pointList)
         {

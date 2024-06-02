@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
     public class Pipe
     {

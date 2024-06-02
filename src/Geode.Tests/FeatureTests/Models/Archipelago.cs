@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using Geode.Geometry;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
-    public class Archipelago: IFeatureConvertible
+    public class Archipelago : IFeatureConvertible
     {
         public IEnumerable<IGeometry> Islands { get; set; }
 
@@ -20,9 +20,10 @@ namespace Geode.Tests.Models
                 {
                     { nameof(Name), Name }
                 },
-                Geometry = new GeometryCollection() {
-                   Geometries = Islands
-                }            
+                Geometry = new GeometryCollection()
+                {
+                    Geometries = Islands
+                }
             };
         }
     }

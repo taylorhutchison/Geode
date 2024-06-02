@@ -31,11 +31,5 @@
     <None Include="..\..\assets\icons\geode.png" Pack="true" PackagePath=".\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Geode.Geometry\Geode.Geometry.csproj" />
-    <ProjectReference Include="..\Geode.Readers\Geode.Readers.csproj" />
-    <ProjectReference Include="..\Geode.Structures\Geode.Structures.csproj" />
-  </ItemGroup>
-
 
 </Project>

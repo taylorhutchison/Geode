@@ -10,7 +10,7 @@ namespace Geode.Tests
         [Fact]
         public void ReadShapefile()
         {
-            var path = @"./Data/Shapefiles/places.shp";
+            var path = @"./TestData/Shapefiles/places.shp";
             var features = new ShapefileReader().Read(path);
             Assert.Equal(243, features.Features.Count());
         }

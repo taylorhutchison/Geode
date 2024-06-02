@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Geode.Tests.FeatureTests.Models.Geometries;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
     public class RoadSegment
     {

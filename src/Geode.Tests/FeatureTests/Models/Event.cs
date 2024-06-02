@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Geode.Geometry;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
-    public class Event: IFeatureConvertible
+    public class Event : IFeatureConvertible
     {
         public string Name { get; set; }
         public string Description { get; set; }

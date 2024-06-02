@@ -3,10 +3,10 @@ using System.Linq;
 using System.Collections.Generic;
 using Xunit;
 using Geode.Geometry;
-using Geode.Tests.Models;
+using Geode.Tests.FeatureTests.Models;
 
 
-namespace Geode.Tests
+namespace Geode.Tests.FeatureTests
 {
     public class CreateFeatureAsIFeatureConvertibleTests
     {
@@ -69,7 +69,7 @@ namespace Geode.Tests
             var earthquake = new Earthquake
             {
                 ImpactArea = p1,
-                Epicenter = new Point(0,0),
+                Epicenter = new Point(0, 0),
                 Magnitude = 9.0
             };
             var feature = earthquake.ToFeature();

@@ -33,7 +33,7 @@ namespace Geode.Algorithms
         }
     }
 
-    public static class Midpoint
+    public static class IPolyAlgorithms
     {
         private static IEnumerable<LineSegment> GetLineSegments(IPoly Polyline)
         {

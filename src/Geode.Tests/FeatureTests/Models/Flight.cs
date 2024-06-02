@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Tests.Models
+namespace Geode.Tests.FeatureTests.Models
 {
-    public class Highway
+    public class Flight
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public ICollection<RoadSegment> Segments { get; set; }
+        public IEnumerable<IEnumerable<double>> FlightPath { get; set; }
     }
 }
