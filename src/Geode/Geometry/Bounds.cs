@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Geode;
-using Geode.Geometry;
 
-namespace Geode.Geometry
+namespace Geode
 {
     public class Bounds: IEquatable<Bounds>
     {

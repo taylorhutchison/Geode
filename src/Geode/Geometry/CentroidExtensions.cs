@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Geode;
-using Geode.Geometry;
 
-namespace Geode.Geometry
+namespace Geode
 {
     public static class CentroidExtensions
     {

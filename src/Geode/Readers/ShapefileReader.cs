@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Geode.Geometry;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Geode.Tests")]
 
-namespace Geode.Readers
+namespace Geode
 {
 
     internal class ShapefileReader : FeatureReader

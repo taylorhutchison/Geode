@@ -1,4 +1,4 @@
-using Geode.Algorithms;
+using Geode;
 
 namespace Geode.Benchmarks;
 

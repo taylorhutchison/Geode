@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Geometry
+namespace Geode
 {
     public interface IPosition: IEquatable<IPosition>
     {

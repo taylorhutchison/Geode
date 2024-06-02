@@ -1,6 +1,4 @@
-﻿using Geode.Geometry;
-
-namespace Geode.Readers
+﻿namespace Geode
 {
     internal abstract class FeatureReader: Reader
     {

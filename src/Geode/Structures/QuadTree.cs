@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Geode.Geometry;
 
-namespace Geode.Structures
+namespace Geode
 {
     public class QuadTree<T> where T: IPosition
     {

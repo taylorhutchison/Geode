@@ -1,11 +1,11 @@
-﻿using Geode.Geometry;
+﻿using Geode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geode.Algorithms
+namespace Geode
 {
     public static class IPositionAlgorithms
     {

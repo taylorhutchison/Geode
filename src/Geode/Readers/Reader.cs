@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Geode.Readers
+namespace Geode
 {
     internal abstract class Reader
     {

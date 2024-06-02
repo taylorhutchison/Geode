@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Xunit;
-using Geode.Geometry;
-using Geode.Algorithms;
+using Geode;
 
 namespace Geode.Tests
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Geode.Geometry;
+using Geode;
 using Geode.Tests.FeatureTests.Models;
 
 namespace Geode.Tests.FeatureTests

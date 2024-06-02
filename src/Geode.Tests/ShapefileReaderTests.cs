@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Xunit;
-using Geode.Readers;
+using Geode;
 
 namespace Geode.Tests
 {

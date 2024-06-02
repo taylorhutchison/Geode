@@ -1,6 +1,4 @@
-﻿using Geode.Geometry;
-
-namespace Geode.Serializers
+﻿namespace Geode
 {
     public class WktSerializer
     {

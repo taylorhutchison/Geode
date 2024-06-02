@@ -4,7 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 
-namespace Geode.Geometry
+namespace Geode
 {
     public class Polygon : IGeoType, IGeometry, IPoly
     {

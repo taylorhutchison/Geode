@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Geode.Exceptions
+namespace Geode
 {
     public class MultipleGeometriesException: Exception
     {

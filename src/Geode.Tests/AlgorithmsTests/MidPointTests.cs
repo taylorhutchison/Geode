@@ -1,6 +1,5 @@
 ﻿using Xunit;
-using Geode.Algorithms;
-using Geode.Geometry;
+using Geode;
 
 namespace Geode.Tests.Algorithms
 {

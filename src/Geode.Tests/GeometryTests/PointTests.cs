@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Geode.Geometry;
+using Geode;
 
 namespace Geode.Tests.GeometryTests
 {

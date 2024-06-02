@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Geode.Geometry;
 
 namespace Geode.Tests.FeatureTests.Models
 {

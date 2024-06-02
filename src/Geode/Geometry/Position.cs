@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Geode.Geometry
+namespace Geode
 {
     public struct Position : IPosition
     {
