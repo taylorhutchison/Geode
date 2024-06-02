@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode
+namespace Geode;
+public interface IFeatureCollection
 {
-    public interface IFeatureCollection 
-    {
-        IEnumerable<IFeature> Features { get; set; }
-    }
+    IEnumerable<IFeature> Features { get; set; }
 }

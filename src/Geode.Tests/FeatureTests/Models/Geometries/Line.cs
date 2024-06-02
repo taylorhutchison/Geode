@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode.Tests.FeatureTests.Models.Geometries
+namespace Geode.Tests.FeatureTests.Models.Geometries;
+public class Line
 {
-    public class Line
+    public IEnumerable<LatLng> Points { get; set; }
+    public Line() { }
+    public Line(IEnumerable<LatLng> points)
     {
-        public IEnumerable<LatLng> Points { get; set; }
-        public Line() { }
-        public Line(IEnumerable<LatLng> points)
-        {
-            Points = points;
-        }
+        Points = points;
     }
 }

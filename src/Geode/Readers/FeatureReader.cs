@@ -1,7 +1,5 @@
-﻿namespace Geode
+﻿namespace Geode;
+internal abstract class FeatureReader : Reader
 {
-    internal abstract class FeatureReader: Reader
-    {
-        public abstract IFeatureCollection Read(string path);
-    }
+    public abstract IFeatureCollection Read(string path);
 }

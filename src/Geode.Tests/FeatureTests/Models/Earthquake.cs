@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode.Tests.FeatureTests.Models
+namespace Geode.Tests.FeatureTests.Models;
+public class Earthquake : IFeatureConvertible
 {
-    public class Earthquake : IFeatureConvertible
+    public Polygon ImpactArea { get; set; }
+    public Point Epicenter { get; set; }
+    public double Magnitude { get; set; }
+    public IFeature ToFeature()
     {
-        public Polygon ImpactArea { get; set; }
-        public Point Epicenter { get; set; }
-        public double Magnitude { get; set; }
-        public IFeature ToFeature()
+        var feature = new Feature
         {
-            var feature = new Feature
+            Geometry = new GeometryCollection
             {
-                Geometry = new GeometryCollection
-                {
-                    Geometries = new List<IGeometry> {
+                Geometries = new List<IGeometry> {
                         ImpactArea,
                         Epicenter
                     }
-                },
-                Properties = new Dictionary<string, object>
+            },
+            Properties = new Dictionary<string, object>
                 {
                     {nameof(Magnitude), Magnitude }
                 }
-            };
-            return feature;
-        }
+        };
+        return feature;
     }
 }

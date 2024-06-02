@@ -1,54 +1,50 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
-namespace Geode
+namespace Geode;
+public class GeoJsonFeature
 {
-    public class GeoJsonFeature
+    public GeoJsonFeature(IFeature feature)
     {
-        public GeoJsonFeature(IFeature feature)
-        {
-            Properties = feature?.Properties;
-            Geometry = new Dictionary<string, object>(2)
+        Properties = feature?.Properties;
+        Geometry = new Dictionary<string, object>(2)
             {
                 {"Type", feature?.Geometry?.Type}
             };
-            if (typeof(IGeoCollection).IsAssignableFrom(feature.Geometry.GetType()))
-            {
-                var geometry = feature.Geometry as IGeoCollection;
-                var geometries = geometry.Geometries.Select(g => new GeoJsonGeometry(g));
-                Geometry.Add("Geometries", geometries);
-            }
-            else
-            {
-                Geometry.Add("Coordinates", feature?.Geometry?.Geometry);
-            }
-        }
-        public string Type => "Feature";
-        public IDictionary<string, object> Properties { get; private set; }
-        public IDictionary<string, object> Geometry { get; private set; }
-    }
-
-    public class GeoJsonFeatureCollection
-    {
-        public GeoJsonFeatureCollection(IFeatureCollection featureCollection)
+        if (typeof(IGeoCollection).IsAssignableFrom(feature.Geometry.GetType()))
         {
-            Features = featureCollection.Features.Select(f => new GeoJsonFeature(f));
+            var geometry = feature.Geometry as IGeoCollection;
+            var geometries = geometry.Geometries.Select(g => new GeoJsonGeometry(g));
+            Geometry.Add("Geometries", geometries);
         }
-        public string Type => "FeatureCollection";
-        public IEnumerable<GeoJsonFeature> Features { get; private set; }
-    }
-
-    public class GeoJsonGeometry
-    {
-        public string Type { get; private set; }
-        public IEnumerable Coordinates { get; private set; }
-        public GeoJsonGeometry(IGeometry geometry)
+        else
         {
-            Type = geometry?.Type.ToString();
-            Coordinates = geometry?.Coordinates;
+            Geometry.Add("Coordinates", feature?.Geometry?.Geometry);
         }
+    }
+    public string Type => "Feature";
+    public IDictionary<string, object> Properties { get; private set; }
+    public IDictionary<string, object> Geometry { get; private set; }
+}
+
+public class GeoJsonFeatureCollection
+{
+    public GeoJsonFeatureCollection(IFeatureCollection featureCollection)
+    {
+        Features = featureCollection.Features.Select(f => new GeoJsonFeature(f));
+    }
+    public string Type => "FeatureCollection";
+    public IEnumerable<GeoJsonFeature> Features { get; private set; }
+}
+
+public class GeoJsonGeometry
+{
+    public string Type { get; private set; }
+    public IEnumerable Coordinates { get; private set; }
+    public GeoJsonGeometry(IGeometry geometry)
+    {
+        Type = geometry?.Type.ToString();
+        Coordinates = geometry?.Coordinates;
     }
 }

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("Geode.Tests")]
 
-namespace Geode
+namespace Geode;
+/// <summary>
+/// A Feature represents a discrete geometry and it's associated attributes. 
+/// </summary>
+public sealed class Feature : IFeature
 {
-    /// <summary>
-    /// A Feature represents a discrete geometry and it's associated attributes. 
-    /// </summary>
-    public sealed class Feature : IFeature
-    {
-        public IDictionary<string, object> Properties { get; set; }
-        public IGeoType Geometry { get; set; }
-
-    }
+    public IDictionary<string, object> Properties { get; set; }
+    public IGeoType Geometry { get; set; }
 
 }

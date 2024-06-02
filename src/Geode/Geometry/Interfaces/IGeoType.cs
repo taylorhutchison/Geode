@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Text;
+﻿using System.Collections;
 
-namespace Geode
+namespace Geode;
+public interface IGeoType
 {
-    public interface IGeoType
-    {
-        GeoType Type { get; }
-        IEnumerable Geometry { get; }
-    }
+    GeoType Type { get; }
+    IEnumerable Geometry { get; }
 }

@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Geode;
 using Geode.Tests.FeatureTests.Models;
 
-namespace Geode.Tests.FeatureTests
+namespace Geode.Tests.FeatureTests;
+public class CreateFeatureCollectionFromAttributesTests
 {
-    public class CreateFeatureCollectionFromAttributesTests
+    [Fact]
+    [Trait("Category", "Unit")]
+    [Trait("Category", "CreateFeatures")]
+    public void CreateFeatures_ListOfTypeWithXYProperties_CreatesFeatures()
     {
-        [Fact]
-        [Trait("Category", "Unit")]
-        [Trait("Category", "CreateFeatures")]
-        public void CreateFeatures_ListOfTypeWithXYProperties_CreatesFeatures()
-        {
-            var eventList = new List<Event>
+        var eventList = new List<Event>
             {
                 new Event{
                     Name = "Test Name 1",
@@ -27,8 +25,7 @@ namespace Geode.Tests.FeatureTests
                     Coordinates = new Point(777.123,999.789)
                 }
             };
-            var featureCollection = eventList.ToFeatureCollection();
-            Assert.Equal(2, featureCollection.Features.Count());
-        }
+        var featureCollection = eventList.ToFeatureCollection();
+        Assert.Equal(2, featureCollection.Features.Count());
     }
 }

@@ -1,5 +1,3 @@
-using Geode;
-
 namespace Geode.Benchmarks;
 
 public class MidpointBenchmarks

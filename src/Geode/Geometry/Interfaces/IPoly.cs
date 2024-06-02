@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode
+namespace Geode;
+public interface IPoly
 {
-    public interface IPoly
-    {
-        IEnumerable<IPosition> Positions { get; }
-    }
+    IEnumerable<IPosition> Positions { get; }
 }

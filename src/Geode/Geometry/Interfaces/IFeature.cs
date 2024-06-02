@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode
+namespace Geode;
+
+public interface IFeature
 {
-    public interface IFeature
-    {
-        IDictionary<string, object> Properties { get; set; }
-        IGeoType Geometry { get; set; }
-    }
+    IDictionary<string, object> Properties { get; set; }
+    IGeoType Geometry { get; set; }
 }

@@ -1,14 +1,12 @@
-﻿namespace Geode
+﻿namespace Geode;
+public class WktSerializer
 {
-    public class WktSerializer
+    public static string ToWKT(IPosition position)
     {
-        public static string ToWKT(IPosition position)
+        if (position == null)
         {
-            if(position == null)
-            {
-                return string.Empty;
-            }
-            return $"POINT ({position.X} {position.Y})";
+            return string.Empty;
         }
+        return $"POINT ({position.X} {position.Y})";
     }
 }

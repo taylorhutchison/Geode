@@ -1,38 +1,34 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Geode
+namespace Geode;
+public class GeometryCollection : IGeoType, IGeoCollection, IEnumerable<IGeoType>
 {
-    public class GeometryCollection: IGeoType, IGeoCollection, IEnumerable<IGeoType>
+    public GeoType Type => GeoType.GeometryCollection;
+    public IEnumerable<IGeometry> Geometries { get; set; }
+    public IEnumerable Geometry => Geometries;
+
+    public IEnumerator<IGeoType> GetEnumerator()
     {
-        public GeoType Type => GeoType.GeometryCollection;
-        public IEnumerable<IGeometry> Geometries { get; set; }
-        public IEnumerable Geometry => Geometries;
-
-        public IEnumerator<IGeoType> GetEnumerator()
+        if (Geometries != null)
         {
-            if (Geometries != null)
+            foreach (var geometry in Geometries)
             {
-                foreach(var geometry in Geometries)
-                {
-                    yield return (IGeoType)geometry;
-                }
+                yield return (IGeoType)geometry;
             }
-            yield break;
         }
+        yield break;
+    }
 
-        IEnumerator IEnumerable.GetEnumerator()
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        if (Geometries != null)
         {
-            if (Geometries != null)
+            foreach (var geometry in Geometries)
             {
-                foreach (var geometry in Geometries)
-                {
-                    yield return geometry;
-                }
+                yield return geometry;
             }
-            yield break;
         }
+        yield break;
     }
 }

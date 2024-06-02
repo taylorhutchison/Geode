@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Geode
+namespace Geode;
+public interface IPosition : IEquatable<IPosition>
 {
-    public interface IPosition: IEquatable<IPosition>
-    {
-        double[] Position { get; }
-        double X { get;  }
-        double Y { get;  }
-        double Z { get;  }
-    }
-
+    double[] Position { get; }
+    double X { get; }
+    double Y { get; }
+    double Z { get; }
 }

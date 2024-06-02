@@ -1,6 +1,4 @@
-﻿namespace Geode.Tests
+﻿namespace Geode.Tests;
+public class QuadTreeTests
 {
-    public class QuadTreeTests
-    {
-    }
 }

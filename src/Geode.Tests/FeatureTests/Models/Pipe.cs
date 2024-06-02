@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode.Tests.FeatureTests.Models
+namespace Geode.Tests.FeatureTests.Models;
+public class Pipe
 {
-    public class Pipe
-    {
-        public int Id { get; set; }
-        public IEnumerable<double[]> Location { get; set; }
-    }
+    public int Id { get; set; }
+    public IEnumerable<double[]> Location { get; set; }
 }

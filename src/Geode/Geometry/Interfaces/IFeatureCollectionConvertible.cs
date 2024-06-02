@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Geode
+﻿namespace Geode;
+public interface IFeatureCollectionConvertible
 {
-    public interface IFeatureCollectionConvertible
-    {
-        IFeatureCollection ToFeatureCollection();
-    }
+    IFeatureCollection ToFeatureCollection();
 }

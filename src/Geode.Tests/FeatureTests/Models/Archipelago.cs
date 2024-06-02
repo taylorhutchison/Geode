@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Geode.Tests.FeatureTests.Models
+namespace Geode.Tests.FeatureTests.Models;
+public class Archipelago : IFeatureConvertible
 {
-    public class Archipelago : IFeatureConvertible
+    public IEnumerable<IGeometry> Islands { get; set; }
+
+    public string Name { get; set; }
+
+    public IFeature ToFeature()
     {
-        public IEnumerable<IGeometry> Islands { get; set; }
-
-        public string Name { get; set; }
-
-        public IFeature ToFeature()
+        return new Feature
         {
-            return new Feature
-            {
-                Properties = new Dictionary<string, object>
+            Properties = new Dictionary<string, object>
                 {
                     { nameof(Name), Name }
                 },
-                Geometry = new GeometryCollection()
-                {
-                    Geometries = Islands
-                }
-            };
-        }
+            Geometry = new GeometryCollection()
+            {
+                Geometries = Islands
+            }
+        };
     }
 }

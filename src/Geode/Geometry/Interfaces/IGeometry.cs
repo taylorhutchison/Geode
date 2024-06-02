@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Geode
+namespace Geode;
+public interface IGeometry : IGeoType, IEquatable<IGeometry>
 {
-    public interface IGeometry: IGeoType, IEquatable<IGeometry>
-    {
-        Bounds Bounds { get; }
-        IEnumerable Coordinates { get; }
-    }
+    Bounds Bounds { get; }
+    IEnumerable Coordinates { get; }
 }
