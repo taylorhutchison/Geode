@@ -11,7 +11,7 @@ public static class PolygonExtensions
             var x = p.Length > 0 ? p[0] : default(double);
             var y = p.Length > 1 ? p[1] : default(double);
             var z = p.Length > 2 ? p[2] : default(double);
-            return new Position(x, y, z) as IPoint;
+            return new Point(x, y, z) as IPoint;
         }));
         return new Polygon(posArray);
     }

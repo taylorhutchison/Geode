@@ -13,8 +13,8 @@ internal class LineSegment
     }
     public LineSegment(double[] a, double[] b)
     {
-        A = new Position(a[0], a[1]);
-        B = new Position(b[0], b[1]);
+        A = new Point(a[0], a[1]);
+        B = new Point(b[0], b[1]);
     }
     public double SegmentLength => Math.Sqrt(Math.Pow(A.Position[0] - B.Position[0], 2) + Math.Pow(A.Position[1] - B.Position[1], 2));
 

@@ -3,29 +3,28 @@
 namespace Geode;
 public sealed class Point : IGeometry<IPoint>, IPoint, IEquatable<Point>
 {
-    private double[] _position;
-    public double X => _position[0];
-    public double Y => _position[1];
-    public double Z => _position[2];
+    public double X => Position[0];
+    public double Y => Position[1];
+    public double Z => Position[2];
     public GeometryType Type => GeometryType.Point;
-    public double[] Position => _position;
+    public double[] Position { get; private set; }
     object IGeometry.Coordinates => Coordinates;
     public IPoint Coordinates => this;
     public Point(double x, double y)
     {
-        _position = new double[] { x, y, 0 };
+        Position = new double[] { x, y, 0 };
     }
     public Point(double x, double y, double z)
     {
-        _position = new double[] { x, y, z };
+        Position = new double[] { x, y, z };
     }
     public Point(IPoint position)
     {
-        _position = position.Position;
+        Position = position.Position;
     }
     public Point(double[] position)
     {
-        _position = position;
+        Position = position;
     }
 
     public bool Equals(Point other)
