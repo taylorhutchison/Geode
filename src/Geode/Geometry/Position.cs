@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Geode;
-public struct Position : IPosition
+public struct Position : IPoint
 {
     private double[] _position;
     public double X => _position[0];
@@ -17,9 +17,9 @@ public struct Position : IPosition
         _position = new double[] { x, y, z };
     }
 
-    double[] IPosition.Position => _position;
+    double[] IPoint.Position => _position;
 
-    public bool Equals(IPosition other)
+    public bool Equals(IPoint other)
     {
         throw new NotImplementedException();
     }

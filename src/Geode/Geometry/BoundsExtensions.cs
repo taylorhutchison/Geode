@@ -21,7 +21,7 @@ public static class BoundsExtensions
         }
         return bounds;
     }
-    public static Bounds GetBounds(this IPosition position)
+    public static Bounds GetBounds(this IPoint position)
     {
         return new Bounds(position);
     }
@@ -29,7 +29,7 @@ public static class BoundsExtensions
     {
         return GetBounds(poly.Positions);
     }
-    public static Bounds GetBounds(this IEnumerable<IPosition> positions)
+    public static Bounds GetBounds(this IEnumerable<IPoint> positions)
     {
         var bounds = positions.Select(p => p.GetBounds());
         return GetBounds(bounds);

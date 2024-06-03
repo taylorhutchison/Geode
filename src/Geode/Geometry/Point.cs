@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Geode;
-public sealed class Point : IGeometry<IPosition>, IPosition, IEquatable<Point>
+public sealed class Point : IGeometry<IPoint>, IPoint, IEquatable<Point>
 {
     private double[] _position;
     public double X => _position[0];
@@ -10,7 +10,7 @@ public sealed class Point : IGeometry<IPosition>, IPosition, IEquatable<Point>
     public GeometryType Type => GeometryType.Point;
     public double[] Position => _position;
     object IGeometry.Coordinates => Coordinates;
-    public IPosition Coordinates => this;
+    public IPoint Coordinates => this;
     public Point(double x, double y)
     {
         _position = new double[] { x, y, 0 };
@@ -19,7 +19,7 @@ public sealed class Point : IGeometry<IPosition>, IPosition, IEquatable<Point>
     {
         _position = new double[] { x, y, z };
     }
-    public Point(IPosition position)
+    public Point(IPoint position)
     {
         _position = position.Position;
     }
@@ -30,10 +30,10 @@ public sealed class Point : IGeometry<IPosition>, IPosition, IEquatable<Point>
 
     public bool Equals(Point other)
     {
-        return Equals((IPosition)other);
+        return Equals((IPoint)other);
     }
 
-    public bool Equals(IPosition other)
+    public bool Equals(IPoint other)
     {
         if (Position.Length != other.Position.Length)
         {

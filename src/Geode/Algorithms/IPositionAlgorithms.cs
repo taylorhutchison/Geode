@@ -5,7 +5,7 @@ using System.Linq;
 namespace Geode;
 public static class IPositionAlgorithms
 {
-    public static IPosition Centroid(this IEnumerable<IPosition> pointList)
+    public static IPoint Centroid(this IEnumerable<IPoint> pointList)
     {
         var coords = pointList.Select(p => p.Position);
         var dimensions = coords.FirstOrDefault().Count();

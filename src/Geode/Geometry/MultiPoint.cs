@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Geode;
-public class MultiPoint : IGeometry<IEnumerable<IPosition>>
+public class MultiPoint : IGeometry<IEnumerable<IPoint>>
 {
     public GeometryType Type => GeometryType.MultiPoint;
     object IGeometry.Coordinates => Coordinates;
-    public IEnumerable<IPosition> Coordinates { get; set; }
-    public MultiPoint(IEnumerable<IPosition> coordinates)
+    public IEnumerable<IPoint> Coordinates { get; set; }
+    public MultiPoint(IEnumerable<IPoint> coordinates)
     {
         Coordinates = coordinates;
     }

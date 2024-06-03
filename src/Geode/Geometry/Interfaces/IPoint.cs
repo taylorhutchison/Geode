@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Geode;
-public interface IPosition : IEquatable<IPosition>
+public interface IPoint : IEquatable<IPoint>
 {
     double[] Position { get; }
     double X { get; }

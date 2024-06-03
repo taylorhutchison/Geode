@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Geode;
-public class MultiPolygon : IGeometry<IEnumerable<IEnumerable<IEnumerable<IPosition>>>>
+public class MultiPolygon : IGeometry<IEnumerable<IEnumerable<IEnumerable<IPoint>>>>
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object IGeometry.Coordinates => Coordinates;
-    public IEnumerable<IEnumerable<IEnumerable<IPosition>>> Coordinates { get; private set; }
+    public IEnumerable<IEnumerable<IEnumerable<IPoint>>> Coordinates { get; private set; }
     public MultiPolygon(IEnumerable<Polygon> polygons)
     {
         Coordinates = polygons.Select(p => p.Coordinates);

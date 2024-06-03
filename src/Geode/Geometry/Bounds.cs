@@ -9,7 +9,7 @@ public class Bounds : IEquatable<Bounds>
     public double YMax { get; set; }
     public double ZMin { get; set; }
     public double ZMax { get; set; }
-    public Bounds(IPosition position)
+    public Bounds(IPoint position)
     {
         XMin = position.Position[0];
         XMax = position.Position[0];

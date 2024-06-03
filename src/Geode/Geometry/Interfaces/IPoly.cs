@@ -4,5 +4,5 @@ namespace Geode;
 public interface IPoly
 {
     Bounds Bounds { get; }
-    IEnumerable<IPosition> Positions { get; }
+    IEnumerable<IPoint> Positions { get; }
 }

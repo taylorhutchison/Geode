@@ -7,7 +7,7 @@ public class GeometryServiceTests
     [Fact]
     public void GetCentroidOfListOfPositions()
     {
-        IEnumerable<IPosition> points = new List<IPosition>
+        IEnumerable<IPoint> points = new List<IPoint>
             {
                 new Point(0,0,0),
                 new Point(1,1,10)

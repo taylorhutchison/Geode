@@ -2,13 +2,13 @@
 using System.Collections;
 
 namespace Geode;
-public class MultiPolyline : IGeometry<IEnumerable<IEnumerable<IPosition>>>
+public class MultiPolyline : IGeometry<IEnumerable<IEnumerable<IPoint>>>
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object IGeometry.Coordinates => Coordinates;
-    public IEnumerable<IEnumerable<IPosition>> Coordinates { get; private set; }
+    public IEnumerable<IEnumerable<IPoint>> Coordinates { get; private set; }
     public Bounds Bounds { get; set; }
-    public MultiPolyline(IEnumerable<IEnumerable<IPosition>> coordinates)
+    public MultiPolyline(IEnumerable<IEnumerable<IPoint>> coordinates)
     {
         Coordinates = coordinates;
     }
