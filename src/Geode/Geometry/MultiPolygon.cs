@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Geode;
-public class MultiPolygon : IGeometry<IEnumerable<IEnumerable<IEnumerable<IPoint>>>>
+public class MultiPolygon : IMultiPolygon
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object IGeometry.Coordinates => Coordinates;
@@ -16,8 +16,4 @@ public class MultiPolygon : IGeometry<IEnumerable<IEnumerable<IEnumerable<IPoint
     public MultiPolygon() { }
     public Bounds Bounds { get; set; }
     public IEnumerable Geometry => Coordinates;
-    public bool Equals(IGeometry other)
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace Geode;
-public class MultiPolyline : IGeometry<IEnumerable<IEnumerable<IPoint>>>
+public class MultiPolyline : IMultiPolyline
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object IGeometry.Coordinates => Coordinates;
@@ -14,8 +14,4 @@ public class MultiPolyline : IGeometry<IEnumerable<IEnumerable<IPoint>>>
     }
     public MultiPolyline() { }
     public IEnumerable Geometry => Coordinates;
-    public bool Equals(IGeometry other)
-    {
-        return Type == other.Type;
-    }
 }

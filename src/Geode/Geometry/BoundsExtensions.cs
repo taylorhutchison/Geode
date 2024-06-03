@@ -25,16 +25,16 @@ public static class BoundsExtensions
     {
         return new Bounds(position);
     }
-    public static Bounds GetBounds(this IPoly poly)
+    public static Bounds GetBounds(this IPolyline poly)
     {
-        return GetBounds(poly.Positions);
+        return GetBounds(poly.Coordinates);
     }
     public static Bounds GetBounds(this IEnumerable<IPoint> positions)
     {
         var bounds = positions.Select(p => p.GetBounds());
         return GetBounds(bounds);
     }
-    public static Bounds GetBounds(this IEnumerable<IPoly> positions)
+    public static Bounds GetBounds(this IEnumerable<IPolyline> positions)
     {
         var bounds = positions.Select(p => p.GetBounds());
         return GetBounds(bounds);

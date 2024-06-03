@@ -6,9 +6,23 @@ namespace Geode;
 
 public static class IPolyAlgorithms
 {
-    private static IEnumerable<LineSegment> GetLineSegments(IPoly Polyline)
+    public static Point GetMidPoint(this IPolyline Polyline)
     {
-        var line = Polyline.Positions.ToArray();
+        if (Polyline.Coordinates.Count() > 1)
+        {
+            var segments = GetLineSegments(Polyline).ToArray();
+            var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
+            var halfwayLength = segmentDistances.Sum(d => d) / 2d;
+
+            return GetMidPoint(segments, segmentDistances, halfwayLength);
+        }
+        var firstPosition = Polyline.Coordinates.First();
+        return new Point(firstPosition);
+    }
+
+    private static IEnumerable<LineSegment> GetLineSegments(IPolyline Polyline)
+    {
+        var line = Polyline.Coordinates.ToArray();
         var segments = new List<LineSegment>();
         for (var i = 0; i < line.Length - 1; i++)
         {
@@ -32,19 +46,6 @@ public static class IPolyAlgorithms
                 return new Point(midPoint);
             }
         }
-        return default(Point);
-    }
-    public static Point GetMidPoint(this IPoly Polyline)
-    {
-        if (Polyline.Positions.Count() > 1)
-        {
-            var segments = GetLineSegments(Polyline).ToArray();
-            var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
-            var halfwayLength = segmentDistances.Sum(d => d) / 2d;
-
-            return GetMidPoint(segments, segmentDistances, halfwayLength);
-        }
-        var firstPosition = Polyline.Positions.First();
-        return new Point(firstPosition);
+        return default;
     }
 }
