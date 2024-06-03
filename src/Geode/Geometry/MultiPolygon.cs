@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Geode;
-public class MultiPolygon : IGeometry
+public class MultiPolygon : IGeometry<IEnumerable<IEnumerable<IEnumerable<IPosition>>>>
 {
     public GeometryType Type => GeometryType.MultiPolyline;
-    public IEnumerable Coordinates { get; private set; }
-    public MultiPolygon(IEnumerable<IEnumerable<IPosition>> coordinates)
+    object IGeometry.Coordinates => Coordinates;
+    public IEnumerable<IEnumerable<IEnumerable<IPosition>>> Coordinates { get; private set; }
+    public MultiPolygon(IEnumerable<Polygon> polygons)
     {
-        Coordinates = coordinates;
+        Coordinates = polygons.Select(p => p.Coordinates);
     }
     public MultiPolygon() { }
     public Bounds Bounds { get; set; }

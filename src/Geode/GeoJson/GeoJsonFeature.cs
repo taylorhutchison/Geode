@@ -30,7 +30,7 @@ public class GeoJsonFeature
 
 public class GeoJsonFeatureCollection
 {
-    public GeoJsonFeatureCollection(IFeatureCollection featureCollection)
+    public GeoJsonFeatureCollection(FeatureCollection featureCollection)
     {
         Features = featureCollection.Features.Select(f => new GeoJsonFeature(f));
     }
@@ -41,7 +41,7 @@ public class GeoJsonFeatureCollection
 public class GeoJsonGeometry
 {
     public string Type { get; private set; }
-    public IEnumerable Coordinates { get; private set; }
+    public object Coordinates { get; private set; }
     public GeoJsonGeometry(IGeometry geometry)
     {
         Type = geometry?.Type.ToString();

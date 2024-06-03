@@ -8,7 +8,7 @@ public class Earthquake : IFeatureConvertible
     public double Magnitude { get; set; }
     public IFeature ToFeature()
     {
-        var feature = new Feature<IGeometry>
+        var feature = new Feature
         {
             Geometry = new GeometryCollection
             {

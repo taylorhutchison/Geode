@@ -4,6 +4,7 @@
 /// </summary>
 public enum GeometryType
 {
+    Unknown,
     Point,
     MultiPoint,
     Polyline,

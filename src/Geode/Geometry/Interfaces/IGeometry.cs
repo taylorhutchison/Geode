@@ -5,11 +5,10 @@ namespace Geode;
 public interface IGeometry
 {
     GeometryType Type { get; }
-    IEnumerable Coordinates { get; }
+    object Coordinates { get; }
 }
 
-public interface IGeometry<T>
+public interface IGeometry<T> : IGeometry
 {
-    GeometryType Type { get; }
-    T TypedCoordinates { get; }
+    new T Coordinates { get; }
 }

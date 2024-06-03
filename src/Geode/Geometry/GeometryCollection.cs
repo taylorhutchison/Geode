@@ -6,6 +6,7 @@ public class GeometryCollection : IGeometry, IGeoCollection, IEnumerable<IGeomet
 {
     public GeometryType Type => GeometryType.GeometryCollection;
     public IEnumerable<IGeometry> Geometries { get; set; }
+    object IGeometry.Coordinates => Coordinates;
     public IEnumerable Geometry => Geometries;
     public IEnumerable Coordinates => Geometries;
 

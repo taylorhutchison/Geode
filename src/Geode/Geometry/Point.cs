@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
 
 namespace Geode;
-public sealed class Point : IGeometry, IPosition, IEnumerable<double>, IEquatable<Point>
+public sealed class Point : IGeometry<IPosition>, IPosition, IEquatable<Point>
 {
     private double[] _position;
     public double X => _position[0];
@@ -12,8 +9,8 @@ public sealed class Point : IGeometry, IPosition, IEnumerable<double>, IEquatabl
     public double Z => _position[2];
     public GeometryType Type => GeometryType.Point;
     public double[] Position => _position;
-    public IEnumerable Coordinates => _position;
-    public IEnumerable Geometry => Coordinates;
+    object IGeometry.Coordinates => Coordinates;
+    public IPosition Coordinates => this;
     public Point(double x, double y)
     {
         _position = new double[] { x, y, 0 };
@@ -52,46 +49,4 @@ public sealed class Point : IGeometry, IPosition, IEnumerable<double>, IEquatabl
         return true;
     }
 
-    public bool Equals(IGeometry other)
-    {
-        if (Type != other.Type)
-        {
-            return false;
-        }
-        var coordList = new List<double>();
-        foreach (var coord in other.Coordinates)
-        {
-            try
-            {
-                coordList.Add(Convert.ToDouble(coord));
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        if (coordList.Count() != _position.Length)
-        {
-            return false;
-        }
-        var coordArray = coordList.ToArray();
-        for (int i = 0; i < _position.Length; i++)
-        {
-            if (_position[i] != coordArray[i])
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public IEnumerator<double> GetEnumerator()
-    {
-        return ((IEnumerable<double>)_position).GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return ((IEnumerable)_position).GetEnumerator();
-    }
 }

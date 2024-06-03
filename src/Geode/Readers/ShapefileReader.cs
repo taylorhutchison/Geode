@@ -264,7 +264,7 @@ internal class ShapefileReader : FeatureReader
         return records;
     }
 
-    public override IFeatureCollection Read(string path)
+    public override FeatureCollection Read(string path)
     {
         if (path.EndsWith(".shp"))
         {
@@ -277,7 +277,7 @@ internal class ShapefileReader : FeatureReader
                 {
                     var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeometryType.Point)).Select(gr =>
                     {
-                        return new Feature<Point>
+                        return new Feature
                         {
                             Geometry = gr.Geometry
                         };
