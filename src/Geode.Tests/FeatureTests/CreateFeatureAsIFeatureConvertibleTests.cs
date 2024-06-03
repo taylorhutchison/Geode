@@ -29,16 +29,16 @@ public class CreateFeatureAsIFeatureConvertibleTests
     [Trait("Category", "Unit")]
     public void CreateFeature_GeoCollectionFeature_CreatesFeature()
     {
-        var p1 = new List<double[]> {
-                         new double[]{0 ,0 },
-                         new double[]{1 ,1 },
-                         new double[]{2 ,2 }
-                        }.ToPolygon();
-        var p2 = new List<double[]> {
-                         new double[]{0 ,0 },
-                         new double[]{1 ,1 },
-                         new double[]{2 ,2 }
-                        }.ToPolygon();
+        var p1 = new List<List<double[]>> {
+                         new List<double[]> { new double[] { 0, 0 } },
+                         new List<double[]> { new double[] { 1, 1 } },
+                         new List<double[]> { new double[] { 2, 2 } },
+            }.ToPolygon();
+        var p2 = new List<List<double[]>> {
+                         new List<double[]> { new double[] { 0, 0 } },
+                         new List<double[]> { new double[] { 1, 1 } },
+                         new List<double[]> { new double[] { 2, 2 } },
+        }.ToPolygon();
         var archipeligo = new Archipelago
         {
             Islands = new List<Polygon>()
@@ -57,12 +57,11 @@ public class CreateFeatureAsIFeatureConvertibleTests
     [Trait("Category", "Unit")]
     public void CreateFeature_GeoCollectionFeatureWithMultipleTypes_CreatesFeature()
     {
-        var p1 = new List<double[]>
-                    {
-                        new double[]{0, 0 },
-                        new double[]{1 ,1 },
-                        new double[]{2 ,2 }
-                    }.ToPolygon();
+        var p1 = new List<List<double[]>> {
+                         new List<double[]> { new double[] { 0, 0 } },
+                         new List<double[]> { new double[] { 1, 1 } },
+                         new List<double[]> { new double[] { 2, 2 } },
+            }.ToPolygon();
         var earthquake = new Earthquake
         {
             ImpactArea = p1,
@@ -70,5 +69,7 @@ public class CreateFeatureAsIFeatureConvertibleTests
             Magnitude = 9.0
         };
         var feature = earthquake.ToFeature();
+        var geometry = feature.Geometry as GeometryCollection;
+        Assert.Equal(2, geometry.Count());
     }
 }
