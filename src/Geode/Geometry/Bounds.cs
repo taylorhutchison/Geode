@@ -19,6 +19,8 @@ public class Bounds : IEquatable<Bounds>
     public Bounds() { }
     public bool Equals(Bounds other)
     {
-        return XMin == other.XMin && XMax == other.XMax && YMin == other.YMin && YMax == other.YMin && ZMin == other.ZMin && ZMax == other.ZMax;
+        return XMin == other.XMin && XMax == other.XMax &&
+               YMin == other.YMin && YMax == other.YMin &&
+               ZMin == other.ZMin && ZMax == other.ZMax;
     }
 }
