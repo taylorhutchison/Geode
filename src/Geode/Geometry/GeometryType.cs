@@ -6,7 +6,8 @@ public enum GeometryType
 {
     Unknown,
     Null,
-    Point,
+    Point2D,
+    Point3D,
     MultiPoint,
     Polyline,
     MultiPolyline,

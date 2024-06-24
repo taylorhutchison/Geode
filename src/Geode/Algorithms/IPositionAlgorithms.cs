@@ -14,6 +14,6 @@ public static class IPositionAlgorithms
         {
             coordinates[i] = coords.Average(c => c[i]);
         }
-        return new Point(coordinates);
+        return new Point2D(coordinates);
     }
 }

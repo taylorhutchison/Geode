@@ -9,8 +9,8 @@ public class GeometryServiceTests
     {
         IEnumerable<IPoint> points = new List<IPoint>
             {
-                new Point(0,0,0),
-                new Point(1,1,10)
+                new Point3D(0,0,0),
+                new Point3D(1,1,10)
             };
         var centroid = points.Centroid();
         Assert.Equal(0.5, centroid.Position[0]);

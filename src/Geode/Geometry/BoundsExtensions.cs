@@ -4,41 +4,61 @@ using System.Linq;
 namespace Geode;
 public static class BoundsExtensions
 {
-    private static Bounds GetBounds(IEnumerable<double[]> poly)
+    public static Bounds GetBounds(IEnumerable<IPoint2D> points)
     {
         var bounds = new Bounds();
-        foreach (var position in poly)
+        foreach (var point in points)
         {
-            if (bounds.XMax < position[0]) bounds.XMax = position[0];
-            if (bounds.XMin > position[0]) bounds.XMin = position[0];
-            if (bounds.YMax < position[1]) bounds.YMax = position[1];
-            if (bounds.YMin > position[1]) bounds.YMin = position[1];
-            if (position.Length > 2)
+            if (bounds.XMax < point.X) bounds.XMax = point.X;
+            if (bounds.XMin > point.X) bounds.XMin = point.X;
+            if (bounds.YMax < point.Y) bounds.YMax = point.Y;
+            if (bounds.YMin > point.Y) bounds.YMin = point.Y;
+        }
+        return bounds;
+    }
+
+    public static Bounds GetBounds(IEnumerable<IPoint3D> points)
+    {
+        var bounds = new Bounds();
+        foreach (var point in points)
+        {
+            if (bounds.XMax < point.X) bounds.XMax = point.X;
+            if (bounds.XMin > point.X) bounds.XMin = point.X;
+            if (bounds.YMax < point.Y) bounds.YMax = point.Y;
+            if (bounds.YMin > point.Y) bounds.YMin = point.Y;
+            if (bounds.ZMax < point.Z) bounds.ZMax = point.Z;
+            if (bounds.ZMin > point.Z) bounds.ZMin = point.Z;
+        }
+        return bounds;
+    }
+
+    public static Bounds GetBounds(this IPolyline polyline)
+    {
+        var bounds = new Bounds();
+        foreach (var point in polyline.Geometry)
+        {
+            if (point != null)
             {
-                if (bounds.ZMax < position[2]) bounds.ZMax = position[2];
-                if (bounds.ZMin > position[2]) bounds.ZMin = position[2];
+                if (point.Position.Length > 0)
+                {
+                    if (bounds.XMax < point.Position[0]) bounds.XMax = point.Position[0];
+                    if (bounds.XMin > point.Position[0]) bounds.XMin = point.Position[0];
+                }
+                if (point.Position.Length > 1)
+                {
+                    if (bounds.YMax < point.Position[1]) bounds.YMax = point.Position[1];
+                    if (bounds.YMin > point.Position[1]) bounds.YMin = point.Position[1];
+                }
+                if (point.Position.Length > 2)
+                {
+                    if (bounds.ZMax < point.Position[2]) bounds.ZMax = point.Position[2];
+                    if (bounds.ZMin > point.Position[2]) bounds.ZMin = point.Position[2];
+                }
             }
         }
         return bounds;
     }
-    public static Bounds GetBounds(this IPoint position)
-    {
-        return new Bounds(position);
-    }
-    public static Bounds GetBounds(this IPolyline poly)
-    {
-        return GetBounds(poly.Coordinates);
-    }
-    public static Bounds GetBounds(this IEnumerable<IPoint> positions)
-    {
-        var bounds = positions.Select(p => p.GetBounds());
-        return GetBounds(bounds);
-    }
-    public static Bounds GetBounds(this IEnumerable<IPolyline> positions)
-    {
-        var bounds = positions.Select(p => p.GetBounds());
-        return GetBounds(bounds);
-    }
+
     public static Bounds GetBounds(this IEnumerable<Bounds> bounds)
     {
         return new Bounds

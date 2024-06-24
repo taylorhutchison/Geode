@@ -5,13 +5,11 @@ namespace Geode;
 public class MultiPolyline : IMultiPolyline
 {
     public GeometryType Type => GeometryType.MultiPolyline;
-    object IGeometry.Coordinates => Coordinates;
-    public IEnumerable<IEnumerable<IPoint>> Coordinates { get; private set; }
-    public Bounds Bounds { get; set; }
+    object IGeometry.Geometry => Geometry;
+    public IEnumerable<IEnumerable<IPoint>> Geometry { get; private set; }
     public MultiPolyline(IEnumerable<IEnumerable<IPoint>> coordinates)
     {
-        Coordinates = coordinates;
+        Geometry = coordinates;
     }
     public MultiPolyline() { }
-    public IEnumerable Geometry => Coordinates;
 }

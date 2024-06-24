@@ -7,13 +7,11 @@ namespace Geode;
 public class MultiPolygon : IMultiPolygon
 {
     public GeometryType Type => GeometryType.MultiPolyline;
-    object IGeometry.Coordinates => Coordinates;
-    public IEnumerable<IEnumerable<IEnumerable<IPoint>>> Coordinates { get; private set; }
+    object IGeometry.Geometry => Geometry;
+    public IEnumerable<IEnumerable<IEnumerable<IPoint>>> Geometry { get; private set; }
     public MultiPolygon(IEnumerable<Polygon> polygons)
     {
-        Coordinates = polygons.Select(p => p.Coordinates);
+        Geometry = polygons.Select(p => p.Geometry);
     }
     public MultiPolygon() { }
-    public Bounds Bounds { get; set; }
-    public IEnumerable Geometry => Coordinates;
 }

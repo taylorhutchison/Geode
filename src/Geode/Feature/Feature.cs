@@ -6,13 +6,13 @@ namespace Geode;
 /// <summary>
 /// A Feature represents a discrete geometry and it's associated attributes. 
 /// </summary>
-public sealed class Feature : IFeature
+public class Feature : IFeature
 {
     public IDictionary<string, object> Properties { get; set; }
     public IGeometry Geometry { get; set; }
 }
 
-public sealed class Feature<T> : IFeature<T>
+public class Feature<T> : IFeature<T>
 {
     public IDictionary<string, object> Properties { get; set; }
     IGeometry IFeature.Geometry { get; set; }

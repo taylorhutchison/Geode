@@ -8,12 +8,11 @@ namespace Geode;
 public class Polyline : IPolyline
 {
     public GeometryType Type => GeometryType.Polyline;
-    object IGeometry.Coordinates => Coordinates;
-    public IEnumerable<IPoint> Coordinates { get; private set; }
-    public IEnumerable<IPoint> Positions => Coordinates;
+    object IGeometry.Geometry => Geometry;
+    public IEnumerable<IPoint> Geometry { get; private set; }
+    public IEnumerable<IPoint> Positions => Geometry;
     public Polyline(IEnumerable<IPoint> coordinates)
     {
-        Coordinates = coordinates;
+        Geometry = coordinates;
     }
-
 }

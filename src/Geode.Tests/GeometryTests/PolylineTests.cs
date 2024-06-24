@@ -8,12 +8,12 @@ public class PolylineTests
     [Fact]
     public void CanCreatePolylineFromListOfPoints()
     {
-        var points = new List<Point> {
-            new Point(1, 2),
-            new Point(3, 4),
-            new Point(5, 6)
+        var points = new List<Point2D> {
+            new Point2D(1, 2),
+            new Point2D(3, 4),
+            new Point2D(5, 6)
         };
         var polyline = new Polyline(points);
-        Assert.Equal(3, polyline.Coordinates.Count());
+        Assert.Equal(3, polyline.Geometry.Count());
     }
 }

@@ -50,11 +50,11 @@ internal class ShapefileReader : FeatureReader
         public ShapefileRecordGeometry(int recordNumber, byte[] recordContents, GeometryType geoType)
         {
             RecordNumber = recordNumber;
-            if (geoType == GeometryType.Point)
+            if (geoType == GeometryType.Point2D)
             {
                 var x = BitConverter.ToDouble(recordContents, 4);
                 var y = BitConverter.ToDouble(recordContents, 12);
-                Geometry = new Point(x, y);
+                Geometry = new Point2D(x, y);
             }
         }
     }
@@ -275,7 +275,7 @@ internal class ShapefileReader : FeatureReader
                 var records = reader.GetAllMainRecords(stream);
                 if (header.ShapeType == 1)
                 {
-                    var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeometryType.Point)).Select(gr =>
+                    var features = records.Select(r => new ShapefileRecordGeometry(r.RecordNumber, r.RecordContents, GeometryType.Point2D)).Select(gr =>
                     {
                         return new Feature
                         {
