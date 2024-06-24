@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Geode;
@@ -53,6 +54,28 @@ public static class BoundsExtensions
                 {
                     if (bounds.ZMax < point.Position[2]) bounds.ZMax = point.Position[2];
                     if (bounds.ZMin > point.Position[2]) bounds.ZMin = point.Position[2];
+                }
+            }
+        }
+        return bounds;
+    }
+
+    public static Bounds GetBounds(this IPolyline<IPoint2D> polyline)
+    {
+        var bounds = new Bounds();
+        foreach (var point in polyline.Geometry)
+        {
+            if (point != null)
+            {
+                if (point.Position.Length > 0)
+                {
+                    if (bounds.XMax < point.X) bounds.XMax = point.X;
+                    if (bounds.XMin > point.X) bounds.XMin = point.X;
+                }
+                if (point.Position.Length > 1)
+                {
+                    if (bounds.YMax < point.Y) bounds.YMax = point.Y;
+                    if (bounds.YMin > point.Y) bounds.YMin = point.Y;
                 }
             }
         }

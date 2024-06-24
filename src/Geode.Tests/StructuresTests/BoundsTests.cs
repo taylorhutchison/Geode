@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace Geode.Tests.Structures;
@@ -13,6 +14,23 @@ public class BoundsTests
                 new double[]{ -1, -5 },
                 new double[]{ 1, 22 }
             }.ToPolyline();
+        var bounds = polyline.GetBounds();
+        Assert.Equal(-1, bounds.XMin);
+        Assert.Equal(1, bounds.XMax);
+        Assert.Equal(-5, bounds.YMin);
+        Assert.Equal(22, bounds.YMax);
+        Assert.Equal(0, bounds.ZMin);
+        Assert.Equal(0, bounds.ZMax);
+    }
+
+    [Fact]
+    public void BoundsOfGenericPolyline()
+    {
+        var polyline = new List<Point2D> {
+            new Point2D(-1, -5),
+            new Point2D(1, 22)
+        }.ToPolyline();
+
         var bounds = polyline.GetBounds();
         Assert.Equal(-1, bounds.XMin);
         Assert.Equal(1, bounds.XMax);

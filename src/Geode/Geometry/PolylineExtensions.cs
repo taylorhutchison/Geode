@@ -29,4 +29,14 @@ public static class PolylineExtensions
         });
         return new Polyline(posArray);
     }
+
+    public static Polyline<IPoint2D> ToPolyline(this IEnumerable<IPoint2D> points)
+    {
+        return new Polyline<IPoint2D>(points);
+    }
+
+    public static Polyline<IPoint3D> ToPolyline(this IEnumerable<IPoint3D> points)
+    {
+        return new Polyline<IPoint3D>(points);
+    }
 }
