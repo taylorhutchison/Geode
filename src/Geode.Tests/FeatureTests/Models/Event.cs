@@ -15,7 +15,7 @@ public class Event : IFeatureConvertible
                     {nameof(Name), Name },
                     {nameof(Description), Description }
                 },
-            Geometry = Location
+            Location = Location
         };
     }
 }

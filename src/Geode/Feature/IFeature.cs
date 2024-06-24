@@ -5,10 +5,10 @@ namespace Geode;
 public interface IFeature
 {
     IDictionary<string, object> Properties { get; set; }
-    IGeometry Geometry { get; set; }
+    IGeometry Location { get; set; }
 }
 
-public interface IFeature<T> : IFeature
+public interface IFeature<T> : IFeature where T : IGeometry
 {
-    new IGeometry<T> Geometry { get; set; }
+    new T Location { get; set; }
 }

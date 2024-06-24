@@ -15,7 +15,7 @@ public class Archipelago : IFeatureConvertible
                 {
                     { nameof(Name), Name }
                 },
-            Geometry = new GeometryCollection()
+            Location = new GeometryCollection()
             {
                 Geometries = Islands
             }

@@ -49,7 +49,7 @@ public class CreateFeatureAsIFeatureConvertibleTests
             Name = "Test Name"
         };
         var feature = archipeligo.ToFeature();
-        var geometry = feature.Geometry as GeometryCollection;
+        var geometry = feature.Location as GeometryCollection;
         Assert.Equal(2, geometry.Count());
     }
 
@@ -69,7 +69,7 @@ public class CreateFeatureAsIFeatureConvertibleTests
             Magnitude = 9.0
         };
         var feature = earthquake.ToFeature();
-        var geometry = feature.Geometry as GeometryCollection;
+        var geometry = feature.Location as GeometryCollection;
         Assert.Equal(2, geometry.Count());
     }
 }

@@ -279,7 +279,7 @@ internal class ShapefileReader : FeatureReader
                     {
                         return new Feature
                         {
-                            Geometry = gr.Geometry
+                            Location = gr.Geometry
                         };
                     });
 

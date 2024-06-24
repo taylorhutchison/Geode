@@ -10,17 +10,17 @@ public class GeoJsonFeature
         Properties = feature?.Properties;
         Geometry = new Dictionary<string, object>(2)
             {
-                {"Type", feature?.Geometry?.Type}
+                {"Type", feature?.Location?.Type}
             };
-        if (typeof(IGeoCollection).IsAssignableFrom(feature.Geometry.GetType()))
+        if (typeof(IGeoCollection).IsAssignableFrom(feature.Location.GetType()))
         {
-            var geometry = feature.Geometry as IGeoCollection;
+            var geometry = feature.Location as IGeoCollection;
             var geometries = geometry.Geometries.Select(g => new GeoJsonGeometry(g));
             Geometry.Add("Geometries", geometries);
         }
         else
         {
-            Geometry.Add("Coordinates", feature?.Geometry?.Geometry);
+            Geometry.Add("Coordinates", feature?.Location?.Geometry);
         }
     }
     public string Type => "Feature";

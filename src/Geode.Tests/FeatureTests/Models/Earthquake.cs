@@ -10,7 +10,7 @@ public class Earthquake : IFeatureConvertible
     {
         var feature = new Feature
         {
-            Geometry = new GeometryCollection
+            Location = new GeometryCollection
             {
                 Geometries = new List<IGeometry> {
                         ImpactArea,
