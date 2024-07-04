@@ -7,6 +7,10 @@ public static class PolylineExtensions
 {
     public static Polyline ToPolyline(this IEnumerable<double[]> positions)
     {   
+        if (positions == null)
+        {
+            throw new GeodeGeometryException("Failed to create a polyline. The array of positions is null.");
+        }
         var posArray = new List<IPoint>();
         int? pointLength = null;
         foreach(var position in positions){

@@ -53,4 +53,21 @@ public class PolylineTests
         };
         Assert.Throws<GeodeGeometryException>(() => points.ToPolyline());
     }
+
+    [Fact]
+    public void PolylineCreationFromArray_ThrowsException_IfAnyArrayElementsHaveZeroLength() {
+        var points = new double[][] {
+            [0],
+            [1, 2],
+            [3, 4],
+            [5, 6]
+        };
+        Assert.Throws<GeodeGeometryException>(() => points.ToPolyline());
+    }
+
+    [Fact]
+    public void PolylineCreationFromArray_ThrowsException_IfArrayIsNull() {
+        double[][] points = null;
+        Assert.Throws<GeodeGeometryException>(() => points.ToPolyline());
+    }
 }
