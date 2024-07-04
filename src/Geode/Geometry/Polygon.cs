@@ -12,12 +12,6 @@ public class Polygon : IPolygon
     object IGeometry.Geometry => Geometry;
     public IEnumerable<IEnumerable<IPoint>> Geometry { get; private set; }
     public IEnumerable<IPoint> Positions => Geometry.SelectMany(p => p);
-
-    public void AddRing(IEnumerable<IPoint> ring)
-    {
-        Geometry = Geometry.Append(ring);
-    }
-
     public Polygon()
     {
         Geometry = Enumerable.Empty<IPoint[]>().ToArray();
@@ -26,6 +20,11 @@ public class Polygon : IPolygon
     public Polygon(IEnumerable<IEnumerable<IPoint>> rings)
     {
         Geometry = rings;
+    }
+
+    public void AddRing(IEnumerable<IPoint> ring)
+    {
+        Geometry = Geometry.Append(ring);
     }
 
 }
