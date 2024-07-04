@@ -17,5 +17,5 @@ public class MidpointBenchmarks
     }
 
     [Benchmark]
-    public Point2D GetMidpoint() => _polyline.GetMidPoint();
+    public Point2D? GetMidpoint() => _polyline.GetMidPoint();
 }

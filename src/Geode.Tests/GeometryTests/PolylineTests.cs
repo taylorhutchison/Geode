@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -15,5 +16,41 @@ public class PolylineTests
         };
         var polyline = new Polyline(points);
         Assert.Equal(3, polyline.Geometry.Count());
+    }
+
+    [Fact]
+    public void CanCreatePolylineFromArray()
+    {
+        var points = new double[][] {
+            [1, 2],
+            [3, 4],
+            [5, 6]
+        };
+        var polyline = points.ToPolyline();
+        Assert.Equal(3, polyline.Geometry.Count());
+    }
+
+    [Fact]
+    public void PolylineCreationFromArray_ThrowsException_IfAnyArrayElementsHaveLessThanTwoElements()
+    {
+        var points = new double[][] {
+            [1, 2],
+            [3, 4],
+            [5],
+            [6, 7]
+        };
+        Assert.Throws<GeodeGeometryException>(() => points.ToPolyline());
+    }
+
+    [Fact]
+    public void PolylineCreationFromArray_ThrowsException_IfAllArrayElementsAreNotConsistentLength()
+    {
+        var points = new double[][] {
+            [1, 2],
+            [3, 4],
+            [5, 6, 7],
+            [8, 9]
+        };
+        Assert.Throws<GeodeGeometryException>(() => points.ToPolyline());
     }
 }
