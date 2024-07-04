@@ -5,10 +5,10 @@ namespace Geode;
 public class GeometryCollection : IGeometry, IGeoCollection, IEnumerable<IGeometry>
 {
     public GeometryType Type => GeometryType.GeometryCollection;
-    public IEnumerable<IGeometry> Geometries { get; set; }
-    object IGeometry.Geometry => Coordinates;
-    public IEnumerable Geometry => Geometries;
-    public IEnumerable Coordinates => Geometries;
+    public IEnumerable<IGeometry>? Geometries { get; set; }
+    object? IGeometry.Geometry => Coordinates;
+    public IEnumerable? Geometry => Geometries;
+    public IEnumerable? Coordinates => Geometries;
 
     public IEnumerator<IGeometry> GetEnumerator()
     {

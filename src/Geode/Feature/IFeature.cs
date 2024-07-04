@@ -4,11 +4,11 @@ namespace Geode;
 
 public interface IFeature
 {
-    IDictionary<string, object> Properties { get; set; }
-    IGeometry Location { get; set; }
+    IDictionary<string, object>? Properties { get; set; }
+    IGeometry? Location { get; set; }
 }
 
 public interface IFeature<T> : IFeature where T : IGeometry
 {
-    new T Location { get; set; }
+    new T? Location { get; set; }
 }

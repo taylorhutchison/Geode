@@ -6,12 +6,12 @@ namespace Geode;
 public interface IGeometry
 {
     GeometryType Type { get; }
-    object Geometry { get; }
+    object? Geometry { get; }
 }
 
 public interface IGeometry<T> : IGeometry
 {
-    new T Geometry { get; }
+    new T? Geometry { get; }
 }
 
 public interface IPoint : IGeometry

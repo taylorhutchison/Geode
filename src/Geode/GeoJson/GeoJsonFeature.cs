@@ -5,27 +5,33 @@ using System.Linq;
 namespace Geode;
 public class GeoJsonFeature
 {
+    public string Type => "Feature";
+    public IDictionary<string, object>? Properties { get; private set; }
+    public IDictionary<string, object>? Geometry { get; private set; }
     public GeoJsonFeature(IFeature feature)
     {
         Properties = feature?.Properties;
         Geometry = new Dictionary<string, object>(2)
-            {
-                {"Type", feature?.Location?.Type}
-            };
-        if (typeof(IGeoCollection).IsAssignableFrom(feature.Location.GetType()))
+        {
+                {"Type", feature?.Location?.Type ?? GeometryType.Unknown}
+        };
+        if (typeof(IGeoCollection).IsAssignableFrom(feature?.Location?.GetType()))
         {
             var geometry = feature.Location as IGeoCollection;
-            var geometries = geometry.Geometries.Select(g => new GeoJsonGeometry(g));
-            Geometry.Add("Geometries", geometries);
+            if (geometry != null)
+            {
+                var geometries = geometry.Geometries?.Select(g => new GeoJsonGeometry(g));
+                if (geometries != null)
+                {
+                    Geometry.Add("Geometries", geometries);
+                }
+            }
         }
-        else
+        else if(feature?.Location?.Geometry != null)
         {
-            Geometry.Add("Coordinates", feature?.Location?.Geometry);
+            Geometry.Add("Coordinates", feature.Location.Geometry);
         }
     }
-    public string Type => "Feature";
-    public IDictionary<string, object> Properties { get; private set; }
-    public IDictionary<string, object> Geometry { get; private set; }
 }
 
 public class GeoJsonFeatureCollection
@@ -40,8 +46,8 @@ public class GeoJsonFeatureCollection
 
 public class GeoJsonGeometry
 {
-    public string Type { get; private set; }
-    public object Coordinates { get; private set; }
+    public string? Type { get; private set; }
+    public object? Coordinates { get; private set; }
     public GeoJsonGeometry(IGeometry geometry)
     {
         Type = geometry?.Type.ToString();

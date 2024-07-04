@@ -7,8 +7,8 @@ namespace Geode;
 public class MultiPolygon : IMultiPolygon
 {
     public GeometryType Type => GeometryType.MultiPolyline;
-    object IGeometry.Geometry => Geometry;
-    public IEnumerable<IEnumerable<IEnumerable<IPoint>>> Geometry { get; private set; }
+    object? IGeometry.Geometry => Geometry;
+    public IEnumerable<IEnumerable<IEnumerable<IPoint>>>? Geometry { get; private set; }
     public MultiPolygon(IEnumerable<Polygon> polygons)
     {
         Geometry = polygons.Select(p => p.Geometry);

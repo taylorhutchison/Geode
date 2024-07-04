@@ -16,7 +16,11 @@ internal class LineSegment
         A = new Point2D(a[0], a[1]);
         B = new Point2D(b[0], b[1]);
     }
-    public double SegmentLength => Math.Sqrt(Math.Pow(A.Position[0] - B.Position[0], 2) + Math.Pow(A.Position[1] - B.Position[1], 2));
+
+    public double SegmentLength => GetSegmentLength();
+    private double GetSegmentLength() { 
+        return Math.Sqrt(Math.Pow(A.Position[0] - B.Position[0], 2) + Math.Pow(A.Position[1] - B.Position[1], 2));
+    }
 
     public Point2D PositionAtDistance(double distance)
     {

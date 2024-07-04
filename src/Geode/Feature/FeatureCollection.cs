@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Geode;
 /// <summary>
@@ -15,5 +16,9 @@ public class FeatureCollection : IEnumerable<IFeature>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return Features.GetEnumerator();
+    }
+
+    public FeatureCollection() {
+        Features = Enumerable.Empty<IFeature>();
     }
 }

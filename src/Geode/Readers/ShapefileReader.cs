@@ -12,7 +12,7 @@ internal class ShapefileReader : FeatureReader
     #region internal-classes
     internal class ShapefileHeader
     {
-        public IGeometry GeoType { get; set; }
+        public IGeometry? GeoType { get; set; }
         public int FileLength { get; set; }
         public int Version { get; set; }
         public int ShapeType { get; set; }
@@ -45,16 +45,19 @@ internal class ShapefileReader : FeatureReader
     }
     internal class ShapefileRecordGeometry
     {
-        public IGeometry Geometry { get; set; }
+        public IGeometry? Geometry { get; set; }
         public int RecordNumber { get; set; }
-        public ShapefileRecordGeometry(int recordNumber, byte[] recordContents, GeometryType geoType)
+        public ShapefileRecordGeometry(int recordNumber, byte[]? recordContents, GeometryType geoType)
         {
             RecordNumber = recordNumber;
-            if (geoType == GeometryType.Point2D)
+            if (recordContents != null)
             {
-                var x = BitConverter.ToDouble(recordContents, 4);
-                var y = BitConverter.ToDouble(recordContents, 12);
-                Geometry = new Point2D(x, y);
+                if (geoType == GeometryType.Point2D)
+                {
+                    var x = BitConverter.ToDouble(recordContents, 4);
+                    var y = BitConverter.ToDouble(recordContents, 12);
+                    Geometry = new Point2D(x, y);
+                }
             }
         }
     }
@@ -62,7 +65,7 @@ internal class ShapefileReader : FeatureReader
     {
         public int RecordNumber { get; set; }
         public int ContentLength { get; set; }
-        public byte[] RecordContents { get; set; }
+        public byte[]? RecordContents { get; set; }
         public ShapefileRecord(byte[] recordHeader)
         {
             if (recordHeader.Length == 8)
@@ -96,7 +99,7 @@ internal class ShapefileReader : FeatureReader
     internal class Dbase
     {
         public int Version { get; private set; }
-        public string LastUpdated { get; private set; }
+        public string? LastUpdated { get; private set; }
         public int RecordCount { get; private set; }
         public int HeaderLength { get; private set; }
         public int FieldCount
@@ -108,8 +111,8 @@ internal class ShapefileReader : FeatureReader
         }
         public int RecordLength { get; private set; }
 
-        public string[] FieldNames { get; private set; }
-        public string[] FieldTypes { get; private set; }
+        public string[]? FieldNames { get; private set; }
+        public string[]? FieldTypes { get; private set; }
 
         private void GetFieldsFromHeader(byte[] tableHeader)
         {
@@ -145,7 +148,7 @@ internal class ShapefileReader : FeatureReader
     }
     #endregion
 
-    private List<ShapefileIndexRecord> Index { get; set; }
+    private List<ShapefileIndexRecord>? Index { get; set; }
     private int CurrentRecord { get; set; } //State variable for iterating through main records.
 
     /// <summary>
@@ -183,7 +186,7 @@ internal class ShapefileReader : FeatureReader
         return GetShapefileHeader(headerBytes);
     }
 
-    private byte[] GetNextRecord(Stream stream, long recordOffset, int recordLength)
+    private byte[]? GetNextRecord(Stream stream, long recordOffset, int recordLength)
     {
         if (stream.CanRead)
         {
@@ -204,7 +207,7 @@ internal class ShapefileReader : FeatureReader
         return null;
     }
 
-    public byte[] GetNextRecord(Stream stream)
+    public byte[]? GetNextRecord(Stream stream)
     {
         if (this.Index != null && this.Index.Count > 0)
         {

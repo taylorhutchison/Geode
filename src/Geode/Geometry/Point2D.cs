@@ -7,7 +7,7 @@ namespace Geode;
 public class Point2D : IGeometry<IPoint2D>, IPoint2D, IEquatable<Point2D>
 {
     private readonly double[] _position;
-    public IReadOnlyList<double>? Position => _position;
+    public IReadOnlyList<double> Position => _position;
     public double X => _position[0];
     public double Y => _position[1];
     public GeometryType Type => GeometryType.Point2D;
@@ -17,17 +17,13 @@ public class Point2D : IGeometry<IPoint2D>, IPoint2D, IEquatable<Point2D>
     {
         _position = [x, y];
     }
-    public bool Equals(Point2D other)
+    public bool Equals(Point2D? other)
     {
-        if (other == null || other is not Point2D)
-        {
-            return false;
-        }
-        return Equals((IPoint2D)other);
+        return other != null && X == other.X && Y == other.Y;
     }
 
-    public bool Equals(IPoint2D other)
+    public bool Equals(IPoint2D? other)
     {
-        return X == other.X && Y == other.Y;
+        return other != null && X == other.X && Y == other.Y;
     }
 }

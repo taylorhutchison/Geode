@@ -3,5 +3,5 @@
 namespace Geode;
 public interface IGeoCollection
 {
-    IEnumerable<IGeometry> Geometries { get; }
+    IEnumerable<IGeometry>? Geometries { get; }
 }

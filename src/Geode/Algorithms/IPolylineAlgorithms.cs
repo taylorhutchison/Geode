@@ -6,29 +6,32 @@ namespace Geode;
 
 public static class IPolyAlgorithms
 {
-    public static Point2D GetMidPoint(this IPolyline Polyline)
+    public static Point2D? GetMidPoint(this IPolyline polyline)
     {
-        if (Polyline.Geometry.Count() > 1)
+        if (polyline?.Geometry != null && polyline.Geometry.Count() > 1)
         {
-            var segments = GetLineSegments(Polyline).ToArray();
+            var segments = GetLineSegments(polyline)?.ToArray();
+            if(segments == null) return default;
             var segmentDistances = segments.Select(s => s.SegmentLength).ToArray();
             var halfwayLength = segmentDistances.Sum(d => d) / 2d;
 
             return GetMidPoint(segments, segmentDistances, halfwayLength);
         }
-        var firstPosition = Polyline.Geometry.First();
+        var firstPosition = polyline?.Geometry?.First();
+        if (firstPosition == null) return null;
         var (x, y) = (firstPosition.Position[0], firstPosition.Position[1]);
         return new Point2D(x, y);
     }
 
-    private static IEnumerable<LineSegment> GetLineSegments(IPolyline Polyline)
+    private static IEnumerable<LineSegment>? GetLineSegments(IPolyline polyline)
     {
-        var line = Polyline.Geometry.ToArray();
+        if(polyline.Geometry == null) return default;
+        var polylineVertices = polyline.Geometry.ToArray();
         var segments = new List<LineSegment>();
-        for (var i = 0; i < line.Length - 1; i++)
+        for (var i = 0; i < polylineVertices.Length - 1; i++)
         {
-            var a = line[i];
-            var b = line[i + 1];
+            var a = polylineVertices[i];
+            var b = polylineVertices[i + 1];
             var segment = new LineSegment(a, b);
             segments.Add(segment);
         }
@@ -44,7 +47,8 @@ public static class IPolyAlgorithms
             {
                 var distance = halfwayLength - (cumulativeDistance - segmentDistances[i]);
                 var midPoint = segments[i].PositionAtDistance(distance);
-                if(midPoint != null && midPoint.Position != null) {
+                if (midPoint != null && midPoint.Position != null)
+                {
                     var (x, y) = (midPoint.Position[0], midPoint.Position[1]);
                     return new Point2D(x, y);
                 }
