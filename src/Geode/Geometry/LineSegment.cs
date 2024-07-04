@@ -18,7 +18,7 @@ internal class LineSegment
     }
     public double SegmentLength => Math.Sqrt(Math.Pow(A.Position[0] - B.Position[0], 2) + Math.Pow(A.Position[1] - B.Position[1], 2));
 
-    public IPoint PositionAtDistance(double distance)
+    public Point2D PositionAtDistance(double distance)
     {
         var cx = B.Position[0] - A.Position[0];
         var cy = B.Position[1] - A.Position[1];

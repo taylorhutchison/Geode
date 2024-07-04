@@ -14,9 +14,9 @@ public interface IGeometry<T> : IGeometry
     new T Geometry { get; }
 }
 
-public interface IPoint : IGeometry, IEquatable<IPoint>
+public interface IPoint : IGeometry
 {
-    double[] Position { get; }
+    IReadOnlyList<double> Position { get; }
 }
 
 public interface IPoint2D : IPoint, IEquatable<IPoint2D>

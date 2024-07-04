@@ -17,7 +17,8 @@ public static class IPolyAlgorithms
             return GetMidPoint(segments, segmentDistances, halfwayLength);
         }
         var firstPosition = Polyline.Geometry.First();
-        return new Point2D(firstPosition);
+        var (x, y) = (firstPosition.Position[0], firstPosition.Position[1]);
+        return new Point2D(x, y);
     }
 
     private static IEnumerable<LineSegment> GetLineSegments(IPolyline Polyline)
@@ -33,9 +34,8 @@ public static class IPolyAlgorithms
         }
         return segments;
     }
-    private static Point2D GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
+    private static Point2D? GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
     {
-        var x = new Polyline(new List<Point2D>());
         var cumulativeDistance = 0d;
         for (var i = 0; i < segmentDistances.Count(); i++)
         {
@@ -44,7 +44,10 @@ public static class IPolyAlgorithms
             {
                 var distance = halfwayLength - (cumulativeDistance - segmentDistances[i]);
                 var midPoint = segments[i].PositionAtDistance(distance);
-                return new Point2D(midPoint);
+                if(midPoint != null && midPoint.Position != null) {
+                    var (x, y) = (midPoint.Position[0], midPoint.Position[1]);
+                    return new Point2D(x, y);
+                }
             }
         }
         return default;

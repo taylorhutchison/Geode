@@ -40,17 +40,18 @@ public static class BoundsExtensions
         {
             if (point != null)
             {
-                if (point.Position.Length > 0)
+                var pointDimensionCount = point.Position.Count();
+                if (pointDimensionCount > 0)
                 {
                     if (bounds.XMax < point.Position[0]) bounds.XMax = point.Position[0];
                     if (bounds.XMin > point.Position[0]) bounds.XMin = point.Position[0];
                 }
-                if (point.Position.Length > 1)
+                if (pointDimensionCount > 1)
                 {
                     if (bounds.YMax < point.Position[1]) bounds.YMax = point.Position[1];
                     if (bounds.YMin > point.Position[1]) bounds.YMin = point.Position[1];
                 }
-                if (point.Position.Length > 2)
+                if (pointDimensionCount > 2)
                 {
                     if (bounds.ZMax < point.Position[2]) bounds.ZMax = point.Position[2];
                     if (bounds.ZMin > point.Position[2]) bounds.ZMin = point.Position[2];
@@ -67,16 +68,10 @@ public static class BoundsExtensions
         {
             if (point != null)
             {
-                if (point.Position.Length > 0)
-                {
-                    if (bounds.XMax < point.X) bounds.XMax = point.X;
-                    if (bounds.XMin > point.X) bounds.XMin = point.X;
-                }
-                if (point.Position.Length > 1)
-                {
-                    if (bounds.YMax < point.Y) bounds.YMax = point.Y;
-                    if (bounds.YMin > point.Y) bounds.YMin = point.Y;
-                }
+                if (bounds.XMax < point.X) bounds.XMax = point.X;
+                if (bounds.XMin > point.X) bounds.XMin = point.X;
+                if (bounds.YMax < point.Y) bounds.YMax = point.Y;
+                if (bounds.YMin > point.Y) bounds.YMin = point.Y;
             }
         }
         return bounds;

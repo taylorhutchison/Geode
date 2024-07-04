@@ -6,29 +6,17 @@ namespace Geode;
 
 public class Point2D : IGeometry<IPoint2D>, IPoint2D, IEquatable<Point2D>
 {
-    public double[] Position { get; private set; }
-    public double X => Position[0];
-    public double Y => Position[1];
+    private readonly double[] _position;
+    public IReadOnlyList<double>? Position => _position;
+    public double X => _position[0];
+    public double Y => _position[1];
     public GeometryType Type => GeometryType.Point2D;
-    object IGeometry.Geometry => Geometry;
+    object IGeometry.Geometry => this;
     public IPoint2D Geometry => this;
-    public Point2D(IPoint point)
-    {
-        Position = point.Position;
-    }
     public Point2D(double x, double y)
     {
-        Position = [x, y];
+        _position = [x, y];
     }
-    public Point2D(IPoint2D point)
-    {
-        Position = point.Position;
-    }
-    public Point2D(double[] position)
-    {
-        Position = position;
-    }
-
     public bool Equals(Point2D other)
     {
         if (other == null || other is not Point2D)
@@ -42,21 +30,4 @@ public class Point2D : IGeometry<IPoint2D>, IPoint2D, IEquatable<Point2D>
     {
         return X == other.X && Y == other.Y;
     }
-
-    public bool Equals(IPoint other)
-    {
-        if (other == null || Position.Length != other.Position.Length)
-        {
-            return false;
-        }
-        for (int i = 0; i < Position.Length; i++)
-        {
-            if (Position[i] != other.Position[i])
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
 }
