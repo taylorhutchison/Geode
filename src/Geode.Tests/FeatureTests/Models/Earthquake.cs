@@ -4,7 +4,7 @@ namespace Geode.Tests.FeatureTests.Models;
 public class Earthquake : IFeatureConvertible
 {
     public Polygon ImpactArea { get; set; }
-    public Point2D Epicenter { get; set; }
+    public Point Epicenter { get; set; }
     public double Magnitude { get; set; }
     public IFeature ToFeature()
     {

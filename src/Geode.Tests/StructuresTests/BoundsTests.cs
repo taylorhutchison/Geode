@@ -26,9 +26,9 @@ public class BoundsTests
     [Fact]
     public void BoundsOfGenericPolyline()
     {
-        var polyline = new List<Point2D> {
-            new Point2D(-1, -5),
-            new Point2D(1, 22)
+        var polyline = new List<Point> {
+            new Point(-1, -5),
+            new Point(1, 22)
         }.ToPolyline();
 
         var bounds = polyline.GetBounds();

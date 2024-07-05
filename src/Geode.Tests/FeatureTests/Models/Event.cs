@@ -5,7 +5,7 @@ public class Event : IFeatureConvertible
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public Point2D Location { get; set; }
+    public Point Location { get; set; }
     public IFeature ToFeature()
     {
         return new Feature

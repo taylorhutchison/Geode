@@ -1,7 +1,7 @@
 ﻿namespace Geode;
 public class WktSerializer
 {
-    public static string ToWKT(IPoint2D position)
+    public static string ToWKT(IPoint position)
     {
         if (position == null)
         {

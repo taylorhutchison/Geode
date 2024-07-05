@@ -16,48 +16,40 @@ public interface IGeometry<T> : IGeometry
 
 public interface IPoint : IGeometry
 {
-    IReadOnlyList<double> Position { get; }
-}
-
-public interface IPoint2D : IPoint, IEquatable<IPoint2D>
-{
-    double X { get; }
-    double Y { get; }
-}
-
-public interface IPoint3D : IPoint, IEquatable<IPoint3D>
-{
+    (double X, double Y, double Z) Coordinates { get; }
     double X { get; }
     double Y { get; }
     double Z { get; }
 }
 
+// public interface IPoint : IPoint, IEquatable<IPoint>
+// {
+//     double X { get; }
+//     double Y { get; }
+// }
+
+// public interface IPoint : IPoint, IEquatable<IPoint>
+// {
+//     double X { get; }
+//     double Y { get; }
+//     double Z { get; }
+// }
+
 public interface IPolyline : IGeometry<IEnumerable<IPoint>>
 {
 
 }
-
-public interface IPolyline<T> : IGeometry<IEnumerable<T>> where T : IPoint
-{
-
-}
-
-public interface IMultiPolyline : IGeometry<IEnumerable<IEnumerable<IPoint>>>
+public interface IMultiPolyline : IGeometry<IEnumerable<IPolyline>>
 {
 
 }
 
 public interface IPolygon : IGeometry<IEnumerable<IEnumerable<IPoint>>>
 {
-
+    public bool IsValid { get; }
 }
 
-public interface IPolygon<T> : IGeometry<IEnumerable<IEnumerable<T>>> where T : IPoint
+public interface IMultiPolygon : IGeometry<IEnumerable<IPolygon>>
 {
-
-}
-
-public interface IMultiPolygon : IGeometry<IEnumerable<IEnumerable<IEnumerable<IPoint>>>>
-{
-
+    public bool IsValid { get; }
 }

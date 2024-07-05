@@ -65,7 +65,7 @@ public class CreateFeatureAsIFeatureConvertibleTests
         var earthquake = new Earthquake
         {
             ImpactArea = p1,
-            Epicenter = new Point2D(0, 0),
+            Epicenter = new Point(0, 0),
             Magnitude = 9.0
         };
         var feature = earthquake.ToFeature();

@@ -6,10 +6,10 @@ public class MultiPolyline : IMultiPolyline
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object? IGeometry.Geometry => Geometry;
-    public IEnumerable<IEnumerable<IPoint>>? Geometry { get; private set; }
-    public MultiPolyline(IEnumerable<IEnumerable<IPoint>> coordinates)
+    public IEnumerable<IPolyline>? Geometry { get; private set; }
+    public MultiPolyline(IEnumerable<IPolyline> polylines)
     {
-        Geometry = coordinates;
+        Geometry = polylines;
     }
     public MultiPolyline() { }
 }

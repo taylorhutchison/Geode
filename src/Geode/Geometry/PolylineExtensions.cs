@@ -27,26 +27,21 @@ public static class PolylineExtensions
             {
                 var x = position.Length > 0 ? position[0] : default;
                 var y = position.Length > 1 ? position[1] : default;
-                posArray.Add(new Point2D(x, y));
+                posArray.Add(new Point(x, y));
             }
             else
             {
                 var x = position.Length > 0 ? position[0] : default;
                 var y = position.Length > 1 ? position[1] : default;
                 var z = position.Length > 2 ? position[2] : default;
-                posArray.Add(new Point3D(x, y, z));
+                posArray.Add(new Point(x, y, z));
             }
         };
         return new Polyline(posArray);
     }
 
-    public static Polyline<IPoint2D> ToPolyline(this IEnumerable<IPoint2D> points)
+    public static Polyline ToPolyline(this IEnumerable<IPoint> points)
     {
-        return new Polyline<IPoint2D>(points);
-    }
-
-    public static Polyline<IPoint3D> ToPolyline(this IEnumerable<IPoint3D> points)
-    {
-        return new Polyline<IPoint3D>(points);
+        return new Polyline(points);
     }
 }

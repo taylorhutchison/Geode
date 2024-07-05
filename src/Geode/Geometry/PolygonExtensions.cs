@@ -8,10 +8,9 @@ public static class PolygonExtensions
     {
         var posArray = rings.Select(ring => ring.Select((p, i) =>
         {
-            var x = p.Length > 0 ? p[0] : default(double);
-            var y = p.Length > 1 ? p[1] : default(double);
-            var z = p.Length > 2 ? p[2] : default(double);
-            return new Point3D(x, y, z) as IPoint;
+            var x = p.Length > 0 ? p[0] : default;
+            var y = p.Length > 1 ? p[1] : default;
+            return new Point(x, y) as IPoint;
         }));
         return new Polygon(posArray);
     }

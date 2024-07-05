@@ -12,6 +12,7 @@ public class Polygon : IPolygon
     object IGeometry.Geometry => Geometry;
     public IEnumerable<IEnumerable<IPoint>> Geometry { get; private set; }
     public IEnumerable<IPoint> Positions => Geometry.SelectMany(p => p);
+    public bool IsValid => throw new NotImplementedException();
     public Polygon()
     {
         Geometry = Enumerable.Empty<IPoint[]>().ToArray();

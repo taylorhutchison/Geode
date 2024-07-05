@@ -8,12 +8,12 @@ public class PolygonTests
     [Fact]
     public void CanCreatePolylineFromListOfPoints()
     {
-        var ring = new List<List<Point2D>> {
-            new List<Point2D> {
-                new Point2D(1, 2),
-                new Point2D(3, 4),
-                new Point2D(5, 6),
-                new Point2D(1, 2)
+        var ring = new List<List<Point>> {
+            new List<Point> {
+                new Point(1, 2),
+                new Point(3, 4),
+                new Point(5, 6),
+                new Point(1, 2)
             }
         };
         var polygon = new Polygon(ring);

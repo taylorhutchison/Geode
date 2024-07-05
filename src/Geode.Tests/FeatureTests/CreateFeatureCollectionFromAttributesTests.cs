@@ -17,12 +17,12 @@ public class CreateFeatureCollectionFromAttributesTests
                 new Event{
                     Name = "Test Name 1",
                     Description = "Test Description 1",
-                    Location = new Point2D(123.005,456.004)
+                    Location = new Point(123.005,456.004)
                 },
                 new Event{
                     Name = "Test Name 2",
                     Description = "Test Description 1",
-                    Location = new Point2D(777.123,999.789)
+                    Location = new Point(777.123,999.789)
                 }
             };
         var featureCollection = eventList.ToFeatureCollection();

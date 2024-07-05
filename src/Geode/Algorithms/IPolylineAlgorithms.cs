@@ -6,7 +6,7 @@ namespace Geode;
 
 public static class IPolyAlgorithms
 {
-    public static Point2D? GetMidPoint(this IPolyline polyline)
+    public static Point? GetMidPoint(this IPolyline polyline)
     {
         if (polyline?.Geometry != null && polyline.Geometry.Count() > 1)
         {
@@ -19,24 +19,11 @@ public static class IPolyAlgorithms
         }
         var firstPosition = polyline?.Geometry?.First();
         if (firstPosition == null) return null;
-        var (x, y) = (firstPosition.Position[0], firstPosition.Position[1]);
-        return new Point2D(x, y);
+        var (x, y, z) = (firstPosition.X, firstPosition.Y, firstPosition.Z);
+        return new Point(x, y, z);
     }
 
-    public static decimal GetDistance(this IPolyline<IPoint2D> polyline) {
-        if(polyline?.Geometry == null) return 0;
-        if(polyline.Geometry.Count() == 1) return 0m;
-        var distance = 0m;
-        var verticies = polyline.Geometry.ToArray();
-        for(var i = 0; i < verticies.Length - 1; i++) {
-            var a = verticies[i];
-            var b = verticies[i + 1];
-            distance += Convert.ToDecimal(Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2)));
-        }
-        return distance;
-    }
-
-    public static decimal GetDistance(this IPolyline<IPoint3D> polyline) {
+    public static decimal GetDistance(this IPolyline polyline) {
         if(polyline?.Geometry == null) return 0;
         if(polyline.Geometry.Count() == 1) return 0m;
         var distance = 0m;
@@ -63,20 +50,20 @@ public static class IPolyAlgorithms
         }
         return segments;
     }
-    private static Point2D? GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
+    private static Point? GetMidPoint(LineSegment[] segments, double[] segmentDistances, double halfwayLength)
     {
         var cumulativeDistance = 0d;
-        for (var i = 0; i < segmentDistances.Count(); i++)
+        for (var i = 0; i < segmentDistances.Length; i++)
         {
             cumulativeDistance += segmentDistances[i];
             if (cumulativeDistance >= halfwayLength)
             {
                 var distance = halfwayLength - (cumulativeDistance - segmentDistances[i]);
                 var midPoint = segments[i].PositionAtDistance(distance);
-                if (midPoint != null && midPoint.Position != null)
+                if (midPoint != null)
                 {
-                    var (x, y) = (midPoint.Position[0], midPoint.Position[1]);
-                    return new Point2D(x, y);
+                    var (x, y, z) = (midPoint.X, midPoint.Y, midPoint.Z);
+                    return new Point(x, y, z);
                 }
             }
         }
