@@ -14,7 +14,7 @@ public interface IGeometry<T> : IGeometry
     new T? Geometry { get; }
 }
 
-public interface IPoint : IGeometry<IPoint>, IEquatable<IPoint>
+public interface IPoint : IGeometry<IPoint>
 {
     (double X, double Y, double Z) Coordinates { get; }
     double X { get; }

@@ -70,4 +70,33 @@ public class PolylineTests
         double[][] points = null;
         Assert.Throws<GeodeGeometryException>(() => points.ToPolyline());
     }
+
+    [Fact]
+    public void PolylinesCreatedFromSameListOfPoints_AreEqual() {
+        var points = new List<Point> {
+            new Point(1, 2),
+            new Point(3, 4),
+            new Point(5, 6)
+        };
+        var polyline1 = new Polyline(points);
+        var polyline2 = new Polyline(points);
+        Assert.Equal(polyline1, polyline2);
+    }
+
+    [Fact]
+    public void PolylinesCreatedFromNewListOfSamePoints_AreNotEqual() {
+        var points1 = new List<Point> {
+            new Point(1, 2),
+            new Point(3, 4),
+            new Point(5, 6)
+        };
+        var points2 = new List<Point> {
+            new Point(1, 2),
+            new Point(3, 4),
+            new Point(5, 6)
+        };
+        var polyline1 = new Polyline(points1);
+        var polyline2 = new Polyline(points2);
+        Assert.NotEqual(polyline1, polyline2);
+    }
 }

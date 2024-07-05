@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Geode;
-public class MultiPoint : IGeometry<IEnumerable<IPoint>>
+public record MultiPoint : IGeometry<IEnumerable<IPoint>>
 {
     public GeometryType Type => GeometryType.MultiPoint;
     object IGeometry.Geometry => Geometry;

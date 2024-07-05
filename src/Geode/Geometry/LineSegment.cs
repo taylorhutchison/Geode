@@ -2,7 +2,7 @@
 
 namespace Geode;
 
-internal class LineSegment
+internal record LineSegment
 {
     public IPoint A { get; set; }
     public IPoint B { get; set; }

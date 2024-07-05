@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Geode;
-public class GeometryCollection : IGeometry, IGeoCollection, IEnumerable<IGeometry>
+public record GeometryCollection : IGeometry, IGeoCollection, IEnumerable<IGeometry>
 {
     public GeometryType Type => GeometryType.GeometryCollection;
     public IEnumerable<IGeometry>? Geometries { get; set; }

@@ -6,7 +6,7 @@ using System.Diagnostics.Contracts;
 using System.Dynamic;
 
 namespace Geode;
-public class Polygon : IPolygon
+public record Polygon : IPolygon
 {
     public GeometryType Type => GeometryType.Polygon;
     object IGeometry.Geometry => Geometry;

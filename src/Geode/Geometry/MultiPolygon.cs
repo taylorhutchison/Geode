@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Geode;
-public class MultiPolygon : IMultiPolygon
+public record MultiPolygon : IMultiPolygon
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object? IGeometry.Geometry => Geometry;

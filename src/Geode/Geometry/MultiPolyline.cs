@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace Geode;
-public class MultiPolyline : IMultiPolyline
+public record MultiPolyline : IMultiPolyline
 {
     public GeometryType Type => GeometryType.MultiPolyline;
     object? IGeometry.Geometry => Geometry;
