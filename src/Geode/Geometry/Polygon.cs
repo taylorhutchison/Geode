@@ -10,22 +10,15 @@ public class Polygon : IPolygon
 {
     public GeometryType Type => GeometryType.Polygon;
     object IGeometry.Geometry => Geometry;
-    public IEnumerable<IEnumerable<IPoint>> Geometry { get; private set; }
-    public IEnumerable<IPoint> Positions => Geometry.SelectMany(p => p);
+    public (IEnumerable<IPoint> Boundary, IEnumerable<IEnumerable<IPoint>>? Holes) Geometry { get; private set; }
     public bool IsValid => throw new NotImplementedException();
     public Polygon()
     {
-        Geometry = Enumerable.Empty<IPoint[]>().ToArray();
-    }
 
-    public Polygon(IEnumerable<IEnumerable<IPoint>> rings)
-    {
-        Geometry = rings;
     }
-
-    public void AddRing(IEnumerable<IPoint> ring)
+    public Polygon(IEnumerable<IPoint> boundary, IEnumerable<IEnumerable<IPoint>>? holes = null)
     {
-        Geometry = Geometry.Append(ring);
+        Geometry = (boundary, holes);
     }
 
 }

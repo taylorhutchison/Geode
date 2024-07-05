@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Geode;
 
-public class Point : IGeometry<IPoint>, IPoint, IEquatable<Point>
+public class Point : IPoint
 {
     private (double X, double Y, double Z) _coordinates;
     public (double X, double Y, double Z) Coordinates => _coordinates;
