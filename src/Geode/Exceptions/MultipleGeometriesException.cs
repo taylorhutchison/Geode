@@ -1,18 +1,17 @@
 ﻿using System;
 
-namespace Geode.Exceptions
+namespace Geode;
+
+public class MultipleGeometriesException : Exception
 {
-    public class MultipleGeometriesException: Exception
+    public MultipleGeometriesException() : base() { }
+    public MultipleGeometriesException(string message) : base(message)
     {
-        public MultipleGeometriesException():base() { }
-        public MultipleGeometriesException(string message) : base(message)
-        {
-
-        }
-        public MultipleGeometriesException(string message, Exception ex):base(message,ex)
-        {
-
-        }
 
     }
+    public MultipleGeometriesException(string message, Exception ex) : base(message, ex)
+    {
+
+    }
+
 }

@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Linq;
 using Xunit;
-using Geode.Readers;
 
-namespace Geode.Tests
+namespace Geode.Tests;
+public class ShapefileReaderTests
 {
-    public class ShapefileReaderTests
+    [Fact]
+    public void ReadShapefile()
     {
-        [Fact]
-        public void ReadShapefile()
-        {
-            var path = @"./Data/Shapefiles/places.shp";
-            var features = new ShapefileReader().Read(path);
-            Assert.Equal(243, features.Features.Count());
-        }
+        var path = @"./TestData/Shapefiles/places.shp";
+        var features = new ShapefileReader().Read(path);
+        Assert.Equal(243, features.Features.Count());
     }
 }

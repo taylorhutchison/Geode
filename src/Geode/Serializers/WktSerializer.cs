@@ -1,16 +1,12 @@
-﻿using Geode.Geometry;
-
-namespace Geode.Serializers
+﻿namespace Geode;
+public class WktSerializer
 {
-    public class WktSerializer
+    public static string ToWKT(IPoint position)
     {
-        public static string ToWKT(IPosition position)
+        if (position == null)
         {
-            if(position == null)
-            {
-                return string.Empty;
-            }
-            return $"POINT ({position.X} {position.Y})";
+            return string.Empty;
         }
+        return $"POINT ({position.X} {position.Y})";
     }
 }

@@ -17,9 +17,9 @@ dotnet add package Geode
 Geode is a library that contains a set of Geometric primatives including: 
 - Point
 - MultiPoint
-- LineString
+- Polyline
 - Polygon
-- MultiLineString
+- MultiPolyline
 - MultiPolygon
 
 #### Top Features
