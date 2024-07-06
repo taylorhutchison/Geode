@@ -12,7 +12,7 @@ public class GeometryServiceTests
                 new Point(0,0,0),
                 new Point(1,1,10)
             };
-        var centroid = points.Centroid();
+        var centroid = points.GetCentroid();
         Assert.Equal(0.5, centroid.X);
         Assert.Equal(0.5, centroid.Y);
         Assert.Equal(5, centroid.Z);

@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Geode;
-public static class IPositionAlgorithms
+
+public static class CentroidExtensions
 {
-    public static Point? Centroid(this IEnumerable<IPoint> pointList)
+    public static IPoint GetCentroid(this Polygon polygon)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static IPoint GetCentroid(this Polygon polygon, bool inside)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static IPoint? GetCentroid(this IEnumerable<IPoint> pointList)
     {
         if (!pointList.Any()) return default;
         var xSum = 0.0;
@@ -24,5 +35,10 @@ public static class IPositionAlgorithms
         }
         if (count == 0) return default;
         return new Point(xSum / count, ySum / count, zSum / count);
+    }
+
+    public static IPoint GetCentroid(this Bounds bounds)
+    {
+        return new Point((bounds.XMin + bounds.XMax) / 2, (bounds.YMin + bounds.YMax) / 2, (bounds.ZMin + bounds.ZMax) / 2);
     }
 }

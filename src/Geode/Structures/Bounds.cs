@@ -1,14 +1,11 @@
 ﻿using System;
 
 namespace Geode;
-public record Bounds : IEquatable<Bounds>
+public record Bounds(double XMin, double XMax, double YMin, double YMax, double ZMin = 0, double ZMax = 0) : IEquatable<Bounds>
 {
-    public double XMin { get; set; }
-    public double XMax { get; set; }
-    public double YMin { get; set; }
-    public double YMax { get; set; }
-    public double ZMin { get; set; }
-    public double ZMax { get; set; }
+    public double Width => XMax - XMin;
+    public double Height => YMax - YMin;
+    public double Depth => ZMax - ZMin;
     public virtual bool Equals(Bounds? other)
     {
         return other != null && XMin == other.XMin && XMax == other.XMax &&

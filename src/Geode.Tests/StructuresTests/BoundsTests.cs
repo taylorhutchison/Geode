@@ -64,4 +64,28 @@ public class BoundsTests
         Assert.Equal(0, bounds.ZMin);
         Assert.Equal(0, bounds.ZMax);
     }
+
+    [Fact]
+    public void BoundsDistanceFromCenterToPoint() {
+        var bounds = new Bounds(0, 10, 0, 10, 0, 10);
+        var point = new Point(5, 5, 5);
+        var distance = bounds.DistanceFromCentroid(point);
+        Assert.Equal(0, distance);
+    }
+
+    [Fact]
+    public void BoundsDistanceFromEdgeToPoint() {
+        var bounds = new Bounds(0, 10, 0, 10, 0, 10);
+        var point = new Point(-5, 7, 0);
+        var distance = bounds.DistanceFromEdge(point);
+        Assert.Equal(5, distance);
+    }
+
+    [Fact]
+    public void BoundsDistanceFromEdgeToPoint2() {
+        var bounds = new Bounds(0, 10, 0, 10, 0, 10);
+        var point = new Point(-5, 15, 0);
+        var distance = bounds.DistanceFromEdge(point);
+        Assert.Equal(7.0710678118654755, distance, 1e-6);
+    }
 }

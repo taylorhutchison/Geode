@@ -266,3 +266,5 @@ __pycache__/
 out/
 
 BenchmarkDotNet.Artifacts/
+coverage.cobertura.xml
+ccreport/
