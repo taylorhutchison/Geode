@@ -1,17 +1,14 @@
-using Geode;
 using Xunit;
 
 namespace Geode.Tests.Algorithms;
+using TestData = AlgorithmsTestData;
 
 public class IPointAlgorithmsTests {
 
-    [Fact]
-    public void DistanceCalculatedBetweenTwoPoints() {
-        var point1 = new Point(0, 0, 0);
-        var point2 = new Point(10, 10, 10);
+    [Theory]
+    [MemberData(nameof(TestData.PointDistanceTestData), MemberType = typeof(TestData))]
+    public void DistanceCalculatedBetweenTwoPoints(IPoint point1, IPoint point2, double expectedDistance) {
         var distance = point1.DistanceTo(point2);
-        Assert.Equal(17.320508075688775, distance, 1e-6);
+        Assert.Equal(expectedDistance, distance, 1e-12);
     }
-
-
 }
