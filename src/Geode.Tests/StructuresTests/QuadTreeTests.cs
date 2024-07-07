@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 
 namespace Geode.Tests.Structures;
+using TestData = StructuresTestData;
 
 public class QuadTreeTests {
 
@@ -44,21 +45,22 @@ public class QuadTreeTests {
         Assert.False(quadTree.Insert(point));
     }
 
-    [Fact]
-    public void QuadTree_FindNearest_ReturnsNearestPoint() {
+    [Theory]
+    [MemberData(nameof(TestData.QuadTreeTestData), MemberType = typeof(TestData))]
+    public void QuadTree_FindNearest_PointOutsideBounds(int gridSize, Point searchPoint, Point expected)
+    {
         var points = new List<IPoint>();
-        for (var i = 0; i < 10; i++) {
-            for(var j = 0; j < 10; j++) {
+        for (var i = 0; i <= gridSize; i++)
+        {
+            for (var j = 0; j <= gridSize; j++)
+            {
                 points.Add(new Point(i, j));
             }
         }
         var quadTree = new QuadTree(points);
-        var point = new Point(3.1, 3.1);
-        var nearest = quadTree.FindNearest(point);
-
-        Assert.Equal(3, nearest.X);
-        Assert.Equal(3, nearest.Y);
+        var nearest = quadTree.FindNearest(searchPoint);
+        Assert.Equal(expected.X, nearest.X);
+        Assert.Equal(expected.Y, nearest.Y);
     }
-
 
 }
