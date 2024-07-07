@@ -60,13 +60,11 @@ public record QuadTree
     {
         IPoint? nearest = null;
         double nearestDist = double.MaxValue;
+        QuadTree? toSearch = this;
 
-        Queue<QuadTree>? toSearch = new Queue<QuadTree>();
-        toSearch.Enqueue(this);
-
-        while (toSearch.Count > 0)
+        while (toSearch != null)
         {
-            var current = toSearch.Dequeue();
+            var current = toSearch;
             if (current._bounds.DistanceFromCentroid(target, false) < nearestDist)
             {
                 foreach (var point in current._points)
@@ -83,21 +81,29 @@ public record QuadTree
                 {
                     if (current._northWest!.Contains(target))
                     {
-                        toSearch.Enqueue(current._northWest!);
+                        toSearch = current._northWest!;
                     }
-                    if (current._northEast!.Contains(target))
+                    else if (current._northEast!.Contains(target))
                     {
-                        toSearch.Enqueue(current._northEast!);
+                        toSearch = current._northEast!;
                     }
-                    if (current._southWest!.Contains(target))
+                    else if (current._southWest!.Contains(target))
                     {
-                        toSearch.Enqueue(current._southWest!);
+                        toSearch = current._southWest!;
                     }
-                    if (current._southEast!.Contains(target))
+                    else if (current._southEast!.Contains(target))
                     {
-                        toSearch.Enqueue(current._southEast!);
+                        toSearch = current._southEast!;
+                    } else
+                    {
+                        toSearch = null;
                     }
+                } else {
+                    toSearch = null;
                 }
+            } else
+            {
+                toSearch = null;
             }
         }
 
