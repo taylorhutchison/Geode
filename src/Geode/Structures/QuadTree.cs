@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Geode;
@@ -7,13 +7,14 @@ public record QuadTree
     private readonly Bounds _bounds;
     private const int _capacity = 4;
     private List<IPoint> _points = new();
-    private bool divided = false;
-    public bool Divided => divided;
-    private QuadTree? northWest;
-    private QuadTree? northEast;
-    private QuadTree? southWest;
-    private QuadTree? southEast;
+    private bool _divided = false;
+    public bool Divided => _divided;
+    public QuadTree? _northWest;
+    public QuadTree? _northEast;
+    public QuadTree? _southWest;
+    public QuadTree? _southEast;
     public int Count = 0;
+    public Bounds bounds => _bounds;
     public QuadTree(Bounds bounds)
     {
         _bounds = bounds;
@@ -41,15 +42,15 @@ public record QuadTree
         }
         else
         {
-            if (!divided)
+            if (!_divided)
             {
                 Subdivide();
             }
 
-            if (northWest?.Insert(point) ?? false) { Count++; return true; }
-            if (northEast?.Insert(point) ?? false) { Count++; return true; }
-            if (southWest?.Insert(point) ?? false) { Count++; return true; }
-            if (southEast?.Insert(point) ?? false) { Count++; return true; }
+            if (_northWest?.Insert(point) ?? false) { Count++; return true; }
+            if (_northEast?.Insert(point) ?? false) { Count++; return true; }
+            if (_southWest?.Insert(point) ?? false) { Count++; return true; }
+            if (_southEast?.Insert(point) ?? false) { Count++; return true; }
         }
 
         return false;
@@ -60,7 +61,7 @@ public record QuadTree
         IPoint? nearest = null;
         double nearestDist = double.MaxValue;
 
-        Queue<QuadTree> toSearch = new Queue<QuadTree>();
+        Queue<QuadTree>? toSearch = new Queue<QuadTree>();
         toSearch.Enqueue(this);
 
         while (toSearch.Count > 0)
@@ -78,12 +79,24 @@ public record QuadTree
                     }
                 }
 
-                if (current.divided)
+                if (current._divided)
                 {
-                    toSearch.Enqueue(current.northWest!);
-                    toSearch.Enqueue(current.northEast!);
-                    toSearch.Enqueue(current.southWest!);
-                    toSearch.Enqueue(current.southEast!);
+                    if (current._northWest!.Contains(target))
+                    {
+                        toSearch.Enqueue(current._northWest!);
+                    }
+                    if (current._northEast!.Contains(target))
+                    {
+                        toSearch.Enqueue(current._northEast!);
+                    }
+                    if (current._southWest!.Contains(target))
+                    {
+                        toSearch.Enqueue(current._southWest!);
+                    }
+                    if (current._southEast!.Contains(target))
+                    {
+                        toSearch.Enqueue(current._southEast!);
+                    }
                 }
             }
         }
@@ -91,12 +104,17 @@ public record QuadTree
         return nearest;
     }
 
+    public bool Contains(IPoint point)
+    {
+        return _bounds.Contains(point, includeZ: false);
+    }
+
     private void Subdivide()
     {
-        northWest = new QuadTree(new Bounds(_bounds.XMin, _bounds.XMax / 2, _bounds.YMin / 2, _bounds.YMax));
-        northEast = new QuadTree(new Bounds(_bounds.XMin / 2, _bounds.XMax, _bounds.YMin / 2, _bounds.YMax));
-        southWest = new QuadTree(new Bounds(_bounds.XMin, _bounds.XMax / 2, _bounds.YMin, _bounds.YMax / 2));
-        southEast = new QuadTree(new Bounds(_bounds.XMin / 2, _bounds.XMax, _bounds.YMin, _bounds.YMax / 2));
-        divided = true;
+        _northWest = new QuadTree(new Bounds(_bounds.XMin, _bounds.XMax / 2, _bounds.YMax / 2, _bounds.YMax));
+        _northEast = new QuadTree(new Bounds(_bounds.XMax / 2, _bounds.XMax, _bounds.YMin / 2, _bounds.YMax));
+        _southWest = new QuadTree(new Bounds(_bounds.XMin, _bounds.XMax / 2, _bounds.YMin, _bounds.YMax / 2));
+        _southEast = new QuadTree(new Bounds(_bounds.XMax / 2, _bounds.XMax, _bounds.YMin, _bounds.YMax / 2));
+        _divided = true;
     }
 }

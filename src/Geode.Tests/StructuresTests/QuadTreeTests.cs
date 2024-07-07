@@ -19,7 +19,7 @@ public class QuadTreeTests {
     }
 
     [Fact]
-    public void QuadTree_WithMoreThanFourPoints_IsNotDivided() {
+    public void QuadTree_WithMoreThanFourPoints_IsDivided() {
         var points = new List<IPoint> {
             new Point(1, 1),
             new Point(2, 2),
