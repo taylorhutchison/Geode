@@ -45,24 +45,44 @@ public static class BoundsExtensions
         return GetBounds(locations);
     }
 
+    public static bool Contains(this Bounds bounds, double x, double y) {
+        return x >= bounds.XMin && x <= bounds.XMax &&
+               y >= bounds.YMin && y <= bounds.YMax;
+    }
+
+    public static bool Contains(this Bounds bounds, double x, double y, double z) {
+        return x >= bounds.XMin && x <= bounds.XMax &&
+               y >= bounds.YMin && y <= bounds.YMax &&
+               z >= bounds.ZMin && z <= bounds.ZMax;
+    }
+
     public static bool Contains(this Bounds bounds, IPoint point, bool includeZ = true)
     {
-        return point.X >= bounds.XMin && point.X <= bounds.XMax &&
-               point.Y >= bounds.YMin && point.Y <= bounds.YMax &&
-               (!includeZ || point.Z >= bounds.ZMin && point.Z <= bounds.ZMax);
+        return includeZ ? Contains(bounds, point.X, point.Y, point.Z) : Contains(bounds, point.X, point.Y);
+    }
+
+    public static double DistanceFromCentroid(this Bounds bounds, double x, double y, double? z = null)
+    {
+        var boundsCentroid = bounds.GetCentroid();
+        return boundsCentroid.DistanceTo(x, y, z);
     }
 
     public static double DistanceFromCentroid(this Bounds bounds, IPoint point, bool includeZ = true)
     {
         var boundsCentroid = bounds.GetCentroid();
-        return boundsCentroid.DistanceTo(point);
+        return boundsCentroid.DistanceTo(point, includeZ);
+    }
+
+    public static double DistanceFromEdge(this Bounds bounds, double x, double y, double z = 0)
+    {
+        var dx = bounds.XMin > x || bounds.XMax < x ? Math.Min(Math.Abs(bounds.XMin - x), Math.Abs(bounds.XMax - x)) : 0;
+        var dy = bounds.YMin > y || bounds.YMax < y ? Math.Min(Math.Abs(bounds.YMin - y), Math.Abs(bounds.YMax - y)) : 0;
+        var dz = z != 0 ? bounds.ZMin > z || bounds.ZMax < z ? Math.Min(Math.Abs(bounds.ZMin - z), Math.Abs(bounds.ZMax - z)) : 0 : 0;
+        return Math.Sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     public static double DistanceFromEdge(this Bounds bounds, IPoint point, bool includeZ = true)
     {
-        var x = bounds.XMin > point.X || bounds.XMax < point.X ? Math.Min(Math.Abs(bounds.XMin - point.X), Math.Abs(bounds.XMax - point.X)) : 0;
-        var y = bounds.YMin > point.Y || bounds.YMax < point.Y ? Math.Min(Math.Abs(bounds.YMin - point.Y), Math.Abs(bounds.YMax - point.Y)) : 0;
-        var z = includeZ ? bounds.ZMin > point.Z || bounds.ZMax < point.Z ? Math.Min(Math.Abs(bounds.ZMin - point.Z), Math.Abs(bounds.ZMax - point.Z)) : 0 : 0;
-        return Math.Sqrt(x * x + y * y + z * z);
+        return includeZ ? DistanceFromEdge(bounds, point.X, point.Y, point.Z) : DistanceFromEdge(bounds, point.X, point.Y);
     }
 }

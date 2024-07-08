@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Transactions;
 using Xunit;
 
 namespace Geode.Tests.Structures;
@@ -61,6 +62,20 @@ public class QuadTreeTests {
         var nearest = quadTree.FindNearest(searchPoint);
         Assert.Equal(expected.X, nearest.X);
         Assert.Equal(expected.Y, nearest.Y);
+    }
+
+    [Fact]
+    public void Simple() {
+        var libraryList = new List<Point> {
+            new Point(0, 0),
+            new Point(0, 1),
+            new Point(1, 0),
+            new Point(1, 1),
+            new Point(2, 2)
+        };
+        var qt = new QuadTree(libraryList);
+        qt.Insert(new Point(0.1, 0.1));
+        Assert.True(qt.Divided);
     }
 
 }

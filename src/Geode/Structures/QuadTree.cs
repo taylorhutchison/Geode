@@ -14,7 +14,6 @@ public record QuadTree
     public QuadTree? _northEast;
     public QuadTree? _southWest;
     public QuadTree? _southEast;
-    public int Count = 0;
     public Bounds bounds => _bounds;
     public QuadTree(Bounds bounds)
     {
@@ -38,7 +37,6 @@ public record QuadTree
         if (_points.Count < _capacity)
         {
             _points.Add(point);
-            Count++;
             return true;
         }
         else
@@ -48,16 +46,20 @@ public record QuadTree
                 Subdivide();
             }
 
-            if (_northWest?.Insert(point) ?? false) { Count++; return true; }
-            if (_northEast?.Insert(point) ?? false) { Count++; return true; }
-            if (_southWest?.Insert(point) ?? false) { Count++; return true; }
-            if (_southEast?.Insert(point) ?? false) { Count++; return true; }
+            if (_northWest?.Insert(point) ?? false) { return true; }
+            if (_northEast?.Insert(point) ?? false) { return true; }
+            if (_southWest?.Insert(point) ?? false) { return true; }
+            if (_southEast?.Insert(point) ?? false) { return true; }
         }
 
         return false;
     }
 
-    public IPoint? FindNearest(IPoint target)
+    public IPoint? FindNearest(IPoint target) {
+        return FindNearest(target.X, target.Y);
+    }
+
+    public IPoint? FindNearest(double targetX, double targetY)
     {
         IPoint? nearest = null;
         double nearestDist = double.MaxValue;
@@ -69,30 +71,30 @@ public record QuadTree
 
             foreach (var point in current._points)
             {
-                var dist = point.DistanceTo(target, includeZ: false);
+                var dist = point.DistanceTo(targetX, targetY);
                 if (dist < nearestDist)
                 {
                     nearest = point;
                     nearestDist = dist;
                 }
             }
-            if (current.Contains(target))
+            if (current.Contains(targetX, targetY))
             {
                 if (current._divided)
                 {
-                    if (current._northWest!.Contains(target))
+                    if (current._northWest!.Contains(targetX, targetY))
                     {
                         toSearch = current._northWest!;
                     }
-                    else if (current._northEast!.Contains(target))
+                    else if (current._northEast!.Contains(targetX, targetY))
                     {
                         toSearch = current._northEast!;
                     }
-                    else if (current._southWest!.Contains(target))
+                    else if (current._southWest!.Contains(targetX, targetY))
                     {
                         toSearch = current._southWest!;
                     }
-                    else if (current._southEast!.Contains(target))
+                    else if (current._southEast!.Contains(targetX, targetY))
                     {
                         toSearch = current._southEast!;
                     }
@@ -109,10 +111,10 @@ public record QuadTree
             else if (current._divided)
             {
                 var nearestQuad = double.MaxValue;
-                var northWestDist = current._northWest!._bounds.DistanceFromCentroid(target, false);
-                var northEastDist = current._northEast!._bounds.DistanceFromCentroid(target, false);
-                var southWestDist = current._southWest!._bounds.DistanceFromCentroid(target, false);
-                var southEastDist = current._southEast!._bounds.DistanceFromCentroid(target, false);
+                var northWestDist = current._northWest!._bounds.DistanceFromCentroid(targetX, targetY);
+                var northEastDist = current._northEast!._bounds.DistanceFromCentroid(targetX, targetY);
+                var southWestDist = current._southWest!._bounds.DistanceFromCentroid(targetX, targetY);
+                var southEastDist = current._southEast!._bounds.DistanceFromCentroid(targetX, targetY);
                 if (northWestDist < nearestQuad)
                 {
                     nearestQuad = northWestDist;
@@ -146,6 +148,11 @@ public record QuadTree
     public bool Contains(IPoint point)
     {
         return _bounds.Contains(point, includeZ: false);
+    }
+
+    public bool Contains(double x, double y)
+    {
+        return _bounds.Contains(x, y);
     }
 
     private void Subdivide()
