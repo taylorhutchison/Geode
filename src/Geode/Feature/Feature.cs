@@ -20,17 +20,12 @@ public class Feature : IFeature
     }
 }
 
-public class Feature<T> : IFeature<T> where T : IGeometry
+public class Feature<T> : IFeature<T> where T : IGeometry<T>
 {
     public IDictionary<string, object>? Properties { get; set; }
     IGeometry? IFeature.Location { get; set; }
     public T? Location { get; set; }
-
-    public Feature()
-    {
-
-    }
-    public Feature(T geometry, IDictionary<string, object> properties)
+    public Feature(T geometry, IDictionary<string, object>? properties)
     {
         Location = geometry;
         Properties = properties;

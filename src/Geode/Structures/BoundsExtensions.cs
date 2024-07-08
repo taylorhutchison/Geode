@@ -39,6 +39,12 @@ public static class BoundsExtensions
         return new Bounds(xMin, xMax, yMin, yMax, zMin, zMax);
     }
 
+    public static Bounds GetBounds<T>(this IEnumerable<IFeature<T>> features) where T : IPoint
+    {
+        var locations = features.Where(f => f.Location != null).Select(f => f.Location! as IPoint);
+        return GetBounds(locations);
+    }
+
     public static bool Contains(this Bounds bounds, IPoint point, bool includeZ = true)
     {
         return point.X >= bounds.XMin && point.X <= bounds.XMax &&
