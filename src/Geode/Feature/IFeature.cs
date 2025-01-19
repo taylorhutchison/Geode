@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Geode;
 
 public interface IFeature
 {
-    IDictionary<string, object>? Properties { get; set; }
+    IDictionary<string, object?>? Properties { get; set; }
     IGeometry? Location { get; set; }
 }
 

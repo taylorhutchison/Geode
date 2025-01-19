@@ -14,6 +14,10 @@ public record Point : IPoint
     public GeometryType Type => GeometryType.Point;
     object IGeometry.Geometry => Geometry;
     public IPoint Geometry => this;
+    public Point(double x, double y)
+    {
+        _coordinates = new(x, y, 0);
+    }
     public Point(double x, double y, double z = 0)
     {
         _coordinates = new (x, y, z);

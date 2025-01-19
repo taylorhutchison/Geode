@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,12 +6,12 @@ namespace Geode;
 public class GeoJsonFeature
 {
     public string Type => "Feature";
-    public IDictionary<string, object>? Properties { get; private set; }
-    public IDictionary<string, object>? Geometry { get; private set; }
+    public IDictionary<string, object?>? Properties { get; private set; }
+    public IDictionary<string, object?>? Geometry { get; private set; }
     public GeoJsonFeature(IFeature feature)
     {
         Properties = feature?.Properties;
-        Geometry = new Dictionary<string, object>(2)
+        Geometry = new Dictionary<string, object?>(2)
         {
                 {"Type", feature?.Location?.Type ?? GeometryType.Unknown}
         };
