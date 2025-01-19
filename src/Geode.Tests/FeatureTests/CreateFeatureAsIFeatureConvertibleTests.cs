@@ -8,7 +8,6 @@ namespace Geode.Tests.FeatureTests;
 public class CreateFeatureAsIFeatureConvertibleTests
 {
     [Fact]
-    [Trait("Category", "Unit")]
     public void CreateFeatureWithGeometryAttributesFavorsInterfaceMethod()
     {
         var city = new City
@@ -26,7 +25,6 @@ public class CreateFeatureAsIFeatureConvertibleTests
     }
 
     [Fact]
-    [Trait("Category", "Unit")]
     public void CreateFeature_GeoCollectionFeature_CreatesFeature()
     {
         var p1 = new List<double[]> {
@@ -54,7 +52,6 @@ public class CreateFeatureAsIFeatureConvertibleTests
     }
 
     [Fact]
-    [Trait("Category", "Unit")]
     public void CreateFeature_GeoCollectionFeatureWithMultipleTypes_CreatesFeature()
     {
         var p1 = new List<double[]> {

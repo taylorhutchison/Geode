@@ -8,7 +8,6 @@ namespace Geode.Tests.FeatureTests;
 public class CreateFeatureCollectionFromAttributesTests
 {
     [Fact]
-    [Trait("Category", "Unit")]
     [Trait("Category", "CreateFeatures")]
     public void CreateFeatures_ListOfTypeWithXYProperties_CreatesFeatures()
     {

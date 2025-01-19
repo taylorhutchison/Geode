@@ -10,7 +10,6 @@ namespace Geode.Tests.SerializerTests;
 public class GeoJsonSerializerTests
 {
     [Fact]
-    [Trait("Category", "Unit")]
     public void Test1()
     {
         Assert.True(true);
